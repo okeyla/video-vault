@@ -76,6 +76,7 @@ DEFAULT_CONFIG = {
     "ytdlp_exe": "",            # 空白 = 自動尋找（PATH → Parabolic 內附）
     "cookies_from_browser": "",  # IG/FB 需要登入時可填 firefox / edge / chrome
     "concurrency": 2,
+    "collect_downloads": True,   # 網站下載完成後，把影片從瀏覽器「下載」資料夾搬進 download_dir
 }
 
 NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
@@ -130,8 +131,9 @@ def save_config(new: dict) -> dict:
             cfg[key] = str(new[key]).strip()
     if "concurrency" in new:
         cfg["concurrency"] = max(1, min(6, int(new["concurrency"])))
-    if "auto_rank" in new:
-        cfg["auto_rank"] = bool(new["auto_rank"])
+    for key in ("auto_rank", "collect_downloads"):
+        if key in new:
+            cfg[key] = bool(new[key])
     if isinstance(new.get("sources"), list):
         cleaned, seen = [], set()
         for s in new["sources"]:
@@ -333,12 +335,90 @@ def enqueue(items: list[dict]) -> list[dict]:
             continue
         platform = it.get("platform") if it.get("platform") in PLATFORMS else "other"
         job = {"id": uuid.uuid4().hex[:10], "itemId": it.get("id"), "url": url, "platform": platform,
-               "status": "queued", "progress": 0, "message": "排隊中", "file": None, "createdAt": time.time()}
+               "status": "queued", "progress": 0, "message": "排隊中", "file": None, "createdAt": time.time(),
+               "kind": "ytdlp"}
         with JOBS_LOCK:
             JOBS[job["id"]] = job
         JOB_QUEUE.put(job["id"])
         created.append(job)
     return created
+
+
+# ---------------------------------------------------------------- 自動歸檔（瀏覽器下載 → VideoVault）
+VIDEO_EXT = {".mp4", ".mov", ".m4v", ".webm", ".mkv", ".avi", ".3gp"}
+PARTIAL_EXT = {".crdownload", ".part", ".partial", ".download", ".tmp"}
+CLAIMED: set[str] = set()
+
+
+def _stamp(f: Path) -> float:
+    st = f.stat()
+    return max(st.st_mtime, st.st_ctime)
+
+
+def unique_path(target: Path) -> Path:
+    if not target.exists():
+        return target
+    for i in range(2, 1000):
+        cand = target.with_name(f"{target.stem} ({i}){target.suffix}")
+        if not cand.exists():
+            return cand
+    return target.with_name(f"{target.stem} {uuid.uuid4().hex[:6]}{target.suffix}")
+
+
+def collect_worker(job_id: str, since: float, platform: str):
+    """等瀏覽器下載完成，把 since 之後出現的影片搬到 download_dir/<平台>/。"""
+    src_dir = browser_downloads_dir()
+    dest_dir = Path(load_config()["download_dir"]) / platform
+    started = time.time()
+    last_sizes: dict[str, int] = {}
+    while time.time() - started < 600:
+        try:
+            files = [f for f in src_dir.iterdir() if f.is_file() and _stamp(f) >= since - 2]
+        except OSError as e:
+            set_job(job_id, status="error", message=f"讀不到下載資料夾：{e}")
+            return
+        partial = [f for f in files if f.suffix.lower() in PARTIAL_EXT]
+        videos = [f for f in files if f.suffix.lower() in VIDEO_EXT and str(f) not in CLAIMED]
+        sizes = {str(f): f.stat().st_size for f in videos}
+        stable = videos and sizes == last_sizes and all(sizes.values())
+        last_sizes = sizes
+        if stable and not partial:
+            dest_dir.mkdir(parents=True, exist_ok=True)
+            moved = []
+            for f in videos:
+                CLAIMED.add(str(f))
+                try:
+                    target = unique_path(dest_dir / f.name)
+                    shutil.move(str(f), str(target))
+                    moved.append(target)
+                except OSError as e:
+                    set_job(job_id, status="error", message=f"搬移失敗（檔案可能還在使用中）：{e}")
+                    return
+            set_job(job_id, status="done", progress=100, file=str(moved[0]),
+                    message=f"已搬到 {dest_dir}" + (f"（共 {len(moved)} 個檔案）" if len(moved) > 1 else ""))
+            return
+        if partial:
+            set_job(job_id, status="running", message="等待瀏覽器下載完成…")
+        elif not videos and time.time() - started > 45:
+            set_job(job_id, status="error",
+                    message=f"在 {src_dir} 找不到剛下載的影片（可能存到別處，或網站下載的不是影片檔）")
+            return
+        else:
+            set_job(job_id, status="running", message="尋找剛下載的影片…")
+        time.sleep(1.5)
+    set_job(job_id, status="error", message="等太久了（超過 10 分鐘），請手動搬移")
+
+
+def start_collect(body: dict) -> dict:
+    platform = body.get("platform") if body.get("platform") in PLATFORMS else "other"
+    job = {"id": uuid.uuid4().hex[:10], "itemId": body.get("id"), "url": str(body.get("url", "")),
+           "platform": platform, "status": "running", "progress": 0, "message": "尋找剛下載的影片…",
+           "file": None, "createdAt": time.time(), "kind": "collect"}
+    with JOBS_LOCK:
+        JOBS[job["id"]] = job
+    since = float(body.get("since") or time.time() - 600)
+    threading.Thread(target=collect_worker, args=(job["id"], since, platform), daemon=True).start()
+    return job
 
 
 # ---------------------------------------------------------------- other actions
@@ -530,6 +610,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json({"stats": stats})
             elif path == "/api/health":
                 self.send_json({"health": check_health()})
+            elif path == "/api/collect":
+                self.send_json({"job": start_collect(body)})
             elif path == "/api/ytdlp":
                 self.send_json({"jobs": enqueue(body.get("items") or [])})
             elif path == "/api/parabolic":

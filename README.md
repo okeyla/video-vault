@@ -64,6 +64,16 @@ GitHub → Settings → Developer settings → **Fine-grained tokens** → Gener
    - **Parabolic（YouTube）**：自動開啟 Parabolic 並複製網址 → 在 Parabolic 按新增下載 → 回來按「完成」。
 4. 已下載的影片在各裝置都會顯示「已下載・私人電腦」，不會重複下載或搞不清楚在哪台。
 
+## 所有影片集中在一個地方
+所有影片都放在 **`影片\VideoVault\<平台>\`**（本地下載站「設定」可改位置），右上「開啟資料夾」可直接打開。
+
+| 下載方式 | 怎麼集中 |
+|---|---|
+| yt-dlp 全自動 | 直接存進 VideoVault |
+| 下載網站（fdown、SaveClip…） | 按「✓ 完成」後，程式會到瀏覽器「下載」資料夾找出**開啟網站之後**新下載的影片，等下載完成再自動搬進 VideoVault（可在設定關閉） |
+| Parabolic | Parabolic 的設定檔有加密，程式無法幫你改。請在 Parabolic 新增下載時，把「儲存資料夾」選為 `影片\VideoVault\youtube`，它會記住 |
+
+
 ## 下載來源管理
 本地下載站右上角 **「下載來源」**：每個平台可以有多個來源（下載網站、Parabolic、yt-dlp 全自動）。
 

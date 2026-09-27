@@ -63,8 +63,8 @@
     <div class="menu-wrap">
       <button class="btn" id="btnFolder" aria-haspopup="true" aria-expanded="false">開啟資料夾 ▾</button>
       <div class="menu hidden" id="folderMenu">
-        <button type="button" data-folder="ytdlp"><b>yt-dlp 全自動下載</b><span id="ytdlpDirHint">依平台分子資料夾</span></button>
-        <button type="button" data-folder="browser"><b>瀏覽器「下載」資料夾</b><span>透過 fdown、SaveClip 等網站下載的影片</span></button>
+        <button type="button" data-folder="ytdlp"><b>VideoVault 影片收藏</b><span id="ytdlpDirHint">所有影片集中處，依平台分子資料夾</span></button>
+        <button type="button" data-folder="browser"><b>瀏覽器「下載」資料夾</b><span>網站下載的影片會暫存在這，按完成後自動搬走</span></button>
         <p>Parabolic 下載的影片存在 Parabolic 自己設定的位置。</p>
       </div>
     </div>
@@ -85,7 +85,7 @@
   </section>
 
   <section class="card hidden" id="jobsCard">
-    <div class="row"><h2 style="margin:0">自動下載（yt-dlp）</h2><div class="spacer"></div>
+    <div class="row"><h2 style="margin:0">背景工作</h2><div class="spacer"></div>
       <button class="btn small ghost" id="btnClearJobs">清除已完成</button></div>
     <div id="jobs" style="margin-top:6px"></div>
   </section>
@@ -132,7 +132,8 @@
     <label class="field"><span>這台電腦的名稱（會記錄在「已下載・○○」）</span><input type="text" name="device" placeholder="例如：私人電腦"></label>
 
     <p class="hint">每個平台要用哪個網站或工具下載，請到右上角「下載來源」管理。</p>
-    <label class="field"><span>下載資料夾（yt-dlp 用；網站下載會存到瀏覽器預設的下載位置）</span><input type="text" name="download_dir" spellcheck="false"></label>
+    <label class="field"><span>影片收藏資料夾（所有影片集中在這裡，依平台分子資料夾）</span><input type="text" name="download_dir" spellcheck="false"></label>
+    <label class="switch" style="margin-bottom:12px"><input type="checkbox" name="collect_downloads">網站下載完成後，自動把影片從瀏覽器「下載」資料夾搬進來</label>
     <details>
       <summary>進階</summary>
       <label class="field"><span>Parabolic 執行檔</span><input type="text" name="parabolic_exe" spellcheck="false"></label>
@@ -203,6 +204,7 @@
   let data = { videos: [] };
   let selected = new Set();
   let platformFilter = 'all';
+  let localReady;  // 本地設定讀取完成前，設定 / 來源視窗先等一下
 
   // ---------- 共用 ----------
   let toastTimer;
@@ -441,6 +443,7 @@
     if (s.type === 'parabolic') {
       api('/api/parabolic', { url: e.v.url }).catch(err => toast(err.message, true));
     } else {
+      if (s.url !== '{url}') e.openedAt ??= Date.now() / 1000;
       const w = window.open(siteTarget(s, e.v.url), 'vv_' + e.v.platform);
       if (!w) toast('瀏覽器擋住了彈出視窗，請允許本站開啟新分頁', true);
     }
@@ -458,13 +461,15 @@
         : document.documentElement.dataset.vvExt
           ? `已開啟 ${name}，網址已自動填入。到該分頁按閃爍的下載鈕並存檔。`
           : `已開啟 ${name} 並複製網址。到該分頁的輸入框按 <b>Ctrl+V</b> 貼上，點下載並存檔。<br>想自動填入？安裝專案裡的 <code>browser-extension</code>（見 README）。`;
+    const collectHint = s.type === 'site' && s.url !== '{url}' && local.config?.collect_downloads
+      ? '<br>存檔後按「完成」，影片會自動從「下載」資料夾搬到 VideoVault。' : '';
     const next = e.cands[e.ci + 1];
     $('#manualTitle').textContent = `手動下載 ${manualIdx + 1} / ${manualQ.length}`;
     $('#manualBody').innerHTML = `
       <div class="row" style="margin-top:8px;gap:8px"><span class="badge ${v.platform}">${P[v.platform].short}</span>
         <span class="note">${VV.escapeHtml(v.note || '')}</span></div>
       <div class="manual-url">${VV.escapeHtml(v.url)}</div>
-      <div class="step"><span class="num">→</span><div class="hint">${how}</div></div>
+      <div class="step"><span class="num">→</span><div class="hint">${how}${collectHint}</div></div>
       <div class="row" style="margin-top:12px">
         <button class="btn primary" data-m="done">✓ 完成，下一部</button>
         <button class="btn" data-m="next" ${next ? '' : 'disabled'} title="記錄這個來源失敗一次">
@@ -484,7 +489,14 @@
     switch (b.dataset.m) {
       case 'again': openCurrent(); return;
       case 'next': recordStat(s, false); e.ci++; openCurrent(); return;
-      case 'done': recordStat(s, true); markDownloaded(e.v.id); break;
+      case 'done':
+        recordStat(s, true);
+        markDownloaded(e.v.id);
+        if (s.type === 'site' && e.openedAt && local.config?.collect_downloads) {
+          api('/api/collect', { id: e.v.id, url: e.v.url, platform: e.v.platform, since: e.openedAt })
+            .then(pollJobs).catch(err => toast(err.message, true));
+        }
+        break;
     }
     manualIdx++;
     openCurrent();
@@ -503,14 +515,16 @@
     $('#jobsCard').classList.toggle('hidden', !jobs.length);
     $('#jobs').innerHTML = jobs.map(j => {
       const cls = j.status === 'done' ? 'done' : j.status === 'error' ? 'error' : '';
-      const label = { queued: '排隊中', running: `${Math.round(j.progress)}%`, done: '完成', error: '失敗' }[j.status];
+      const collect = j.kind === 'collect';
+      const label = { queued: '排隊中', running: collect ? '搬移中' : `${Math.round(j.progress)}%`,
+        done: collect ? '已歸檔' : '完成', error: '失敗' }[j.status];
       const msg = j.status === 'done' && j.file ? '📁 ' + j.file : j.message;
-      const alt = j.status === 'error' && rankedSources(j.platform).some(s => s.type !== 'ytdlp')
+      const alt = !collect && j.status === 'error' && rankedSources(j.platform).some(s => s.type !== 'ytdlp')
         ? `<button class="btn small" data-fallback="${j.id}">改用其他來源</button>` : '';
       return `<div class="job"><div class="row" style="flex-wrap:nowrap"><span class="badge ${j.platform}">${P[j.platform]?.short || '?'}</span>
         <span class="grow" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px">${VV.escapeHtml(j.url)}</span>
         <span class="status ${j.status === 'done' ? 'downloaded' : j.status === 'error' ? 'error' : 'pending'}">${label}</span>${alt}</div>
-        <div class="progress ${cls}"><i style="width:${j.status === 'error' ? 100 : j.progress}%"></i></div>
+        <div class="progress ${cls}"><i style="width:${j.status === 'error' || (collect && j.status === 'done') ? 100 : collect ? 50 : j.progress}%"></i></div>
         <div class="msg" title="${VV.escapeHtml(msg || '')}">${VV.escapeHtml(msg || '')}</div></div>`;
     }).join('');
     let finished = false;
@@ -539,8 +553,9 @@
     for (const k of ['owner', 'repo', 'branch', 'path', 'token', 'device']) f.elements[k].value = c[k] || '';
     const lc = local.config || {};
     for (const k of ['download_dir', 'parabolic_exe', 'ytdlp_exe', 'cookies_from_browser', 'concurrency']) f.elements[k].value = lc[k] ?? '';
+    f.elements.collect_downloads.checked = lc.collect_downloads !== false;
   }
-  $('#btnSettings').onclick = () => { fillSettings(cfg); $('#importCode').value = ''; $('#settingsDlg').showModal(); };
+  $('#btnSettings').onclick = async () => { await localReady; fillSettings(cfg); if ($('#settingsDlg').open) return; $('#importCode').value = ''; $('#settingsDlg').showModal(); };
   $('#btnCancel').onclick = () => $('#settingsDlg').close();
   $('#btnImport').onclick = () => {
     try {
@@ -562,6 +577,7 @@
         await api('/api/config', {
           download_dir: f.download_dir.value, parabolic_exe: f.parabolic_exe.value, ytdlp_exe: f.ytdlp_exe.value,
           cookies_from_browser: f.cookies_from_browser.value, concurrency: f.concurrency.value,
+          collect_downloads: f.collect_downloads.checked,
         });
       } catch (e) { toast(e.message, true); }
     }
@@ -620,7 +636,8 @@
     $('#btnDelSrc').classList.toggle('hidden', !s || s.builtin);
     f.name.focus();
   }
-  $('#btnSources').onclick = () => {
+  $('#btnSources').onclick = async () => {
+    await localReady;
     $('#srcForm').classList.add('hidden');
     renderSources();
     $('#sourcesDlg').showModal();
@@ -727,7 +744,8 @@
       .catch(err => toast(err.message, true));
   });
 
-  loadLocal().then(() => {
+  localReady = loadLocal();
+  localReady.then(() => {
     loadList(); pollJobs();
     if (!store.ready) $('#btnSettings').click();
     // 程式剛啟動時連線檢查可能還沒跑完，稍後再拿一次結果
