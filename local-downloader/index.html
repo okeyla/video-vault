@@ -297,7 +297,8 @@
     if (h === 'parabolic') {
       api('/api/parabolic', { url: v.url }).catch(e => toast(e.message, true));
     } else {
-      const target = v.platform === 'other' ? v.url : P[v.platform].site;
+      // #vv= 讓瀏覽器擴充功能自動填入網址（沒裝擴充功能也無害）
+      const target = v.platform === 'other' ? v.url : P[v.platform].site + '#vv=' + encodeURIComponent(v.url);
       const w = window.open(target, 'vv_' + v.platform);
       if (!w) toast('瀏覽器擋住了彈出視窗，請允許本站開啟新分頁', true);
     }
@@ -311,7 +312,9 @@
       ? '已開啟 Parabolic 並複製網址。在 Parabolic 按「新增下載」，網址會自動帶入，選好畫質後下載。'
       : v.platform === 'other'
         ? '已開啟原網址並複製。'
-        : `已開啟 <b>${VV.escapeHtml(routeLabel(v))}</b> 並複製網址。到該分頁的輸入框按 <b>Ctrl+V</b> 貼上，點下載並存檔。`;
+        : document.documentElement.dataset.vvExt
+          ? `已開啟 <b>${VV.escapeHtml(routeLabel(v))}</b>，網址已自動填入。到該分頁按閃爍的下載鈕並存檔。`
+          : `已開啟 <b>${VV.escapeHtml(routeLabel(v))}</b> 並複製網址。到該分頁的輸入框按 <b>Ctrl+V</b> 貼上，點下載並存檔。<br>想自動填入？安裝專案裡的 <code>browser-extension</code>（見 README）。`;
     $('#manualTitle').textContent = `手動下載 ${manualIdx + 1} / ${manualQ.length}`;
     $('#manualBody').innerHTML = `
       <div class="row" style="margin-top:8px;gap:8px"><span class="badge ${v.platform}">${P[v.platform].short}</span>
