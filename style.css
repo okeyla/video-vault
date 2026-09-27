@@ -138,3 +138,8 @@ details summary { cursor: pointer; color: var(--muted); font-size: 13px; margin:
 .progress > i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .3s; }
 .progress.done > i { background: var(--ok); } .progress.error > i { background: var(--err); }
 .hidden { display: none !important; }
+.brand small { white-space: nowrap; }
+@media (max-width: 640px) {
+  header.top .wrap { flex-wrap: wrap; gap: 8px; }
+  .brand small { display: none; }
+}

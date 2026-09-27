@@ -90,6 +90,7 @@
   <div class="wrap">
     <span id="selCount" class="hint">未選取</span>
     <div class="spacer"></div>
+    <button class="btn danger" id="btnDeleteSel" disabled>刪除所選</button>
     <button class="btn primary" id="btnDownload" disabled>下載所選</button>
   </div>
 </div>
@@ -273,6 +274,28 @@
     });
   }
 
+  // 從清單刪除紀錄（不會刪除已下載的檔案）
+  function deleteVideos(ids) {
+    if (!ids.length) return;
+    if (!store.canWrite) { toast('需要 GitHub Token 才能刪除，請到「設定」貼上設定碼', true); return; }
+    const one = ids.length === 1 && data.videos.find(v => v.id === ids[0]);
+    const what = one ? `這筆紀錄？\n${one.url}` : `選取的 ${ids.length} 筆紀錄？`;
+    if (!confirm(`從清單刪除${what}\n\n（已下載到電腦的檔案不會被刪除）`)) return;
+    const gone = new Set(ids);
+    writeChain = writeChain.then(async () => {
+      try {
+        data = await store.update(d => {
+          const before = d.videos.length;
+          d.videos = d.videos.filter(v => !gone.has(v.id));
+          if (d.videos.length === before) return false;
+        }, `刪除 ${ids.length} 筆影片`);
+        for (const id of ids) selected.delete(id);
+        render();
+        toast(`已刪除 ${ids.length} 筆`);
+      } catch (e) { toast('刪除失敗：' + e.message, true); }
+    });
+  }
+
   // ---------- 讀取 ----------
   async function loadLocal() {
     try {
@@ -335,12 +358,14 @@
             <span>${VV.fmtDate(v.addedAt)}</span>${v.addedFrom ? `<span>來自 ${VV.escapeHtml(v.addedFrom)}</span>` : ''}</div>
         </div>
         <span class="route">→ ${VV.escapeHtml(routeLabel(v))}</span>
+        ${store.canWrite ? '<button type="button" class="btn ghost small danger" data-del title="從清單刪除">✕</button>' : ''}
       </label>`;
     }).join('');
 
     const n = selected.size;
     $('#selCount').textContent = n ? `已選 ${n} 部` : '未選取';
     $('#btnDownload').disabled = !n;
+    $('#btnDeleteSel').disabled = !n || !store.canWrite;
     $('#selAll').checked = shown.length > 0 && shown.every(v => selected.has(v.id));
   }
 
@@ -661,6 +686,12 @@
   });
   $('#statusFilter').addEventListener('change', render);
   $('#btnDownload').onclick = startDownload;
+  $('#btnDeleteSel').onclick = () => deleteVideos([...selected]);
+  $('#list').addEventListener('click', e => {
+    const b = e.target.closest('button[data-del]'); if (!b) return;
+    e.preventDefault();  // 按鈕在 label 裡，避免順便勾選
+    deleteVideos([b.closest('.item').dataset.id]);
+  });
   $('#btnReload').onclick = loadList;
   $('#btnFolder').onclick = () => api('/api/open-folder', {}).catch(e => toast(e.message, true));
 
