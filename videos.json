@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-27T04:10:47.776Z",
+  "updatedAt": "2026-09-27T04:10:55.679Z",
   "videos": [
     {
       "id": "muj9mo2lecqg9",
@@ -33,9 +33,9 @@
       "note": "測試影片（Me at the zoo，19 秒）",
       "addedAt": "2026-09-27T03:19:25.000Z",
       "addedFrom": "Claude 測試",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-09-27T04:10:55.679Z",
+      "downloadedOn": "IMX500",
       "file": null
     }
   ]
