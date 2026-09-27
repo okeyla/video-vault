@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-27T03:35:11.710Z",
+  "updatedAt": "2026-09-27T03:36:19.084Z",
   "videos": [
     {
       "id": "muj9mo2lecqg9",
@@ -9,9 +9,9 @@
       "note": "水母媽媽教學",
       "addedAt": "2026-09-27T03:35:11.709Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-09-27T03:36:19.084Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
