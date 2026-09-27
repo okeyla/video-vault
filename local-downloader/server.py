@@ -19,6 +19,8 @@ import sys
 import threading
 import time
 import uuid
+import urllib.error
+import urllib.request
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -30,18 +32,46 @@ CONFIG_PATH = HERE / "config.json"
 PARABOLIC_DIR = Path(r"C:\Program Files\Nickvision Parabolic\Release")
 
 PLATFORMS = ("facebook", "instagram", "threads", "youtube", "other")
-HANDLERS = ("site", "parabolic", "ytdlp")
+SOURCE_TYPES = ("site", "parabolic", "ytdlp")
+STATS_PATH = HERE / "stats.json"
+
+
+def _site(sid, platform, name, url, input_sel="", button_sel="", enabled=True):
+    return {"id": sid, "platform": platform, "name": name, "type": "site", "url": url,
+            "input": input_sel, "button": button_sel, "enabled": enabled, "builtin": True}
+
+
+def _tool(platform, kind, enabled=True):
+    name = {"ytdlp": "yt-dlp 全自動", "parabolic": "Parabolic"}[kind]
+    return {"id": kind, "platform": platform, "name": name, "type": kind, "url": "",
+            "input": "", "button": "", "enabled": enabled, "builtin": True}
+
+
+# 下載來源：每個平台依序排列，排在前面的優先使用（開啟「自動排序」時改依成功率排序）
+# 預設停用的是已驗證可連線的備用站，需要時到「下載來源」啟用
+DEFAULT_SOURCES = [
+    _site("fdown", "facebook", "fdown.net", "https://fdown.net/", "#downloadinput", "#downloadbtn"),
+    _site("snapsave", "facebook", "SnapSave", "https://snapsave.app/", "#url", "#send", False),
+    _site("fdownloader", "facebook", "FDownloader", "https://fdownloader.net/", "#s_input", "button.btn-red", False),
+    _tool("facebook", "ytdlp"),
+    _site("saveclip", "instagram", "SaveClip", "https://saveclip.app/zh-tw9", "#s_input", "#search-form button"),
+    _site("fastdl", "instagram", "FastDL", "https://fastdl.app/", "#search-form-input", "#searchFormButton", False),
+    _site("sssinstagram", "instagram", "SSSInstagram", "https://sssinstagram.com/", "#input", ".form__submit", False),
+    _tool("instagram", "ytdlp"),
+    _site("threadsdownloader", "threads", "ThreadsDownloader", "https://www.threadsdownloader.com/", "#postUrl", "#loadVideos"),
+    _site("threadster", "threads", "Threadster", "https://threadster.app/", "#url", "button[type=submit]", False),
+    _site("savethr", "threads", "SaveThr", "https://savethr.com/", "#floating_outlined", "#submit-btn", False),
+    _tool("threads", "ytdlp"),
+    _tool("youtube", "parabolic"),
+    _tool("youtube", "ytdlp"),
+    _tool("other", "ytdlp"),
+    _site("original", "other", "開啟原網址", "{url}"),
+]
 
 DEFAULT_CONFIG = {
     "download_dir": str(Path.home() / "Videos" / "VideoVault"),
-    # 每個平台用哪種方式下載：site = 開啟下載網站、parabolic = 交給 Parabolic、ytdlp = 背景全自動
-    "handlers": {
-        "facebook": "site",
-        "instagram": "site",
-        "threads": "site",
-        "youtube": "parabolic",
-        "other": "ytdlp",
-    },
+    "sources": DEFAULT_SOURCES,
+    "auto_rank": True,           # 依成功率與連線狀態自動排序
     "parabolic_exe": str(PARABOLIC_DIR / "Nickvision.Parabolic.WinUI.exe"),
     "ytdlp_exe": "",            # 空白 = 自動尋找（PATH → Parabolic 內附）
     "cookies_from_browser": "",  # IG/FB 需要登入時可填 firefox / edge / chrome
@@ -49,20 +79,48 @@ DEFAULT_CONFIG = {
 }
 
 NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+FILE_LOCK = threading.Lock()
 
 
 # ---------------------------------------------------------------- config
+def source_key(src: dict) -> str:
+    return f"{src['platform']}/{src['id']}"
+
+
 def load_config() -> dict:
     cfg = json.loads(json.dumps(DEFAULT_CONFIG))
-    if CONFIG_PATH.exists():
-        try:
-            saved = json.loads(CONFIG_PATH.read_text("utf-8"))
-            handlers = {**cfg["handlers"], **saved.pop("handlers", {})}
-            cfg.update(saved)
-            cfg["handlers"] = handlers
-        except (OSError, ValueError) as e:
-            print(f"[warn] config.json 讀取失敗，使用預設值：{e}")
+    if not CONFIG_PATH.exists():
+        return cfg
+    try:
+        saved = json.loads(CONFIG_PATH.read_text("utf-8"))
+    except (OSError, ValueError) as e:
+        print(f"[warn] config.json 讀取失敗，使用預設值：{e}")
+        return cfg
+    handlers = saved.pop("handlers", None)
+    cfg.update(saved)
+    if "sources" not in saved and handlers:
+        # 舊版設定（每平台一種方式）→ 把當時選的方式排到最前面
+        for p, h in handlers.items():
+            chosen = [s for s in cfg["sources"] if s["platform"] == p and s["type"] == h]
+            cfg["sources"] = chosen + [s for s in cfg["sources"] if s not in chosen]
+    # 新版程式加入的內建來源，補到清單最後
+    have = {source_key(s) for s in cfg["sources"]}
+    cfg["sources"] += [s for s in json.loads(json.dumps(DEFAULT_SOURCES)) if source_key(s) not in have]
     return cfg
+
+
+def clean_source(s: dict) -> dict | None:
+    platform, kind = s.get("platform"), s.get("type")
+    if platform not in PLATFORMS or kind not in SOURCE_TYPES:
+        return None
+    sid = re.sub(r"[^\w-]", "", str(s.get("id") or ""))[:40] or uuid.uuid4().hex[:8]
+    url = str(s.get("url") or "").strip()
+    if kind == "site" and not (url == "{url}" or re.match(r"^https?://\S+$", url)):
+        return None
+    return {"id": sid, "platform": platform, "name": str(s.get("name") or sid).strip()[:40], "type": kind,
+            "url": url if kind == "site" else "", "input": str(s.get("input") or "").strip()[:200],
+            "button": str(s.get("button") or "").strip()[:200], "enabled": bool(s.get("enabled", True)),
+            "builtin": bool(s.get("builtin"))}
 
 
 def save_config(new: dict) -> dict:
@@ -72,11 +130,76 @@ def save_config(new: dict) -> dict:
             cfg[key] = str(new[key]).strip()
     if "concurrency" in new:
         cfg["concurrency"] = max(1, min(6, int(new["concurrency"])))
-    for p, h in (new.get("handlers") or {}).items():
-        if p in PLATFORMS and h in HANDLERS:
-            cfg["handlers"][p] = h
-    CONFIG_PATH.write_text(json.dumps(cfg, ensure_ascii=False, indent=2), "utf-8")
+    if "auto_rank" in new:
+        cfg["auto_rank"] = bool(new["auto_rank"])
+    if isinstance(new.get("sources"), list):
+        cleaned, seen = [], set()
+        for s in new["sources"]:
+            c = clean_source(s)
+            if c and source_key(c) not in seen:
+                seen.add(source_key(c))
+                cleaned.append(c)
+        cfg["sources"] = cleaned
+    with FILE_LOCK:
+        CONFIG_PATH.write_text(json.dumps(cfg, ensure_ascii=False, indent=2), "utf-8")
     return cfg
+
+
+# ---------------------------------------------------------------- 成功率統計
+def load_stats() -> dict:
+    try:
+        return json.loads(STATS_PATH.read_text("utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def record_stat(key: str, ok: bool) -> dict:
+    with FILE_LOCK:
+        stats = load_stats()
+        st = stats.setdefault(key, {"ok": 0, "fail": 0, "recent": "", "lastAt": None})
+        st["ok" if ok else "fail"] += 1
+        st["recent"] = (st["recent"] + ("1" if ok else "0"))[-20:]  # 最近 20 次，1 = 成功
+        st["lastAt"] = time.strftime("%Y-%m-%dT%H:%M:%S")
+        STATS_PATH.write_text(json.dumps(stats, ensure_ascii=False, indent=2), "utf-8")
+    return stats
+
+
+# ---------------------------------------------------------------- 連線檢查
+HEALTH: dict[str, dict] = {}
+BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
+
+
+def check_site(url: str) -> dict:
+    started = time.time()
+    req = urllib.request.Request(url, headers={"User-Agent": BROWSER_UA, "Accept": "text/html"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as res:
+            code = res.status
+    except urllib.error.HTTPError as e:
+        code = e.code
+        # Cloudflare 驗證頁：網站本身正常，只是擋程式
+        if e.headers.get("cf-mitigated") == "challenge" or (
+                code in (403, 503) and "cloudflare" in str(e.headers.get("server", "")).lower()):
+            return {"state": "up", "code": code, "ms": int((time.time() - started) * 1000), "note": "有機器人驗證"}
+    except (urllib.error.URLError, OSError) as e:
+        return {"state": "down", "code": None, "ms": None, "note": str(getattr(e, "reason", e))[:80]}
+    ms = int((time.time() - started) * 1000)
+    return {"state": "up" if code < 500 else "down", "code": code, "ms": ms, "note": ""}
+
+
+def check_health() -> dict:
+    cfg = load_config()
+    sites = {s["url"] for s in cfg["sources"] if s["type"] == "site" and s["url"].startswith("http")}
+    results: dict[str, dict] = {}
+    threads = [threading.Thread(target=lambda u=u: results.__setitem__(u, check_site(u))) for u in sites]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join(15)
+    checked = time.strftime("%H:%M")
+    HEALTH.clear()
+    HEALTH.update({u: {**r, "checkedAt": checked} for u, r in results.items()})
+    return HEALTH
 
 
 def find_ytdlp(cfg: dict) -> str | None:
@@ -95,15 +218,21 @@ def find_ffmpeg() -> str | None:
     return None
 
 
+VERSION_CACHE: dict[str, str | None] = {}
+
+
 def tool_status(cfg: dict) -> dict:
     ytdlp = find_ytdlp(cfg)
     version = None
     if ytdlp:
-        try:
-            version = subprocess.run([ytdlp, "--version"], capture_output=True, text=True,
-                                     timeout=15, creationflags=NO_WINDOW).stdout.strip()
-        except (OSError, subprocess.SubprocessError):
-            pass
+        # yt-dlp 啟動要一兩秒，版本號只查一次
+        if ytdlp not in VERSION_CACHE:
+            try:
+                VERSION_CACHE[ytdlp] = subprocess.run([ytdlp, "--version"], capture_output=True, text=True,
+                                                      timeout=15, creationflags=NO_WINDOW).stdout.strip()
+            except (OSError, subprocess.SubprocessError):
+                VERSION_CACHE[ytdlp] = None
+        version = VERSION_CACHE[ytdlp]
     return {
         "ytdlp": ytdlp,
         "ytdlp_version": version,
@@ -175,6 +304,7 @@ def run_ytdlp(job: dict):
         set_job(job["id"], status="error", message=str(e))
         return
 
+    record_stat(f"{job['platform']}/ytdlp", proc.returncode == 0)
     if proc.returncode == 0:
         set_job(job["id"], status="done", progress=100, message="完成")
     else:
@@ -287,7 +417,7 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(data)
         elif path == "/api/config":
             cfg = load_config()
-            self.send_json({"config": cfg, "tools": tool_status(cfg)})
+            self.send_json({"config": cfg, "tools": tool_status(cfg), "stats": load_stats(), "health": HEALTH})
         elif path == "/api/jobs":
             with JOBS_LOCK:
                 self.send_json({"jobs": sorted(JOBS.values(), key=lambda j: j["createdAt"])})
@@ -302,7 +432,20 @@ class Handler(BaseHTTPRequestHandler):
             body = self.read_json()
             if path == "/api/config":
                 cfg = save_config(body)
-                self.send_json({"config": cfg, "tools": tool_status(cfg)})
+                self.send_json({"config": cfg, "tools": tool_status(cfg), "stats": load_stats(), "health": HEALTH})
+            elif path == "/api/stats":
+                key = str(body.get("key", ""))
+                if not re.match(r"^[a-z]+/[\w-]+$", key):
+                    raise ValueError("來源代號不正確")
+                self.send_json({"stats": record_stat(key, bool(body.get("ok")))})
+            elif path == "/api/stats/reset":
+                with FILE_LOCK:
+                    stats = load_stats()
+                    stats.pop(str(body.get("key", "")), None)
+                    STATS_PATH.write_text(json.dumps(stats, ensure_ascii=False, indent=2), "utf-8")
+                self.send_json({"stats": stats})
+            elif path == "/api/health":
+                self.send_json({"health": check_health()})
             elif path == "/api/ytdlp":
                 self.send_json({"jobs": enqueue(body.get("items") or [])})
             elif path == "/api/parabolic":
@@ -327,6 +470,7 @@ def main():
     cfg = load_config()
     for _ in range(max(1, int(cfg.get("concurrency", 2)))):
         threading.Thread(target=worker, daemon=True).start()
+    threading.Thread(target=check_health, daemon=True).start()
     try:
         httpd = ThreadingHTTPServer((HOST, PORT), Handler)
     except OSError:

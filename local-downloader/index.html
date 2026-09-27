@@ -23,7 +23,22 @@
   .job .msg { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .selall { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
   .selall input { width: 18px; height: 18px; accent-color: var(--accent); }
-  .handlers { display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; align-items: center; margin-bottom: 12px; }
+  #sourcesDlg { width: min(760px, calc(100% - 32px)); }
+  .src { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; margin-top: 6px; background: var(--surface); }
+  .src.off { opacity: .55; }
+  .src .rank { width: 22px; text-align: center; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+  .src .info { flex: 1; min-width: 0; }
+  .src .name { font-weight: 600; }
+  .src .sub { font-size: 12px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; }
+  .src .sub span { white-space: nowrap; }
+  .src input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); flex-shrink: 0; }
+  .src .ops { display: flex; gap: 0; flex-shrink: 0; }
+  .dot-h { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; background: var(--other); }
+  .dot-h.up { background: var(--ok); } .dot-h.down { background: var(--err); }
+  .type-tag { font-size: 11px; border: 1px solid var(--border); border-radius: 5px; padding: 0 5px; color: var(--muted); }
+  .switch { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; }
+  .switch input { width: 18px; height: 18px; accent-color: var(--accent); }
+  .srcform { border: 1px dashed var(--border); border-radius: 10px; padding: 12px; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -32,6 +47,7 @@
     <div class="brand"><span class="dot"></span>VideoVault <small id="deviceLabel">本地下載站</small></div>
     <div class="spacer"></div>
     <button class="btn ghost" id="btnReload" title="重新讀取清單">↻</button>
+    <button class="btn" id="btnSources">下載來源</button>
     <button class="btn" id="btnFolder">下載資料夾</button>
     <button class="btn" id="btnSettings">設定</button>
   </div>
@@ -95,8 +111,7 @@
     </details>
     <label class="field"><span>這台電腦的名稱（會記錄在「已下載・○○」）</span><input type="text" name="device" placeholder="例如：私人電腦"></label>
 
-    <h3 style="margin-top:18px">下載方式</h3>
-    <div class="handlers" id="handlerFields"></div>
+    <p class="hint">每個平台要用哪個網站或工具下載，請到右上角「下載來源」管理。</p>
     <label class="field"><span>下載資料夾（yt-dlp 用；網站下載會存到瀏覽器預設的下載位置）</span><input type="text" name="download_dir" spellcheck="false"></label>
     <details>
       <summary>進階</summary>
@@ -116,6 +131,41 @@
   </form>
 </dialog>
 
+<dialog id="sourcesDlg">
+  <h3>下載來源</h3>
+  <div class="row">
+    <label class="switch"><input type="checkbox" id="autoRank">自動排序：依最近 20 次成功率與連線狀態，挑最好的來源</label>
+    <div class="spacer"></div>
+    <button type="button" class="btn small" id="btnHealth">重新檢查連線</button>
+  </div>
+  <div class="chips" id="srcChips" style="margin-top:12px"></div>
+  <div id="srcList"></div>
+  <div class="row" style="margin-top:10px">
+    <button type="button" class="btn small" id="btnAddSrc">＋ 新增下載網站</button>
+  </div>
+  <form class="srcform hidden" id="srcForm">
+    <input type="hidden" name="key">
+    <div class="grid2">
+      <label class="field"><span>名稱</span><input type="text" name="name" required placeholder="例如：SnapSave"></label>
+      <label class="field"><span>網址（可用 <code>{url}</code> 代入影片網址）</span><input type="text" name="url" required spellcheck="false" placeholder="https://example.com/"></label>
+      <label class="field"><span>輸入框選擇器（空白 = 自動偵測）</span><input type="text" name="input" spellcheck="false" placeholder="#url"></label>
+      <label class="field"><span>下載鈕選擇器（空白 = 自動偵測）</span><input type="text" name="button" spellcheck="false" placeholder="#download"></label>
+    </div>
+    <p class="hint">選擇器不會寫也沒關係，擴充功能會自己找網頁上的網址輸入框。填錯的話只是不會自動填入，不影響其他功能。</p>
+    <div class="row">
+      <button type="button" class="btn small ghost danger" id="btnDelSrc">刪除</button>
+      <div class="spacer"></div>
+      <button type="button" class="btn small" id="btnCancelSrc">取消</button>
+      <button class="btn small primary">儲存來源</button>
+    </div>
+  </form>
+  <p class="hint" style="margin-top:12px">
+    成功率來自你按「完成」或「換下一個來源」的紀錄，以及 yt-dlp 的下載結果。<br>
+    關閉自動排序時，依你用 ↑↓ 排的順序。下載時若第一個來源失敗，可在下載卡片按「換下一個來源」。
+  </p>
+  <div class="foot"><button type="button" class="btn primary" id="btnCloseSources">完成</button></div>
+</dialog>
+
 <div class="toast" id="toast"></div>
 
 <script src="common.js"></script>
@@ -124,13 +174,8 @@
   'use strict';
   const $ = s => document.querySelector(s);
   const P = VV.PLATFORMS;
-  const HANDLER_OPTIONS = {
-    facebook:  [['site', 'fdown.net'], ['ytdlp', 'yt-dlp 全自動']],
-    instagram: [['site', 'saveclip.app'], ['ytdlp', 'yt-dlp 全自動']],
-    threads:   [['site', 'threadsdownloader.com'], ['ytdlp', 'yt-dlp 全自動']],
-    youtube:   [['parabolic', 'Parabolic'], ['ytdlp', 'yt-dlp 全自動']],
-    other:     [['ytdlp', 'yt-dlp 全自動'], ['site', '開啟原網址']],
-  };
+  const PLATFORM_KEYS = ['facebook', 'instagram', 'threads', 'youtube', 'other'];
+  const TYPE_LABEL = { site: '網站', parabolic: '程式', ytdlp: '全自動' };
 
   let cfg = VV.loadConfig();
   let store = new VV.GitHubStore(cfg);
@@ -166,10 +211,48 @@
     ta.remove();
     if (!ok && navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
   }
-  const handlerOf = v => local.config?.handlers?.[v.platform] || (v.platform === 'youtube' ? 'parabolic' : v.platform === 'other' ? 'ytdlp' : 'site');
-  function routeLabel(v) {
-    const h = handlerOf(v);
-    return (HANDLER_OPTIONS[v.platform] || HANDLER_OPTIONS.other).find(o => o[0] === h)?.[1] || h;
+  // ---------- 下載來源排序 ----------
+  const srcKey = s => `${s.platform}/${s.id}`;
+  function srcStat(s) {
+    const st = local.stats?.[srcKey(s)];
+    const recent = st?.recent || '';
+    const ok = [...recent].filter(c => c === '1').length;
+    return { ok, n: recent.length, rate: recent.length ? ok / recent.length : null };
+  }
+  function srcHealth(s) {
+    if (s.type === 'ytdlp') return local.tools?.ytdlp ? { state: 'up', note: '已安裝' } : { state: 'down', note: '找不到 yt-dlp' };
+    if (s.type === 'parabolic') return local.tools?.parabolic ? { state: 'up', note: '已安裝' } : { state: 'down', note: '找不到 Parabolic' };
+    if (s.url === '{url}') return { state: 'up', note: '' };
+    return local.health?.[s.url] || { state: 'unknown', note: '尚未檢查' };
+  }
+  // 分數 = 拉普拉斯平滑的成功率（沒紀錄時為 0.5）；連不上的來源大幅降分
+  function srcScore(s) {
+    const { ok, n } = srcStat(s);
+    let score = (ok + 1) / (n + 2);
+    if (srcHealth(s).state === 'down') score *= 0.2;
+    return score;
+  }
+  function rankedSources(platform, { includeDisabled = false } = {}) {
+    const all = (local.config?.sources || []).filter(s => s.platform === platform);
+    const list = includeDisabled ? all : all.filter(s => s.enabled);
+    if (!local.config?.auto_rank) return list;
+    const order = new Map(all.map((s, i) => [srcKey(s), i]));
+    return [...list].sort((a, b) =>
+      (b.enabled - a.enabled) || (srcScore(b) - srcScore(a)) || (order.get(srcKey(a)) - order.get(srcKey(b))));
+  }
+  const bestSource = v => rankedSources(v.platform)[0];
+  const routeLabel = v => bestSource(v)?.name || '（沒有可用來源）';
+  function recordStat(s, ok) {
+    api('/api/stats', { key: srcKey(s), ok }).then(r => { local.stats = r.stats; }).catch(() => {});
+  }
+  function siteTarget(s, videoUrl) {
+    const enc = encodeURIComponent(videoUrl);
+    const base = s.url === '{url}' ? videoUrl : s.url.replaceAll('{url}', enc);
+    // #vv= 讓瀏覽器擴充功能自動填入網址；vvi / vvb 告訴它輸入框與下載鈕在哪
+    let hash = 'vv=' + enc;
+    if (s.input) hash += '&vvi=' + encodeURIComponent(s.input);
+    if (s.button) hash += '&vvb=' + encodeURIComponent(s.button);
+    return s.url === '{url}' ? base : base.split('#')[0] + '#' + hash;
   }
 
   // ---------- 寫回 GitHub（序列化，避免同時寫入衝突） ----------
@@ -262,59 +345,76 @@
   }
 
   // ---------- 下載 ----------
+  // 每部影片帶著「候選來源」清單；第一個不行就換下一個
   function startDownload() {
     const items = data.videos.filter(v => selected.has(v.id));
     if (!items.length) return;
-    const auto = items.filter(v => handlerOf(v) === 'ytdlp');
-    const manual = items.filter(v => handlerOf(v) !== 'ytdlp');
-    // 按平台排序，同一個下載網站的影片連續處理
-    const order = ['youtube', 'facebook', 'instagram', 'threads', 'other'];
-    manual.sort((a, b) => order.indexOf(a.platform) - order.indexOf(b.platform));
-
-    if (manual.length) startManual(manual);  // 必須在點擊事件內同步執行，才能開新分頁
-    if (auto.length) {
-      if (!local.tools?.ytdlp) toast('找不到 yt-dlp，請到設定改用其他方式', true);
-      else api('/api/ytdlp', { items: auto.map(({ id, url, platform }) => ({ id, url, platform })) })
-        .then(() => { toast(`${auto.length} 部已加入自動下載`); pollJobs(); })
-        .catch(e => toast(e.message, true));
+    const auto = [], manual = [], none = [];
+    for (const v of items) {
+      const cands = rankedSources(v.platform);
+      if (!cands.length) none.push(v);
+      else if (cands[0].type === 'ytdlp') auto.push(v);
+      else manual.push({ v, cands, ci: 0 });
     }
+    // 同一個來源的影片連續處理
+    manual.sort((a, b) => srcKey(a.cands[0]).localeCompare(srcKey(b.cands[0])));
+
+    if (manual.length) enqueueManual(manual);  // 必須在點擊事件內同步執行，才能開新分頁
+    if (auto.length) runYtdlp(auto);
+    if (none.length) toast(`${none.length} 部沒有啟用的下載來源，請到「下載來源」開啟`, true);
     for (const v of items) selected.delete(v.id);
     render();
   }
 
+  function runYtdlp(videos) {
+    if (!local.tools?.ytdlp) { toast('找不到 yt-dlp', true); return; }
+    api('/api/ytdlp', { items: videos.map(({ id, url, platform }) => ({ id, url, platform })) })
+      .then(() => { toast(`${videos.length} 部已加入自動下載`); pollJobs(); })
+      .catch(e => toast(e.message, true));
+  }
+
   // 手動佇列：網站 / Parabolic，一次處理一部
   let manualQ = [], manualIdx = 0;
-  function startManual(items) {
-    manualQ = items; manualIdx = 0;
+  function enqueueManual(entries) {
+    const idle = manualIdx >= manualQ.length;
+    if (idle) { manualQ = []; manualIdx = 0; }
+    manualQ.push(...entries);
     $('#manualCard').classList.remove('hidden');
-    openCurrent();
+    if (idle) openCurrent(); else renderManual();
   }
   function openCurrent() {
-    const v = manualQ[manualIdx];
-    if (!v) { finishManual(); return; }
-    copySync(v.url);
-    const h = handlerOf(v);
-    if (h === 'parabolic') {
-      api('/api/parabolic', { url: v.url }).catch(e => toast(e.message, true));
+    const e = manualQ[manualIdx];
+    if (!e) { finishManual(); return; }
+    const s = e.cands[e.ci];
+    if (s.type === 'ytdlp') {
+      // 換到 yt-dlp 時直接交給背景下載，佇列前進到下一部
+      runYtdlp([e.v]);
+      manualIdx++;
+      openCurrent();
+      return;
+    }
+    copySync(e.v.url);
+    if (s.type === 'parabolic') {
+      api('/api/parabolic', { url: e.v.url }).catch(err => toast(err.message, true));
     } else {
-      // #vv= 讓瀏覽器擴充功能自動填入網址（沒裝擴充功能也無害）
-      const target = v.platform === 'other' ? v.url : P[v.platform].site + '#vv=' + encodeURIComponent(v.url);
-      const w = window.open(target, 'vv_' + v.platform);
+      const w = window.open(siteTarget(s, e.v.url), 'vv_' + e.v.platform);
       if (!w) toast('瀏覽器擋住了彈出視窗，請允許本站開啟新分頁', true);
     }
     renderManual();
   }
   function renderManual() {
-    const v = manualQ[manualIdx];
-    if (!v) return;
-    const h = handlerOf(v);
-    const how = h === 'parabolic'
-      ? '已開啟 Parabolic 並複製網址。在 Parabolic 按「新增下載」，網址會自動帶入，選好畫質後下載。'
-      : v.platform === 'other'
+    const e = manualQ[manualIdx];
+    if (!e) return;
+    const { v } = e, s = e.cands[e.ci];
+    const name = `<b>${VV.escapeHtml(s.name)}</b>`;
+    const how = s.type === 'parabolic'
+      ? `已開啟 ${name} 並複製網址。在 Parabolic 按「新增下載」，網址會自動帶入，選好畫質後下載。`
+      : s.url === '{url}'
         ? '已開啟原網址並複製。'
         : document.documentElement.dataset.vvExt
-          ? `已開啟 <b>${VV.escapeHtml(routeLabel(v))}</b>，網址已自動填入。到該分頁按閃爍的下載鈕並存檔。`
-          : `已開啟 <b>${VV.escapeHtml(routeLabel(v))}</b> 並複製網址。到該分頁的輸入框按 <b>Ctrl+V</b> 貼上，點下載並存檔。<br>想自動填入？安裝專案裡的 <code>browser-extension</code>（見 README）。`;
+          ? `已開啟 ${name}，網址已自動填入。到該分頁按閃爍的下載鈕並存檔。`
+          : `已開啟 ${name} 並複製網址。到該分頁的輸入框按 <b>Ctrl+V</b> 貼上，點下載並存檔。<br>想自動填入？安裝專案裡的 <code>browser-extension</code>（見 README）。`;
+    const next = e.cands[e.ci + 1];
     $('#manualTitle').textContent = `手動下載 ${manualIdx + 1} / ${manualQ.length}`;
     $('#manualBody').innerHTML = `
       <div class="row" style="margin-top:8px;gap:8px"><span class="badge ${v.platform}">${P[v.platform].short}</span>
@@ -323,7 +423,9 @@
       <div class="step"><span class="num">→</span><div class="hint">${how}</div></div>
       <div class="row" style="margin-top:12px">
         <button class="btn primary" data-m="done">✓ 完成，下一部</button>
-        <button class="btn" data-m="again">重新開啟 / 複製</button>
+        <button class="btn" data-m="next" ${next ? '' : 'disabled'} title="記錄這個來源失敗一次">
+          ✗ 這個不行，換 ${next ? VV.escapeHtml(next.name) : '（沒有其他來源）'}</button>
+        <button class="btn ghost" data-m="again">重新開啟</button>
         <button class="btn ghost" data-m="skip">略過</button>
       </div>`;
   }
@@ -332,11 +434,14 @@
     if (manualQ.length) toast('手動下載佇列完成');
     manualQ = []; manualIdx = 0;
   }
-  $('#manualBody').addEventListener('click', e => {
-    const b = e.target.closest('button[data-m]'); if (!b) return;
-    const v = manualQ[manualIdx];
-    if (b.dataset.m === 'again') { openCurrent(); return; }
-    if (b.dataset.m === 'done') markDownloaded(v.id);
+  $('#manualBody').addEventListener('click', ev => {
+    const b = ev.target.closest('button[data-m]'); if (!b) return;
+    const e = manualQ[manualIdx], s = e.cands[e.ci];
+    switch (b.dataset.m) {
+      case 'again': openCurrent(); return;
+      case 'next': recordStat(s, false); e.ci++; openCurrent(); return;
+      case 'done': recordStat(s, true); markDownloaded(e.v.id); break;
+    }
     manualIdx++;
     openCurrent();
   });
@@ -344,27 +449,44 @@
 
   // yt-dlp 工作進度
   let pollTimer = null;
+  let lastJobs = [];
   const reported = new Set();
   async function pollJobs() {
     clearTimeout(pollTimer);
     let jobs = [];
     try { jobs = (await api('/api/jobs')).jobs; } catch { return; }
+    lastJobs = jobs;
     $('#jobsCard').classList.toggle('hidden', !jobs.length);
     $('#jobs').innerHTML = jobs.map(j => {
       const cls = j.status === 'done' ? 'done' : j.status === 'error' ? 'error' : '';
       const label = { queued: '排隊中', running: `${Math.round(j.progress)}%`, done: '完成', error: '失敗' }[j.status];
       const msg = j.status === 'done' && j.file ? '📁 ' + j.file : j.message;
+      const alt = j.status === 'error' && rankedSources(j.platform).some(s => s.type !== 'ytdlp')
+        ? `<button class="btn small" data-fallback="${j.id}">改用其他來源</button>` : '';
       return `<div class="job"><div class="row" style="flex-wrap:nowrap"><span class="badge ${j.platform}">${P[j.platform]?.short || '?'}</span>
         <span class="grow" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px">${VV.escapeHtml(j.url)}</span>
-        <span class="status ${j.status === 'done' ? 'downloaded' : j.status === 'error' ? 'error' : 'pending'}">${label}</span></div>
+        <span class="status ${j.status === 'done' ? 'downloaded' : j.status === 'error' ? 'error' : 'pending'}">${label}</span>${alt}</div>
         <div class="progress ${cls}"><i style="width:${j.status === 'error' ? 100 : j.progress}%"></i></div>
         <div class="msg" title="${VV.escapeHtml(msg || '')}">${VV.escapeHtml(msg || '')}</div></div>`;
     }).join('');
+    let finished = false;
     for (const j of jobs) {
-      if (j.status === 'done' && !reported.has(j.id)) { reported.add(j.id); markDownloaded(j.itemId, j.file); }
+      if ((j.status === 'done' || j.status === 'error') && !reported.has(j.id)) {
+        reported.add(j.id); finished = true;
+        if (j.status === 'done') markDownloaded(j.itemId, j.file);
+      }
     }
+    if (finished) api('/api/config').then(r => { local.stats = r.stats; render(); }).catch(() => {});
     if (jobs.some(j => j.status === 'queued' || j.status === 'running')) pollTimer = setTimeout(pollJobs, 1000);
   }
+  $('#jobs').addEventListener('click', ev => {
+    const b = ev.target.closest('button[data-fallback]'); if (!b) return;
+    const j = lastJobs.find(x => x.id === b.dataset.fallback);
+    const v = data.videos.find(x => x.id === j?.itemId) || { id: j.itemId, url: j.url, platform: j.platform, note: '' };
+    const cands = rankedSources(j.platform).filter(s => s.type !== 'ytdlp');
+    if (cands.length) enqueueManual([{ v, cands, ci: 0 }]);
+    b.disabled = true;
+  });
   $('#btnClearJobs').onclick = () => api('/api/jobs/clear', {}).then(pollJobs);
 
   // ---------- 設定 ----------
@@ -373,9 +495,6 @@
     for (const k of ['owner', 'repo', 'branch', 'path', 'token', 'device']) f.elements[k].value = c[k] || '';
     const lc = local.config || {};
     for (const k of ['download_dir', 'parabolic_exe', 'ytdlp_exe', 'cookies_from_browser', 'concurrency']) f.elements[k].value = lc[k] ?? '';
-    $('#handlerFields').innerHTML = Object.entries(HANDLER_OPTIONS).map(([p, opts]) =>
-      `<span class="badge ${p}">${P[p].short}</span><select data-h="${p}">${opts.map(([val, label]) =>
-        `<option value="${val}" ${lc.handlers?.[p] === val ? 'selected' : ''}>${label}</option>`).join('')}</select>`).join('');
   }
   $('#btnSettings').onclick = () => { fillSettings(cfg); $('#importCode').value = ''; $('#settingsDlg').showModal(); };
   $('#btnCancel').onclick = () => $('#settingsDlg').close();
@@ -395,17 +514,134 @@
     VV.saveConfig(cfg);
     store = new VV.GitHubStore(cfg);
     if (local.config) {
-      const handlers = {};
-      document.querySelectorAll('#handlerFields select').forEach(s => handlers[s.dataset.h] = s.value);
       try {
-        local = await api('/api/config', {
+        await api('/api/config', {
           download_dir: f.download_dir.value, parabolic_exe: f.parabolic_exe.value, ytdlp_exe: f.ytdlp_exe.value,
-          cookies_from_browser: f.cookies_from_browser.value, concurrency: f.concurrency.value, handlers,
+          cookies_from_browser: f.cookies_from_browser.value, concurrency: f.concurrency.value,
         });
       } catch (e) { toast(e.message, true); }
     }
     await loadLocal();
     loadList();
+  });
+
+  // ---------- 下載來源管理 ----------
+  let srcPlatform = 'facebook';
+  async function saveSources(patch) {
+    try {
+      const r = await api('/api/config', patch);
+      Object.assign(local, r);
+      renderSources(); render();
+    } catch (e) { toast(e.message, true); }
+  }
+  function renderSources() {
+    $('#autoRank').checked = !!local.config?.auto_rank;
+    $('#srcChips').innerHTML = PLATFORM_KEYS.map(p =>
+      `<button type="button" class="chip" data-sp="${p}" aria-pressed="${p === srcPlatform}">${P[p].name}</button>`).join('');
+    const auto = !!local.config?.auto_rank;
+    const list = rankedSources(srcPlatform, { includeDisabled: true });
+    let rank = 0;
+    $('#srcList').innerHTML = list.map((s, i) => {
+      const h = srcHealth(s), st = srcStat(s);
+      const hText = h.state === 'up' ? (h.ms ? `正常 ${h.ms}ms` : '正常') : h.state === 'down' ? '連不上' : '未檢查';
+      const rateText = st.n ? `成功 ${st.ok}/${st.n}（${Math.round(st.rate * 100)}%）` : '尚無紀錄';
+      const where = s.type === 'site' ? (s.url === '{url}' ? '直接開啟影片網址' : s.url) : '';
+      return `<div class="src${s.enabled ? '' : ' off'}" data-key="${srcKey(s)}">
+        <span class="rank">${s.enabled ? ++rank : '–'}</span>
+        <input type="checkbox" data-op="toggle" ${s.enabled ? 'checked' : ''} title="啟用 / 停用">
+        <div class="info">
+          <div class="name">${VV.escapeHtml(s.name)} <span class="type-tag">${TYPE_LABEL[s.type]}</span></div>
+          <div class="sub">
+            <span title="${VV.escapeHtml(h.note || '')}"><i class="dot-h ${h.state}"></i>${hText}${h.note && h.state === 'up' && h.note !== '已安裝' ? '・' + VV.escapeHtml(h.note) : ''}</span>
+            <span>${rateText}</span>
+            ${where ? `<span style="overflow:hidden;text-overflow:ellipsis">${VV.escapeHtml(where)}</span>` : ''}
+          </div>
+        </div>
+        <div class="ops">
+          ${auto ? '' : `<button type="button" class="btn ghost small" data-op="up" ${i ? '' : 'disabled'} title="往上">↑</button>
+          <button type="button" class="btn ghost small" data-op="down" ${i < list.length - 1 ? '' : 'disabled'} title="往下">↓</button>`}
+          ${st.n ? '<button type="button" class="btn ghost small" data-op="reset" title="清除成功率紀錄">⟲</button>' : ''}
+          ${s.type === 'site' && s.url !== '{url}' ? '<button type="button" class="btn ghost small" data-op="open" title="開啟網站">↗</button>' : ''}
+          ${s.type === 'site' ? '<button type="button" class="btn ghost small" data-op="edit" title="編輯">✎</button>' : ''}
+        </div>
+      </div>`;
+    }).join('');
+  }
+  function openSrcForm(s) {
+    const f = $('#srcForm');
+    f.classList.remove('hidden');
+    f.key.value = s ? srcKey(s) : '';
+    f.name.value = s?.name || ''; f.url.value = s?.url || 'https://';
+    f.input.value = s?.input || ''; f.button.value = s?.button || '';
+    $('#btnDelSrc').classList.toggle('hidden', !s || s.builtin);
+    f.name.focus();
+  }
+  $('#btnSources').onclick = () => {
+    $('#srcForm').classList.add('hidden');
+    renderSources();
+    $('#sourcesDlg').showModal();
+  };
+  $('#btnCloseSources').onclick = () => $('#sourcesDlg').close();
+  $('#srcChips').addEventListener('click', e => {
+    const b = e.target.closest('[data-sp]'); if (!b) return;
+    srcPlatform = b.dataset.sp; $('#srcForm').classList.add('hidden'); renderSources();
+  });
+  $('#autoRank').addEventListener('change', e => saveSources({ auto_rank: e.target.checked }));
+  $('#btnHealth').onclick = async () => {
+    const b = $('#btnHealth'); b.disabled = true; b.textContent = '檢查中…';
+    try { local.health = (await api('/api/health', {})).health; renderSources(); render(); }
+    catch (e) { toast(e.message, true); }
+    b.disabled = false; b.textContent = '重新檢查連線';
+  };
+  $('#srcList').addEventListener('click', e => {
+    const b = e.target.closest('[data-op]'); if (!b) return;
+    const key = b.closest('.src').dataset.key;
+    const sources = local.config.sources.map(s => ({ ...s }));
+    const s = sources.find(x => srcKey(x) === key);
+    switch (b.dataset.op) {
+      case 'toggle': s.enabled = b.checked; break;
+      case 'up': case 'down': {
+        // 在同平台的清單中與相鄰項目交換
+        const same = sources.filter(x => x.platform === s.platform);
+        const j = same.indexOf(s) + (b.dataset.op === 'up' ? -1 : 1);
+        const a = sources.indexOf(s), c = sources.indexOf(same[j]);
+        [sources[a], sources[c]] = [sources[c], sources[a]];
+        break;
+      }
+      case 'reset':
+        if (!confirm(`清除「${s.name}」的成功率紀錄？`)) return;
+        api('/api/stats/reset', { key }).then(r => { local.stats = r.stats; renderSources(); render(); });
+        return;
+      case 'open': window.open(s.url, '_blank', 'noopener'); return;
+      case 'edit': openSrcForm(s); return;
+    }
+    saveSources({ sources });
+  });
+  $('#btnAddSrc').onclick = () => openSrcForm(null);
+  $('#btnCancelSrc').onclick = () => $('#srcForm').classList.add('hidden');
+  $('#btnDelSrc').onclick = () => {
+    const key = $('#srcForm').key.value;
+    if (!confirm('刪除這個下載來源？')) return;
+    $('#srcForm').classList.add('hidden');
+    saveSources({ sources: local.config.sources.filter(s => srcKey(s) !== key) });
+  };
+  $('#srcForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const f = e.target;
+    const url = f.url.value.trim();
+    if (!/^https?:\/\/\S+$/.test(url) && url !== '{url}') { toast('網址要以 https:// 開頭', true); return; }
+    const fields = { name: f.name.value.trim(), url, input: f.input.value.trim(), button: f.button.value.trim() };
+    let sources = local.config.sources.map(s => ({ ...s }));
+    if (f.key.value) {
+      Object.assign(sources.find(s => srcKey(s) === f.key.value), fields);
+    } else {
+      // 新網站放在該平台最後
+      const src = { id: 'custom-' + Date.now().toString(36), platform: srcPlatform, type: 'site', enabled: true, builtin: false, ...fields };
+      const lastIdx = sources.map(s => s.platform).lastIndexOf(srcPlatform);
+      sources.splice(lastIdx + 1, 0, src);
+    }
+    f.classList.add('hidden');
+    saveSources({ sources }).then(() => $('#btnHealth').click());
   });
 
   // ---------- 事件 ----------
@@ -431,6 +667,10 @@
   loadLocal().then(() => {
     loadList(); pollJobs();
     if (!store.ready) $('#btnSettings').click();
+    // 程式剛啟動時連線檢查可能還沒跑完，稍後再拿一次結果
+    if (local.config && !Object.keys(local.health || {}).length) {
+      setTimeout(() => api('/api/config').then(r => { local.health = r.health; render(); }).catch(() => {}), 12000);
+    }
   });
 })();
 </script>

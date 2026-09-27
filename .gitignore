@@ -1,3 +1,4 @@
 local-downloader/config.json
 __pycache__/
 github_pat_*
+local-downloader/stats.json

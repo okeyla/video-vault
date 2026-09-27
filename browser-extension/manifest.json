@@ -1,16 +1,11 @@
 {
   "manifest_version": 3,
   "name": "VideoVault 自動填入",
-  "version": "1.0.0",
-  "description": "本地下載站開啟 fdown / saveclip / threadsdownloader 時，自動把影片網址填進輸入框。",
+  "version": "1.1.0",
+  "description": "本地下載站開啟下載網站時，自動把影片網址填進輸入框。只在網址帶有 #vv= 時動作。",
   "content_scripts": [
     {
-      "matches": [
-        "https://fdown.net/*",
-        "https://saveclip.app/*",
-        "https://www.threadsdownloader.com/*",
-        "https://threadsdownloader.com/*"
-      ],
+      "matches": ["https://*/*", "http://*/*"],
       "js": ["fill.js"],
       "run_at": "document_idle"
     },
