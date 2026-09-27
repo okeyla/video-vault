@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VideoVault 影片收藏</title>
+<meta name="description" content="收集 Facebook、Instagram、Threads、YouTube 影片連結，統一管理下載進度。">
+<meta name="theme-color" content="#d9480f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>VideoVault <small>影片收藏清單</small></div>
+    <div class="spacer"></div>
+    <button class="btn ghost" id="btnReload" title="重新整理">↻</button>
+    <button class="btn" id="btnSettings">設定</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="setupBanner" class="banner hidden">尚未連結 GitHub 儲存庫。請先點右上角「設定」。</div>
+  <div id="readonlyBanner" class="banner hidden">目前是唯讀模式（沒有 Token），可以瀏覽但無法新增或修改。</div>
+
+  <section class="card" id="addCard">
+    <h2>新增影片</h2>
+    <textarea id="addInput" placeholder="貼上影片網址（可一次貼多個，或直接貼整段分享文字）"></textarea>
+    <div id="addPreview" class="hint" style="margin-top:6px"></div>
+    <div class="row" style="margin-top:10px">
+      <input type="text" id="addNote" class="grow" placeholder="備註（選填），例如：料理、健身、笑話">
+      <button class="btn" id="btnPaste">貼上剪貼簿</button>
+      <button class="btn primary" id="btnAdd">加入清單</button>
+    </div>
+  </section>
+
+  <section style="margin-top:20px">
+    <div class="row">
+      <input type="search" id="search" class="grow" placeholder="搜尋網址或備註">
+      <select id="statusFilter" style="width:auto">
+        <option value="pending">未下載</option>
+        <option value="downloaded">已下載</option>
+        <option value="all">全部</option>
+      </select>
+    </div>
+    <div class="chips" id="platformChips" style="margin-top:10px"></div>
+    <div class="list" id="list"></div>
+  </section>
+</main>
+
+<dialog id="settingsDlg">
+  <form method="dialog" id="settingsForm">
+    <h3>設定</h3>
+    <div class="grid2">
+      <label class="field"><span>GitHub 帳號 (owner)</span><input type="text" name="owner" autocomplete="off" spellcheck="false"></label>
+      <label class="field"><span>儲存庫 (repo)</span><input type="text" name="repo" autocomplete="off" spellcheck="false"></label>
+      <label class="field"><span>分支</span><input type="text" name="branch" placeholder="main" spellcheck="false"></label>
+      <label class="field"><span>資料檔路徑</span><input type="text" name="path" placeholder="videos.json" spellcheck="false"></label>
+    </div>
+    <label class="field"><span>GitHub Token（Fine-grained，只給這個 repo 的 Contents: Read and write）</span>
+      <input type="password" name="token" autocomplete="off" spellcheck="false" placeholder="github_pat_…"></label>
+    <label class="field"><span>這台裝置的名稱（記錄從哪裡新增）</span><input type="text" name="device" placeholder="例如：手機、公司電腦"></label>
+    <p class="hint">Token 只存在這個瀏覽器的 localStorage，不會上傳到任何地方（除了 GitHub API 本身）。</p>
+
+    <details>
+      <summary>設定碼：在其他裝置快速套用</summary>
+      <p class="hint">設定碼包含 Token，請只傳給自己（例如用私訊傳給自己的手機）。</p>
+      <div class="row">
+        <button type="button" class="btn small" id="btnExport">複製目前的設定碼</button>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <input type="text" id="importCode" class="grow" placeholder="貼上設定碼 VV1.…">
+        <button type="button" class="btn small" id="btnImport">套用</button>
+      </div>
+    </details>
+    <details>
+      <summary>電腦版書籤小工具（一鍵加入正在看的影片）</summary>
+      <p class="hint">把下面的連結拖曳到書籤列。看到喜歡的影片時點一下，就會帶著網址開啟本頁。</p>
+      <p><a id="bookmarklet" class="btn small" href="#">＋ 收藏影片</a></p>
+    </details>
+
+    <div class="foot">
+      <button type="button" class="btn" value="cancel" id="btnCancel">取消</button>
+      <button class="btn primary" value="save">儲存</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="editDlg">
+  <form method="dialog">
+    <h3>編輯</h3>
+    <label class="field"><span>網址</span><input type="text" id="editUrl" spellcheck="false"></label>
+    <label class="field"><span>備註</span><input type="text" id="editNote"></label>
+    <label class="field"><span>狀態</span>
+      <select id="editStatus"><option value="pending">未下載</option><option value="downloaded">已下載</option></select></label>
+    <div class="foot">
+      <button type="button" class="btn danger" id="btnDelete" style="margin-right:auto">刪除</button>
+      <button type="button" class="btn" id="btnEditCancel">取消</button>
+      <button class="btn primary" value="save">儲存</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script src="common.js"></script>
+<script>
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  let cfg = VV.loadConfig();
+  let store = new VV.GitHubStore(cfg);
+  let data = { videos: [] };
+  let platformFilter = 'all';
+  let busy = false;
+
+  // ---------- toast ----------
+  let toastTimer;
+  function toast(msg, isErr) {
+    const t = $('#toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isErr ? ' err' : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.className = 'toast', isErr ? 5000 : 2500);
+  }
+
+  // ---------- 資料 ----------
+  async function reload() {
+    $('#setupBanner').classList.toggle('hidden', store.ready);
+    $('#readonlyBanner').classList.toggle('hidden', !store.ready || store.canWrite);
+    $('#addCard').classList.toggle('hidden', !store.canWrite);
+    if (!store.ready) { render(); return; }
+    try {
+      $('#list').innerHTML = '<div class="empty">讀取中…</div>';
+      data = await store.load();
+    } catch (e) {
+      toast(e.message, true);
+    }
+    render();
+  }
+
+  async function mutate(fn, message, okMsg) {
+    if (busy) return;
+    busy = true;
+    document.body.style.cursor = 'progress';
+    try {
+      data = await store.update(fn, message);
+      if (okMsg) toast(okMsg);
+    } catch (e) {
+      toast(e.message, true);
+    } finally {
+      busy = false;
+      document.body.style.cursor = '';
+      render();
+    }
+  }
+
+  // ---------- 新增 ----------
+  function parseInput() {
+    return VV.extractUrls($('#addInput').value).map(VV.normalizeUrl);
+  }
+  function updatePreview() {
+    const urls = parseInput();
+    const existing = new Set(data.videos.map(v => v.url));
+    $('#addPreview').innerHTML = urls.map(u => {
+      const p = VV.detectPlatform(u);
+      const dup = existing.has(u) ? ' <span class="status">已在清單</span>' : '';
+      return `<div class="row" style="gap:6px;flex-wrap:nowrap"><span class="badge ${p}">${VV.PLATFORMS[p].short}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${VV.escapeHtml(u)}</span>${dup}</div>`;
+    }).join('');
+  }
+
+  async function addVideos() {
+    const urls = parseInput();
+    if (!urls.length) { toast('沒有找到網址', true); return; }
+    const note = $('#addNote').value.trim();
+    const device = cfg.device || VV.guessDevice();
+    let added = 0;
+    await mutate(d => {
+      const existing = new Set(d.videos.map(v => v.url));
+      for (const url of urls) {
+        if (existing.has(url)) continue;
+        d.videos.unshift({
+          id: VV.uid(), url, platform: VV.detectPlatform(url), note,
+          addedAt: new Date().toISOString(), addedFrom: device,
+          status: 'pending', downloadedAt: null, downloadedOn: null, file: null,
+        });
+        added++;
+      }
+      if (!added) return false;
+    }, `新增 ${urls.length} 筆影片`);
+    if (added) {
+      toast(`已加入 ${added} 筆` + (added < urls.length ? `（${urls.length - added} 筆重複略過）` : ''));
+      $('#addInput').value = ''; $('#addNote').value = ''; updatePreview();
+      history.replaceState(null, '', location.pathname);
+    } else if (!busy) toast('這些網址都已在清單中');
+  }
+
+  // ---------- 列表 ----------
+  function render() {
+    const status = $('#statusFilter').value;
+    const q = $('#search').value.trim().toLowerCase();
+    const byStatus = data.videos.filter(v => status === 'all' || (v.status || 'pending') === status);
+
+    const counts = { all: byStatus.length };
+    for (const v of byStatus) counts[v.platform] = (counts[v.platform] || 0) + 1;
+    const keys = ['all', 'facebook', 'instagram', 'threads', 'youtube', 'other'].filter(k => k === 'all' || counts[k]);
+    if (!keys.includes(platformFilter)) platformFilter = 'all';
+    $('#platformChips').innerHTML = keys.map(k =>
+      `<button class="chip" data-p="${k}" aria-pressed="${k === platformFilter}">${k === 'all' ? '全部' : VV.PLATFORMS[k].name}<span class="n">${counts[k]}</span></button>`).join('');
+
+    const shown = byStatus.filter(v =>
+      (platformFilter === 'all' || v.platform === platformFilter) &&
+      (!q || v.url.toLowerCase().includes(q) || (v.note || '').toLowerCase().includes(q)));
+
+    if (!store.ready) { $('#list').innerHTML = ''; return; }
+    if (!shown.length) {
+      $('#list').innerHTML = `<div class="empty">${data.videos.length ? '沒有符合條件的影片' : '清單是空的，先貼一個影片網址吧'}</div>`;
+      return;
+    }
+    $('#list').innerHTML = shown.map(v => {
+      const st = v.status || 'pending';
+      const stText = st === 'downloaded' ? `已下載${v.downloadedOn ? '・' + VV.escapeHtml(v.downloadedOn) : ''}` : '未下載';
+      return `<div class="item" data-id="${v.id}">
+        <span class="badge ${v.platform}">${VV.PLATFORMS[v.platform]?.short || '?'}</span>
+        <div class="body">
+          <a class="url" href="${VV.escapeHtml(v.url)}" target="_blank" rel="noopener noreferrer">${VV.escapeHtml(v.url)}</a>
+          ${v.note ? `<div class="note">${VV.escapeHtml(v.note)}</div>` : ''}
+          <div class="meta"><span class="status ${st}">${stText}</span><span>${VV.fmtDate(v.addedAt)}</span>${v.addedFrom ? `<span>來自 ${VV.escapeHtml(v.addedFrom)}</span>` : ''}${v.file ? `<span title="${VV.escapeHtml(v.file)}">📁 ${VV.escapeHtml(v.file.split(/[\\/]/).pop())}</span>` : ''}</div>
+        </div>
+        <div class="actions">
+          <button class="btn ghost small" data-act="copy" title="複製網址">⧉</button>
+          ${store.canWrite ? '<button class="btn ghost small" data-act="edit" title="編輯">✎</button>' : ''}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ---------- 編輯 ----------
+  let editing = null;
+  function openEdit(id) {
+    editing = data.videos.find(v => v.id === id);
+    if (!editing) return;
+    $('#editUrl').value = editing.url;
+    $('#editNote').value = editing.note || '';
+    $('#editStatus').value = editing.status || 'pending';
+    $('#editDlg').showModal();
+  }
+  $('#editDlg').addEventListener('close', () => {
+    if ($('#editDlg').returnValue !== 'save' || !editing) return;
+    const id = editing.id;
+    const url = VV.normalizeUrl($('#editUrl').value);
+    const note = $('#editNote').value.trim();
+    const status = $('#editStatus').value;
+    mutate(d => {
+      const v = d.videos.find(x => x.id === id);
+      if (!v) return false;
+      Object.assign(v, { url, note, platform: VV.detectPlatform(url) });
+      if (v.status !== status) {
+        v.status = status;
+        if (status === 'pending') Object.assign(v, { downloadedAt: null, downloadedOn: null, file: null });
+        else Object.assign(v, { downloadedAt: new Date().toISOString(), downloadedOn: cfg.device || VV.guessDevice() });
+      }
+    }, '編輯影片', '已儲存');
+  });
+  $('#btnEditCancel').onclick = () => $('#editDlg').close();
+  $('#btnDelete').onclick = () => {
+    if (!editing || !confirm('確定從清單刪除這筆？（不會刪除已下載的檔案）')) return;
+    const id = editing.id;
+    editing = null;
+    $('#editDlg').close();
+    mutate(d => { d.videos = d.videos.filter(v => v.id !== id); }, '刪除影片', '已刪除');
+  };
+
+  // ---------- 設定 ----------
+  function fillSettings(c) {
+    const f = $('#settingsForm');
+    for (const k of ['owner', 'repo', 'branch', 'path', 'token', 'device']) f.elements[k].value = c[k] || '';
+  }
+  $('#btnSettings').onclick = () => { fillSettings(cfg); $('#settingsDlg').showModal(); };
+  $('#btnCancel').onclick = () => $('#settingsDlg').close();
+  $('#settingsDlg').addEventListener('close', () => {
+    if ($('#settingsDlg').returnValue !== 'save') return;
+    const f = $('#settingsForm');
+    cfg = {
+      owner: f.owner.value.trim(), repo: f.repo.value.trim(),
+      branch: f.branch.value.trim() || 'main', path: f.path.value.trim() || 'videos.json',
+      token: f.token.value.trim(), device: f.device.value.trim(),
+    };
+    VV.saveConfig(cfg);
+    store = new VV.GitHubStore(cfg);
+    reload();
+  });
+  $('#btnExport').onclick = async () => {
+    try { await navigator.clipboard.writeText(VV.exportConfigCode(cfg)); toast('設定碼已複製'); }
+    catch { prompt('複製這段設定碼：', VV.exportConfigCode(cfg)); }
+  };
+  $('#btnImport').onclick = () => {
+    try {
+      const c = VV.importConfigCode($('#importCode').value);
+      fillSettings({ ...cfg, ...c, device: $('#settingsForm').device.value });
+      toast('已填入，按「儲存」生效');
+    } catch (e) { toast(e.message, true); }
+  };
+  const pageUrl = location.origin + location.pathname;
+  $('#bookmarklet').href = `javascript:void(open('${pageUrl}?url='+encodeURIComponent(location.href)))`;
+  $('#bookmarklet').onclick = e => { e.preventDefault(); toast('請把這個按鈕拖到書籤列'); };
+
+  // ---------- 事件 ----------
+  $('#addInput').addEventListener('input', updatePreview);
+  $('#btnAdd').onclick = addVideos;
+  $('#addInput').addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) addVideos(); });
+  $('#btnPaste').onclick = async () => {
+    try {
+      const t = await navigator.clipboard.readText();
+      $('#addInput').value = ($('#addInput').value + '\n' + t).trim();
+      updatePreview();
+    } catch { toast('瀏覽器不允許讀取剪貼簿，請手動貼上', true); }
+  };
+  $('#btnReload').onclick = reload;
+  $('#search').addEventListener('input', render);
+  $('#statusFilter').addEventListener('change', render);
+  $('#platformChips').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if (!b) return;
+    platformFilter = b.dataset.p; render();
+  });
+  $('#list').addEventListener('click', async e => {
+    const b = e.target.closest('button[data-act]'); if (!b) return;
+    const id = b.closest('.item').dataset.id;
+    const v = data.videos.find(x => x.id === id);
+    if (b.dataset.act === 'edit') openEdit(id);
+    if (b.dataset.act === 'copy') {
+      try { await navigator.clipboard.writeText(v.url); toast('網址已複製'); } catch { toast('無法複製', true); }
+    }
+  });
+
+  // 分享（PWA share target）或書籤小工具帶進來的網址
+  const params = new URLSearchParams(location.search);
+  const incoming = [params.get('url'), params.get('text'), params.get('title')].filter(Boolean).join('\n');
+  if (incoming) { $('#addInput').value = incoming; }
+
+  if (!store.ready) fillSettings(cfg);
+  reload().then(updatePreview);
+
+  if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
+})();
+</script>
+</body>
+</html>

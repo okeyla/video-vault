@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VideoVault 本地下載</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<style>
+  .bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--surface);
+    border-top: 1px solid var(--border); box-shadow: 0 -4px 16px rgba(0,0,0,.06);
+  }
+  .bar .wrap { display: flex; align-items: center; gap: 12px; padding-top: 10px; padding-bottom: 10px; }
+  .route { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .tools { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin-top: 12px; }
+  .tools .ok { color: var(--ok); } .tools .bad { color: var(--err); }
+  .step { display: flex; gap: 10px; align-items: flex-start; }
+  .step .num { font-weight: 700; color: var(--accent); }
+  .manual-url { font-size: 14px; word-break: break-all; margin: 6px 0 10px; }
+  .job { padding: 10px 0; border-top: 1px solid var(--border); }
+  .job:first-child { border-top: 0; }
+  .job .msg { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .selall { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+  .selall input { width: 18px; height: 18px; accent-color: var(--accent); }
+  .handlers { display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; align-items: center; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>VideoVault <small id="deviceLabel">本地下載站</small></div>
+    <div class="spacer"></div>
+    <button class="btn ghost" id="btnReload" title="重新讀取清單">↻</button>
+    <button class="btn" id="btnFolder">下載資料夾</button>
+    <button class="btn" id="btnSettings">設定</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="serverBanner" class="banner hidden">連不到本地程式。請用 <code>start.bat</code>（或 <code>python server.py</code>）開啟本頁，而不是直接點兩下 HTML 檔。</div>
+  <div id="setupBanner" class="banner hidden">尚未連結 GitHub 儲存庫。請點「設定」，貼上管理網站產生的設定碼。</div>
+  <div id="readonlyBanner" class="banner hidden">沒有 GitHub Token：可以下載，但無法自動把影片標記為「已下載」。</div>
+  <div class="tools" id="tools"></div>
+
+  <section class="card hidden" id="manualCard">
+    <div class="row"><h2 style="margin:0" id="manualTitle">手動下載</h2><div class="spacer"></div>
+      <button class="btn small ghost" id="btnManualStop">結束</button></div>
+    <div id="manualBody"></div>
+  </section>
+
+  <section class="card hidden" id="jobsCard">
+    <div class="row"><h2 style="margin:0">自動下載（yt-dlp）</h2><div class="spacer"></div>
+      <button class="btn small ghost" id="btnClearJobs">清除已完成</button></div>
+    <div id="jobs" style="margin-top:6px"></div>
+  </section>
+
+  <section style="margin-top:20px">
+    <div class="row">
+      <label class="selall"><input type="checkbox" id="selAll">全選</label>
+      <div class="spacer"></div>
+      <select id="statusFilter" style="width:auto">
+        <option value="pending">未下載</option>
+        <option value="downloaded">已下載</option>
+        <option value="all">全部</option>
+      </select>
+    </div>
+    <div class="chips" id="platformChips" style="margin-top:10px"></div>
+    <div class="list" id="list"></div>
+  </section>
+</main>
+
+<div class="bar">
+  <div class="wrap">
+    <span id="selCount" class="hint">未選取</span>
+    <div class="spacer"></div>
+    <button class="btn primary" id="btnDownload" disabled>下載所選</button>
+  </div>
+</div>
+
+<dialog id="settingsDlg">
+  <form method="dialog" id="settingsForm">
+    <h3>設定</h3>
+    <label class="field"><span>設定碼（從管理網站「設定 → 設定碼」複製）</span>
+      <div class="row"><input type="text" id="importCode" class="grow" placeholder="VV1.…"><button type="button" class="btn small" id="btnImport">套用</button></div></label>
+    <details>
+      <summary>GitHub 詳細設定</summary>
+      <div class="grid2">
+        <label class="field"><span>GitHub 帳號</span><input type="text" name="owner" spellcheck="false"></label>
+        <label class="field"><span>儲存庫</span><input type="text" name="repo" spellcheck="false"></label>
+        <label class="field"><span>分支</span><input type="text" name="branch" spellcheck="false"></label>
+        <label class="field"><span>資料檔路徑</span><input type="text" name="path" spellcheck="false"></label>
+      </div>
+      <label class="field"><span>GitHub Token</span><input type="password" name="token" autocomplete="off" spellcheck="false"></label>
+    </details>
+    <label class="field"><span>這台電腦的名稱（會記錄在「已下載・○○」）</span><input type="text" name="device" placeholder="例如：私人電腦"></label>
+
+    <h3 style="margin-top:18px">下載方式</h3>
+    <div class="handlers" id="handlerFields"></div>
+    <label class="field"><span>下載資料夾（yt-dlp 用；網站下載會存到瀏覽器預設的下載位置）</span><input type="text" name="download_dir" spellcheck="false"></label>
+    <details>
+      <summary>進階</summary>
+      <label class="field"><span>Parabolic 執行檔</span><input type="text" name="parabolic_exe" spellcheck="false"></label>
+      <label class="field"><span>yt-dlp 執行檔（空白 = 自動尋找，含 Parabolic 內附版本）</span><input type="text" name="ytdlp_exe" spellcheck="false"></label>
+      <div class="grid2">
+        <label class="field"><span>登入 cookies 來源瀏覽器（IG 常需要）</span>
+          <select name="cookies_from_browser"><option value="">不使用</option><option>firefox</option><option>edge</option><option>chrome</option><option>brave</option></select></label>
+        <label class="field"><span>同時下載數</span><select name="concurrency"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+      </div>
+      <p class="hint">「同時下載數」在重新啟動 start.bat 後生效。</p>
+    </details>
+    <div class="foot">
+      <button type="button" class="btn" id="btnCancel">取消</button>
+      <button class="btn primary" value="save">儲存</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script src="common.js"></script>
+<script>
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const P = VV.PLATFORMS;
+  const HANDLER_OPTIONS = {
+    facebook:  [['site', 'fdown.net'], ['ytdlp', 'yt-dlp 全自動']],
+    instagram: [['site', 'saveclip.app'], ['ytdlp', 'yt-dlp 全自動']],
+    threads:   [['site', 'threadsdownloader.com'], ['ytdlp', 'yt-dlp 全自動']],
+    youtube:   [['parabolic', 'Parabolic'], ['ytdlp', 'yt-dlp 全自動']],
+    other:     [['ytdlp', 'yt-dlp 全自動'], ['site', '開啟原網址']],
+  };
+
+  let cfg = VV.loadConfig();
+  let store = new VV.GitHubStore(cfg);
+  let local = { config: null, tools: {} };
+  let data = { videos: [] };
+  let selected = new Set();
+  let platformFilter = 'all';
+
+  // ---------- 共用 ----------
+  let toastTimer;
+  function toast(msg, isErr) {
+    const t = $('#toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isErr ? ' err' : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.className = 'toast', isErr ? 5000 : 2500);
+  }
+  async function api(path, body) {
+    const opt = { headers: { 'X-VideoVault': '1' } };
+    if (body !== undefined) { opt.method = 'POST'; opt.headers['Content-Type'] = 'application/json'; opt.body = JSON.stringify(body); }
+    const res = await fetch(path, opt);
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(json.error || `本地程式錯誤 ${res.status}`);
+    return json;
+  }
+  // 同步複製：在 window.open 之前完成，避免新分頁搶走焦點導致複製失敗
+  function copySync(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch {}
+    ta.remove();
+    if (!ok && navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+  }
+  const handlerOf = v => local.config?.handlers?.[v.platform] || (v.platform === 'youtube' ? 'parabolic' : v.platform === 'other' ? 'ytdlp' : 'site');
+  function routeLabel(v) {
+    const h = handlerOf(v);
+    return (HANDLER_OPTIONS[v.platform] || HANDLER_OPTIONS.other).find(o => o[0] === h)?.[1] || h;
+  }
+
+  // ---------- 寫回 GitHub（序列化，避免同時寫入衝突） ----------
+  let writeChain = Promise.resolve();
+  function markDownloaded(id, file) {
+    if (!store.canWrite) return;
+    writeChain = writeChain.then(async () => {
+      try {
+        data = await store.update(d => {
+          const v = d.videos.find(x => x.id === id);
+          if (!v) return false;
+          Object.assign(v, { status: 'downloaded', downloadedAt: new Date().toISOString(),
+            downloadedOn: cfg.device || '電腦', file: file || v.file || null });
+        }, `標記已下載：${id}`);
+        selected.delete(id);
+        render();
+      } catch (e) { toast('寫回 GitHub 失敗：' + e.message, true); }
+    });
+  }
+
+  // ---------- 讀取 ----------
+  async function loadLocal() {
+    try {
+      local = await api('/api/config');
+      $('#serverBanner').classList.add('hidden');
+    } catch {
+      $('#serverBanner').classList.remove('hidden');
+    }
+    const t = local.tools || {};
+    const mark = (ok, label, detail) => `<span class="${ok ? 'ok' : 'bad'}">${ok ? '✓' : '✗'} ${label}${detail ? ' ' + VV.escapeHtml(detail) : ''}</span>`;
+    $('#tools').innerHTML = local.config ? [
+      mark(t.ytdlp, 'yt-dlp', t.ytdlp_version),
+      mark(t.ffmpeg, 'ffmpeg'),
+      mark(t.parabolic, 'Parabolic'),
+      `<span>📁 ${VV.escapeHtml(local.config.download_dir)}</span>`,
+    ].join('') : '';
+  }
+  async function loadList() {
+    $('#setupBanner').classList.toggle('hidden', store.ready);
+    $('#readonlyBanner').classList.toggle('hidden', !store.ready || store.canWrite);
+    $('#deviceLabel').textContent = '本地下載站' + (cfg.device ? '・' + cfg.device : '');
+    if (!store.ready) { render(); return; }
+    $('#list').innerHTML = '<div class="empty">讀取中…</div>';
+    try { data = await store.load(); } catch (e) { toast(e.message, true); }
+    const ids = new Set(data.videos.map(v => v.id));
+    selected = new Set([...selected].filter(id => ids.has(id)));
+    render();
+  }
+
+  // ---------- 列表 ----------
+  function visible() {
+    const status = $('#statusFilter').value;
+    return data.videos.filter(v =>
+      (status === 'all' || (v.status || 'pending') === status) &&
+      (platformFilter === 'all' || v.platform === platformFilter));
+  }
+  function render() {
+    const status = $('#statusFilter').value;
+    const byStatus = data.videos.filter(v => status === 'all' || (v.status || 'pending') === status);
+    const counts = { all: byStatus.length };
+    for (const v of byStatus) counts[v.platform] = (counts[v.platform] || 0) + 1;
+    const keys = ['all', 'facebook', 'instagram', 'threads', 'youtube', 'other'].filter(k => k === 'all' || counts[k]);
+    if (!keys.includes(platformFilter)) platformFilter = 'all';
+    $('#platformChips').innerHTML = keys.map(k =>
+      `<button class="chip" data-p="${k}" aria-pressed="${k === platformFilter}">${k === 'all' ? '全部' : P[k].name}<span class="n">${counts[k]}</span></button>`).join('');
+
+    const shown = visible();
+    if (!store.ready) $('#list').innerHTML = '';
+    else if (!shown.length) $('#list').innerHTML = `<div class="empty">${status === 'pending' ? '沒有待下載的影片 🎉' : '沒有影片'}</div>`;
+    else $('#list').innerHTML = shown.map(v => {
+      const st = v.status || 'pending';
+      const on = selected.has(v.id);
+      return `<label class="item${on ? ' selected' : ''}" data-id="${v.id}">
+        <input type="checkbox" ${on ? 'checked' : ''}>
+        <span class="badge ${v.platform}">${P[v.platform]?.short || '?'}</span>
+        <div class="body">
+          <a class="url" href="${VV.escapeHtml(v.url)}" target="_blank" rel="noopener noreferrer">${VV.escapeHtml(v.url)}</a>
+          ${v.note ? `<div class="note">${VV.escapeHtml(v.note)}</div>` : ''}
+          <div class="meta"><span class="status ${st}">${st === 'downloaded' ? '已下載' + (v.downloadedOn ? '・' + VV.escapeHtml(v.downloadedOn) : '') : '未下載'}</span>
+            <span>${VV.fmtDate(v.addedAt)}</span>${v.addedFrom ? `<span>來自 ${VV.escapeHtml(v.addedFrom)}</span>` : ''}</div>
+        </div>
+        <span class="route">→ ${VV.escapeHtml(routeLabel(v))}</span>
+      </label>`;
+    }).join('');
+
+    const n = selected.size;
+    $('#selCount').textContent = n ? `已選 ${n} 部` : '未選取';
+    $('#btnDownload').disabled = !n;
+    $('#selAll').checked = shown.length > 0 && shown.every(v => selected.has(v.id));
+  }
+
+  // ---------- 下載 ----------
+  function startDownload() {
+    const items = data.videos.filter(v => selected.has(v.id));
+    if (!items.length) return;
+    const auto = items.filter(v => handlerOf(v) === 'ytdlp');
+    const manual = items.filter(v => handlerOf(v) !== 'ytdlp');
+    // 按平台排序，同一個下載網站的影片連續處理
+    const order = ['youtube', 'facebook', 'instagram', 'threads', 'other'];
+    manual.sort((a, b) => order.indexOf(a.platform) - order.indexOf(b.platform));
+
+    if (manual.length) startManual(manual);  // 必須在點擊事件內同步執行，才能開新分頁
+    if (auto.length) {
+      if (!local.tools?.ytdlp) toast('找不到 yt-dlp，請到設定改用其他方式', true);
+      else api('/api/ytdlp', { items: auto.map(({ id, url, platform }) => ({ id, url, platform })) })
+        .then(() => { toast(`${auto.length} 部已加入自動下載`); pollJobs(); })
+        .catch(e => toast(e.message, true));
+    }
+    for (const v of items) selected.delete(v.id);
+    render();
+  }
+
+  // 手動佇列：網站 / Parabolic，一次處理一部
+  let manualQ = [], manualIdx = 0;
+  function startManual(items) {
+    manualQ = items; manualIdx = 0;
+    $('#manualCard').classList.remove('hidden');
+    openCurrent();
+  }
+  function openCurrent() {
+    const v = manualQ[manualIdx];
+    if (!v) { finishManual(); return; }
+    copySync(v.url);
+    const h = handlerOf(v);
+    if (h === 'parabolic') {
+      api('/api/parabolic', { url: v.url }).catch(e => toast(e.message, true));
+    } else {
+      const target = v.platform === 'other' ? v.url : P[v.platform].site;
+      const w = window.open(target, 'vv_' + v.platform);
+      if (!w) toast('瀏覽器擋住了彈出視窗，請允許本站開啟新分頁', true);
+    }
+    renderManual();
+  }
+  function renderManual() {
+    const v = manualQ[manualIdx];
+    if (!v) return;
+    const h = handlerOf(v);
+    const how = h === 'parabolic'
+      ? '已開啟 Parabolic 並複製網址。在 Parabolic 按「新增下載」，網址會自動帶入，選好畫質後下載。'
+      : v.platform === 'other'
+        ? '已開啟原網址並複製。'
+        : `已開啟 <b>${VV.escapeHtml(routeLabel(v))}</b> 並複製網址。到該分頁的輸入框按 <b>Ctrl+V</b> 貼上，點下載並存檔。`;
+    $('#manualTitle').textContent = `手動下載 ${manualIdx + 1} / ${manualQ.length}`;
+    $('#manualBody').innerHTML = `
+      <div class="row" style="margin-top:8px;gap:8px"><span class="badge ${v.platform}">${P[v.platform].short}</span>
+        <span class="note">${VV.escapeHtml(v.note || '')}</span></div>
+      <div class="manual-url">${VV.escapeHtml(v.url)}</div>
+      <div class="step"><span class="num">→</span><div class="hint">${how}</div></div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn primary" data-m="done">✓ 完成，下一部</button>
+        <button class="btn" data-m="again">重新開啟 / 複製</button>
+        <button class="btn ghost" data-m="skip">略過</button>
+      </div>`;
+  }
+  function finishManual() {
+    $('#manualCard').classList.add('hidden');
+    if (manualQ.length) toast('手動下載佇列完成');
+    manualQ = []; manualIdx = 0;
+  }
+  $('#manualBody').addEventListener('click', e => {
+    const b = e.target.closest('button[data-m]'); if (!b) return;
+    const v = manualQ[manualIdx];
+    if (b.dataset.m === 'again') { openCurrent(); return; }
+    if (b.dataset.m === 'done') markDownloaded(v.id);
+    manualIdx++;
+    openCurrent();
+  });
+  $('#btnManualStop').onclick = finishManual;
+
+  // yt-dlp 工作進度
+  let pollTimer = null;
+  const reported = new Set();
+  async function pollJobs() {
+    clearTimeout(pollTimer);
+    let jobs = [];
+    try { jobs = (await api('/api/jobs')).jobs; } catch { return; }
+    $('#jobsCard').classList.toggle('hidden', !jobs.length);
+    $('#jobs').innerHTML = jobs.map(j => {
+      const cls = j.status === 'done' ? 'done' : j.status === 'error' ? 'error' : '';
+      const label = { queued: '排隊中', running: `${Math.round(j.progress)}%`, done: '完成', error: '失敗' }[j.status];
+      const msg = j.status === 'done' && j.file ? '📁 ' + j.file : j.message;
+      return `<div class="job"><div class="row" style="flex-wrap:nowrap"><span class="badge ${j.platform}">${P[j.platform]?.short || '?'}</span>
+        <span class="grow" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px">${VV.escapeHtml(j.url)}</span>
+        <span class="status ${j.status === 'done' ? 'downloaded' : j.status === 'error' ? 'error' : 'pending'}">${label}</span></div>
+        <div class="progress ${cls}"><i style="width:${j.status === 'error' ? 100 : j.progress}%"></i></div>
+        <div class="msg" title="${VV.escapeHtml(msg || '')}">${VV.escapeHtml(msg || '')}</div></div>`;
+    }).join('');
+    for (const j of jobs) {
+      if (j.status === 'done' && !reported.has(j.id)) { reported.add(j.id); markDownloaded(j.itemId, j.file); }
+    }
+    if (jobs.some(j => j.status === 'queued' || j.status === 'running')) pollTimer = setTimeout(pollJobs, 1000);
+  }
+  $('#btnClearJobs').onclick = () => api('/api/jobs/clear', {}).then(pollJobs);
+
+  // ---------- 設定 ----------
+  function fillSettings(c) {
+    const f = $('#settingsForm');
+    for (const k of ['owner', 'repo', 'branch', 'path', 'token', 'device']) f.elements[k].value = c[k] || '';
+    const lc = local.config || {};
+    for (const k of ['download_dir', 'parabolic_exe', 'ytdlp_exe', 'cookies_from_browser', 'concurrency']) f.elements[k].value = lc[k] ?? '';
+    $('#handlerFields').innerHTML = Object.entries(HANDLER_OPTIONS).map(([p, opts]) =>
+      `<span class="badge ${p}">${P[p].short}</span><select data-h="${p}">${opts.map(([val, label]) =>
+        `<option value="${val}" ${lc.handlers?.[p] === val ? 'selected' : ''}>${label}</option>`).join('')}</select>`).join('');
+  }
+  $('#btnSettings').onclick = () => { fillSettings(cfg); $('#importCode').value = ''; $('#settingsDlg').showModal(); };
+  $('#btnCancel').onclick = () => $('#settingsDlg').close();
+  $('#btnImport').onclick = () => {
+    try {
+      const c = VV.importConfigCode($('#importCode').value);
+      const f = $('#settingsForm');
+      for (const k of ['owner', 'repo', 'branch', 'path', 'token']) f.elements[k].value = c[k] || '';
+      toast('已填入，按「儲存」生效');
+    } catch (e) { toast(e.message, true); }
+  };
+  $('#settingsDlg').addEventListener('close', async () => {
+    if ($('#settingsDlg').returnValue !== 'save') return;
+    const f = $('#settingsForm');
+    cfg = { owner: f.owner.value.trim(), repo: f.repo.value.trim(), branch: f.branch.value.trim() || 'main',
+      path: f.path.value.trim() || 'videos.json', token: f.token.value.trim(), device: f.device.value.trim() };
+    VV.saveConfig(cfg);
+    store = new VV.GitHubStore(cfg);
+    if (local.config) {
+      const handlers = {};
+      document.querySelectorAll('#handlerFields select').forEach(s => handlers[s.dataset.h] = s.value);
+      try {
+        local = await api('/api/config', {
+          download_dir: f.download_dir.value, parabolic_exe: f.parabolic_exe.value, ytdlp_exe: f.ytdlp_exe.value,
+          cookies_from_browser: f.cookies_from_browser.value, concurrency: f.concurrency.value, handlers,
+        });
+      } catch (e) { toast(e.message, true); }
+    }
+    await loadLocal();
+    loadList();
+  });
+
+  // ---------- 事件 ----------
+  $('#list').addEventListener('change', e => {
+    if (e.target.type !== 'checkbox') return;
+    const id = e.target.closest('.item').dataset.id;
+    e.target.checked ? selected.add(id) : selected.delete(id);
+    render();
+  });
+  $('#selAll').addEventListener('change', e => {
+    for (const v of visible()) e.target.checked ? selected.add(v.id) : selected.delete(v.id);
+    render();
+  });
+  $('#platformChips').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if (!b) return;
+    platformFilter = b.dataset.p; render();
+  });
+  $('#statusFilter').addEventListener('change', render);
+  $('#btnDownload').onclick = startDownload;
+  $('#btnReload').onclick = loadList;
+  $('#btnFolder').onclick = () => api('/api/open-folder', {}).catch(e => toast(e.message, true));
+
+  loadLocal().then(() => {
+    loadList(); pollJobs();
+    if (!store.ready) $('#btnSettings').click();
+  });
+})();
+</script>
+</body>
+</html>
