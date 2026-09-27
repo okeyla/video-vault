@@ -1,5 +1,18 @@
 {
   "version": 1,
-  "updatedAt": null,
-  "videos": []
+  "updatedAt": "2026-09-27T03:19:25.000Z",
+  "videos": [
+    {
+      "id": "test6ab88b3d",
+      "url": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+      "platform": "youtube",
+      "note": "測試影片（Me at the zoo，19 秒）",
+      "addedAt": "2026-09-27T03:19:25.000Z",
+      "addedFrom": "Claude 測試",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    }
+  ]
 }
