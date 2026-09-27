@@ -76,7 +76,12 @@
   function loadConfig() {
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem(CFG_KEY) || '{}'); } catch {}
-    return { ...DEFAULT_CFG, ...saved };
+    const cfg = { ...DEFAULT_CFG, ...saved };
+    // 在 <owner>.github.io/<repo>/ 上開啟時，自動帶入帳號與儲存庫
+    const m = location.hostname.match(/^([\w-]+)\.github\.io$/i);
+    const repo = location.pathname.split('/')[1];
+    if (m && repo && !cfg.owner && !cfg.repo) Object.assign(cfg, { owner: m[1], repo });
+    return cfg;
   }
   function saveConfig(cfg) {
     try { localStorage.setItem(CFG_KEY, JSON.stringify(cfg)); } catch {}
