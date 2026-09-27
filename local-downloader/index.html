@@ -23,6 +23,18 @@
   .job .msg { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .selall { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
   .selall input { width: 18px; height: 18px; accent-color: var(--accent); }
+  .menu-wrap { position: relative; }
+  .menu {
+    position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; width: 290px; padding: 6px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 28px rgba(0,0,0,.18);
+  }
+  .menu button {
+    display: block; width: 100%; text-align: left; border: 0; background: transparent; border-radius: 8px;
+    padding: 8px 10px; cursor: pointer;
+  }
+  .menu button:hover { background: var(--surface-2); }
+  .menu button span { display: block; font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .menu p { margin: 4px 10px 6px; font-size: 12px; color: var(--muted); }
   #sourcesDlg { width: min(760px, calc(100% - 32px)); }
   .src { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; margin-top: 6px; background: var(--surface); }
   .src.off { opacity: .55; }
@@ -48,7 +60,14 @@
     <div class="spacer"></div>
     <button class="btn ghost" id="btnReload" title="重新讀取清單">↻</button>
     <button class="btn" id="btnSources">下載來源</button>
-    <button class="btn" id="btnFolder">下載資料夾</button>
+    <div class="menu-wrap">
+      <button class="btn" id="btnFolder" aria-haspopup="true" aria-expanded="false">開啟資料夾 ▾</button>
+      <div class="menu hidden" id="folderMenu">
+        <button type="button" data-folder="ytdlp"><b>yt-dlp 全自動下載</b><span id="ytdlpDirHint">依平台分子資料夾</span></button>
+        <button type="button" data-folder="browser"><b>瀏覽器「下載」資料夾</b><span>透過 fdown、SaveClip 等網站下載的影片</span></button>
+        <p>Parabolic 下載的影片存在 Parabolic 自己設定的位置。</p>
+      </div>
+    </div>
     <button class="btn" id="btnSettings">設定</button>
   </div>
 </header>
@@ -693,7 +712,20 @@
     deleteVideos([b.closest('.item').dataset.id]);
   });
   $('#btnReload').onclick = loadList;
-  $('#btnFolder').onclick = () => api('/api/open-folder', {}).catch(e => toast(e.message, true));
+  function toggleFolderMenu(open) {
+    $('#folderMenu').classList.toggle('hidden', !open);
+    $('#btnFolder').setAttribute('aria-expanded', String(open));
+    if (open && local.config) $('#ytdlpDirHint').textContent = local.config.download_dir;
+  }
+  $('#btnFolder').onclick = e => { e.stopPropagation(); toggleFolderMenu($('#folderMenu').classList.contains('hidden')); };
+  document.addEventListener('click', e => { if (!e.target.closest('.menu-wrap')) toggleFolderMenu(false); });
+  $('#folderMenu').addEventListener('click', e => {
+    const b = e.target.closest('button[data-folder]'); if (!b) return;
+    toggleFolderMenu(false);
+    api('/api/open-folder', { which: b.dataset.folder })
+      .then(r => toast('已在檔案總管開啟：' + r.path))
+      .catch(err => toast(err.message, true));
+  });
 
   loadLocal().then(() => {
     loadList(); pollJobs();

@@ -352,13 +352,97 @@ def open_parabolic(url: str) -> str:
     return "已開啟 Parabolic"
 
 
-def open_folder(sub: str | None = None) -> None:
-    cfg = load_config()
-    path = Path(cfg["download_dir"])
-    if sub in PLATFORMS:
-        path = path / sub
-    path.mkdir(parents=True, exist_ok=True)
+def browser_downloads_dir() -> Path:
+    """Windows 的「下載」資料夾（使用者可能搬到別的磁碟，所以向系統查詢）。"""
+    try:
+        import ctypes
+        from ctypes import wintypes
+
+        class GUID(ctypes.Structure):
+            _fields_ = [("d1", wintypes.DWORD), ("d2", wintypes.WORD), ("d3", wintypes.WORD), ("d4", ctypes.c_ubyte * 8)]
+
+        folder_id = GUID(0x374DE290, 0x123F, 0x4565, (ctypes.c_ubyte * 8)(0x91, 0x64, 0x39, 0xC4, 0x92, 0x5E, 0x46, 0x7B))
+        buf = ctypes.c_wchar_p()
+        if ctypes.windll.shell32.SHGetKnownFolderPath(ctypes.byref(folder_id), 0, None, ctypes.byref(buf)) == 0:
+            path = Path(buf.value)
+            ctypes.windll.ole32.CoTaskMemFree(buf)
+            return path
+    except (OSError, AttributeError):
+        pass
+    return Path.home() / "Downloads"
+
+
+def explorer_windows() -> set:
+    try:
+        import ctypes
+        from ctypes import wintypes
+    except ImportError:
+        return set()
+    user32 = ctypes.windll.user32
+    out = set()
+
+    @ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+    def each(hwnd, _):
+        cls = ctypes.create_unicode_buffer(64)
+        user32.GetClassNameW(hwnd, cls, 64)
+        if cls.value == "CabinetWClass" and user32.IsWindowVisible(hwnd):
+            out.add(hwnd)
+        return True
+
+    user32.EnumWindows(each, 0)
+    return out
+
+
+def bring_explorer_to_front(folder: Path, before: set, timeout: float = 3.0) -> None:
+    """背景程式開的視窗會被 Windows 放在後面；找到該檔案總管視窗並拉到最前面。
+    優先找「新開的」檔案總管視窗；資料夾已開著時，改用視窗標題比對。"""
+    try:
+        import ctypes
+        from ctypes import wintypes
+    except ImportError:
+        return
+    user32 = ctypes.windll.user32
+    title = folder.name.lower()
+    found = []
+
+    @ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+    def each(hwnd, _):
+        cls = ctypes.create_unicode_buffer(64)
+        user32.GetClassNameW(hwnd, cls, 64)
+        if cls.value == "CabinetWClass" and user32.IsWindowVisible(hwnd):
+            text = ctypes.create_unicode_buffer(260)
+            user32.GetWindowTextW(hwnd, text, 260)
+            if hwnd not in before or text.value.lower().startswith(title):
+                found.append(hwnd)
+        return True
+
+    deadline = time.time() + timeout
+    while time.time() < deadline and not found:
+        user32.EnumWindows(each, 0)
+        if not found:
+            time.sleep(0.15)
+    if not found:
+        return
+    hwnd = found[0]
+    # 模擬按一下 Alt，Windows 才允許背景程式切換前景視窗
+    user32.keybd_event(0x12, 0, 0, 0)
+    user32.keybd_event(0x12, 0, 2, 0)
+    user32.ShowWindow(hwnd, 9)  # SW_RESTORE
+    user32.SetForegroundWindow(hwnd)
+
+
+def open_folder(which: str | None = None, sub: str | None = None) -> str:
+    if which == "browser":
+        path = browser_downloads_dir()
+    else:
+        path = Path(load_config()["download_dir"])
+        if sub in PLATFORMS:
+            path = path / sub
+        path.mkdir(parents=True, exist_ok=True)
+    before = explorer_windows()
     os.startfile(str(path))  # type: ignore[attr-defined]
+    threading.Thread(target=bring_explorer_to_front, args=(path, before), daemon=True).start()
+    return str(path)
 
 
 # ---------------------------------------------------------------- HTTP
@@ -453,8 +537,7 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError("網址格式不正確")
                 self.send_json({"message": open_parabolic(body["url"])})
             elif path == "/api/open-folder":
-                open_folder(body.get("platform"))
-                self.send_json({"ok": True})
+                self.send_json({"path": open_folder(body.get("which"), body.get("platform"))})
             elif path == "/api/jobs/clear":
                 with JOBS_LOCK:
                     for k in [k for k, j in JOBS.items() if j["status"] in ("done", "error")]:
