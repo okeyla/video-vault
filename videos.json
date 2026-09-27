@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-27T03:36:19.084Z",
+  "updatedAt": "2026-09-27T04:10:47.776Z",
   "videos": [
     {
       "id": "muj9mo2lecqg9",
@@ -21,9 +21,9 @@
       "note": "垃圾桶套子",
       "addedAt": "2026-09-27T03:29:57.638Z",
       "addedFrom": "IPhone15",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-09-27T04:10:47.776Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
