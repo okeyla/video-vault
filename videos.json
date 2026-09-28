@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-28T07:45:15.518Z",
+  "updatedAt": "2026-09-28T07:51:35.403Z",
   "videos": [
     {
       "id": "muky03r15ynxv",
@@ -9,9 +9,9 @@
       "note": "學習（青紅皂白）",
       "addedAt": "2026-09-28T07:45:15.518Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-09-28T07:51:35.403Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
