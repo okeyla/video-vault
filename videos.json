@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-28T07:33:27.114Z",
+  "updatedAt": "2026-09-28T07:45:15.518Z",
   "videos": [
+    {
+      "id": "muky03r15ynxv",
+      "url": "https://www.facebook.com/share/r/1DEf3ys9Va",
+      "platform": "facebook",
+      "note": "學習（青紅皂白）",
+      "addedAt": "2026-09-28T07:45:15.518Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mukxkx54sj32g",
       "url": "https://www.instagram.com/reel/Dcs310LzG9S",
