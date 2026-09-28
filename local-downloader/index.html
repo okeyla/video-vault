@@ -63,7 +63,7 @@
     <div class="menu-wrap">
       <button class="btn" id="btnFolder" aria-haspopup="true" aria-expanded="false">開啟資料夾 ▾</button>
       <div class="menu hidden" id="folderMenu">
-        <button type="button" data-folder="ytdlp"><b>VideoVault 影片收藏</b><span id="ytdlpDirHint">所有影片集中處，依平台分子資料夾</span></button>
+        <button type="button" data-folder="ytdlp"><b>影片儲存資料夾</b><span id="ytdlpDirHint">所有影片集中處，依平台分子資料夾</span></button>
         <button type="button" data-folder="browser"><b>瀏覽器「下載」資料夾</b><span>網站下載的影片會暫存在這，按完成後自動搬走</span></button>
         <p>Parabolic 下載的影片存在 Parabolic 自己設定的位置。</p>
       </div>
@@ -132,7 +132,13 @@
     <label class="field"><span>這台電腦的名稱（會記錄在「已下載・○○」）</span><input type="text" name="device" placeholder="例如：私人電腦"></label>
 
     <p class="hint">每個平台要用哪個網站或工具下載，請到右上角「下載來源」管理。</p>
-    <label class="field"><span>影片收藏資料夾（所有影片集中在這裡，依平台分子資料夾）</span><input type="text" name="download_dir" spellcheck="false"></label>
+    <label class="field"><span>影片儲存資料夾（所有影片集中在這裡，依平台分子資料夾）</span>
+      <div class="row">
+        <input type="text" name="download_dir" class="grow" spellcheck="false" placeholder="預設：下載資料夾">
+        <button type="button" class="btn small" id="btnPickDir">瀏覽…</button>
+        <button type="button" class="btn small ghost" id="btnDefaultDir" title="改回 Windows「下載」資料夾">使用預設</button>
+      </div>
+      <span class="hint" id="dirHint"></span></label>
     <label class="switch" style="margin-bottom:12px"><input type="checkbox" name="collect_downloads">網站下載完成後，自動把影片從瀏覽器「下載」資料夾搬進來</label>
     <details>
       <summary>進階</summary>
@@ -462,7 +468,7 @@
           ? `已開啟 ${name}，網址已自動填入。到該分頁按閃爍的下載鈕並存檔。`
           : `已開啟 ${name} 並複製網址。到該分頁的輸入框按 <b>Ctrl+V</b> 貼上，點下載並存檔。<br>想自動填入？安裝專案裡的 <code>browser-extension</code>（見 README）。`;
     const collectHint = s.type === 'site' && s.url !== '{url}' && local.config?.collect_downloads
-      ? '<br>存檔後按「完成」，影片會自動從「下載」資料夾搬到 VideoVault。' : '';
+      ? `<br>存檔後按「完成」，影片會自動歸檔到 ${VV.escapeHtml(local.config.download_dir)}\${e.v.platform}。` : '';
     const next = e.cands[e.ci + 1];
     $('#manualTitle').textContent = `手動下載 ${manualIdx + 1} / ${manualQ.length}`;
     $('#manualBody').innerHTML = `
@@ -554,9 +560,26 @@
     const lc = local.config || {};
     for (const k of ['download_dir', 'parabolic_exe', 'ytdlp_exe', 'cookies_from_browser', 'concurrency']) f.elements[k].value = lc[k] ?? '';
     f.elements.collect_downloads.checked = lc.collect_downloads !== false;
+    updateDirHint(lc.download_dir_is_default);
   }
   $('#btnSettings').onclick = async () => { await localReady; fillSettings(cfg); if ($('#settingsDlg').open) return; $('#importCode').value = ''; $('#settingsDlg').showModal(); };
   $('#btnCancel').onclick = () => $('#settingsDlg').close();
+  function updateDirHint(isDefault) {
+    $('#dirHint').textContent = isDefault ? '目前使用預設：Windows「下載」資料夾' : '這是你指定的位置，下次啟動會沿用';
+  }
+  $('#btnPickDir').onclick = async () => {
+    const f = $('#settingsForm'), b = $('#btnPickDir');
+    b.disabled = true; b.textContent = '請在跳出的視窗選擇…';
+    try {
+      const r = await api('/api/pick-folder', { initial: f.download_dir.value });
+      if (r.path) { f.download_dir.value = r.path; updateDirHint(false); }
+    } catch (e) { toast(e.message, true); }
+    b.disabled = false; b.textContent = '瀏覽…';
+  };
+  $('#btnDefaultDir').onclick = () => {
+    $('#settingsForm').download_dir.value = '';
+    updateDirHint(true);
+  };
   $('#btnImport').onclick = () => {
     try {
       const c = VV.importConfigCode($('#importCode').value);

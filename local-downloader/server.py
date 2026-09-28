@@ -69,7 +69,8 @@ DEFAULT_SOURCES = [
 ]
 
 DEFAULT_CONFIG = {
-    "download_dir": str(Path.home() / "Videos" / "VideoVault"),
+    "download_dir": "",          # 空白 = Windows「下載」資料夾；使用者指定後會記住
+    "config_version": 2,
     "sources": DEFAULT_SOURCES,
     "auto_rank": True,           # 依成功率與連線狀態自動排序
     "parabolic_exe": str(PARABOLIC_DIR / "Nickvision.Parabolic.WinUI.exe"),
@@ -88,15 +89,31 @@ def source_key(src: dict) -> str:
     return f"{src['platform']}/{src['id']}"
 
 
-def load_config() -> dict:
+LEGACY_DOWNLOAD_DIR = str(Path.home() / "Videos" / "VideoVault")
+
+
+def resolve_download_dir(cfg: dict) -> dict:
+    """download_dir 空白代表預設（Windows「下載」資料夾）；回傳給網頁的是實際路徑。"""
+    cfg["download_dir_is_default"] = not cfg["download_dir"]
+    if not cfg["download_dir"]:
+        cfg["download_dir"] = str(browser_downloads_dir())
+    return cfg
+
+
+def load_config(resolve: bool = True) -> dict:
     cfg = json.loads(json.dumps(DEFAULT_CONFIG))
     if not CONFIG_PATH.exists():
-        return cfg
+        return resolve_download_dir(cfg) if resolve else cfg
     try:
         saved = json.loads(CONFIG_PATH.read_text("utf-8"))
     except (OSError, ValueError) as e:
         print(f"[warn] config.json 讀取失敗，使用預設值：{e}")
-        return cfg
+        return resolve_download_dir(cfg) if resolve else cfg
+    if saved.get("config_version", 1) < 2 and saved.get("download_dir") == LEGACY_DOWNLOAD_DIR:
+        # 舊版的預設位置不是使用者選的 → 改用新的預設（下載資料夾）
+        saved["download_dir"] = ""
+    saved.pop("config_version", None)
+    saved.pop("download_dir_is_default", None)
     handlers = saved.pop("handlers", None)
     cfg.update(saved)
     if "sources" not in saved and handlers:
@@ -107,7 +124,7 @@ def load_config() -> dict:
     # 新版程式加入的內建來源，補到清單最後
     have = {source_key(s) for s in cfg["sources"]}
     cfg["sources"] += [s for s in json.loads(json.dumps(DEFAULT_SOURCES)) if source_key(s) not in have]
-    return cfg
+    return resolve_download_dir(cfg) if resolve else cfg
 
 
 def clean_source(s: dict) -> dict | None:
@@ -124,9 +141,27 @@ def clean_source(s: dict) -> dict | None:
             "builtin": bool(s.get("builtin"))}
 
 
+def clean_download_dir(value) -> str:
+    raw = str(value or "").strip().strip('"')
+    if not raw:
+        return ""
+    path = Path(os.path.expandvars(raw)).expanduser()
+    if not path.is_absolute():
+        raise ValueError(f"請填完整的資料夾路徑（例如 D:\影片）：{raw}")
+    if path.resolve() == browser_downloads_dir().resolve():
+        return ""  # 等於預設就存空白，之後「下載」資料夾搬家也跟得上
+    try:
+        path.mkdir(parents=True, exist_ok=True)
+    except OSError as e:
+        raise ValueError(f"無法使用這個資料夾：{e}") from e
+    return str(path)
+
+
 def save_config(new: dict) -> dict:
-    cfg = load_config()
-    for key in ("download_dir", "parabolic_exe", "ytdlp_exe", "cookies_from_browser"):
+    cfg = load_config(resolve=False)
+    if "download_dir" in new:
+        cfg["download_dir"] = clean_download_dir(new["download_dir"])
+    for key in ("parabolic_exe", "ytdlp_exe", "cookies_from_browser"):
         if key in new:
             cfg[key] = str(new[key]).strip()
     if "concurrency" in new:
@@ -142,9 +177,10 @@ def save_config(new: dict) -> dict:
                 seen.add(source_key(c))
                 cleaned.append(c)
         cfg["sources"] = cleaned
+    cfg["config_version"] = 2
     with FILE_LOCK:
         CONFIG_PATH.write_text(json.dumps(cfg, ensure_ascii=False, indent=2), "utf-8")
-    return cfg
+    return resolve_download_dir(cfg)
 
 
 # ---------------------------------------------------------------- 成功率統計
@@ -503,12 +539,44 @@ def bring_explorer_to_front(folder: Path, before: set, timeout: float = 3.0) -> 
             time.sleep(0.15)
     if not found:
         return
-    hwnd = found[0]
+    force_foreground(found[0])
+
+
+def force_foreground(hwnd) -> None:
+    import ctypes
+    user32 = ctypes.windll.user32
     # 模擬按一下 Alt，Windows 才允許背景程式切換前景視窗
     user32.keybd_event(0x12, 0, 0, 0)
     user32.keybd_event(0x12, 0, 2, 0)
     user32.ShowWindow(hwnd, 9)  # SW_RESTORE
     user32.SetForegroundWindow(hwnd)
+
+
+def pick_folder(initial: str = "") -> str | None:
+    """跳出 Windows 資料夾選擇視窗；按取消回傳 None。"""
+    import tkinter
+    from tkinter import filedialog
+    root = tkinter.Tk()
+    root.withdraw()
+    root.attributes("-topmost", True)  # 放在最上層，避免被瀏覽器蓋住
+    title = "選擇影片儲存的資料夾"
+
+    def focus_dialog(tries=0):
+        import ctypes
+        hwnd = ctypes.windll.user32.FindWindowW("#32770", title)
+        if hwnd:
+            force_foreground(hwnd)
+        elif tries < 20:
+            root.after(100, focus_dialog, tries + 1)
+
+    root.after(100, focus_dialog)
+    try:
+        chosen = filedialog.askdirectory(parent=root, title=title,
+                                         initialdir=initial if initial and Path(initial).is_dir() else None,
+                                         mustexist=False)
+    finally:
+        root.destroy()
+    return str(Path(chosen)) if chosen else None
 
 
 def open_folder(which: str | None = None, sub: str | None = None) -> str:
@@ -618,6 +686,8 @@ class Handler(BaseHTTPRequestHandler):
                 if not valid_url(body.get("url", "")):
                     raise ValueError("網址格式不正確")
                 self.send_json({"message": open_parabolic(body["url"])})
+            elif path == "/api/pick-folder":
+                self.send_json({"path": pick_folder(str(body.get("initial") or ""))})
             elif path == "/api/open-folder":
                 self.send_json({"path": open_folder(body.get("which"), body.get("platform"))})
             elif path == "/api/jobs/clear":
