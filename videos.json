@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-28T07:51:53.608Z",
+  "updatedAt": "2026-09-28T07:52:17.111Z",
   "videos": [
     {
       "id": "muky03r15ynxv",
@@ -21,9 +21,9 @@
       "note": "教學（折紙）",
       "addedAt": "2026-09-28T07:33:27.114Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-09-28T07:52:17.111Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
