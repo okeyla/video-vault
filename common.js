@@ -83,9 +83,26 @@
     if (m && repo && !cfg.owner && !cfg.repo) Object.assign(cfg, { owner: m[1], repo });
     return cfg;
   }
+  // 回傳是否真的存進去（Safari 封鎖 Cookie 時寫入會失敗）
   function saveConfig(cfg) {
-    try { localStorage.setItem(CFG_KEY, JSON.stringify(cfg)); } catch {}
+    const json = JSON.stringify(cfg);
+    try {
+      localStorage.setItem(CFG_KEY, json);
+      if (localStorage.getItem(CFG_KEY) !== json) return false;
+    } catch { return false; }
+    // 請瀏覽器把這個網站的資料標為「持久保存」，降低被自動清除的機會
+    navigator.storage?.persist?.().catch(() => {});
+    return true;
   }
+  function storageWorks() {
+    try {
+      localStorage.setItem('videovault.test', '1');
+      const ok = localStorage.getItem('videovault.test') === '1';
+      localStorage.removeItem('videovault.test');
+      return ok;
+    } catch { return false; }
+  }
+  const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
   // 設定碼：讓手機 / 公司電腦 / 本地下載站快速套用同一組設定
   function exportConfigCode(cfg) {
     const { owner, repo, branch, path, token } = cfg;
@@ -193,7 +210,7 @@
 
   global.VV = {
     PLATFORMS, detectPlatform, extractUrls, normalizeUrl, uid,
-    loadConfig, saveConfig, exportConfigCode, importConfigCode,
+    loadConfig, saveConfig, storageWorks, isStandalone, exportConfigCode, importConfigCode,
     GitHubStore, escapeHtml, fmtDate, guessDevice,
   };
 })(window);

@@ -8,7 +8,10 @@
 <meta name="theme-color" content="#d9480f">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="VideoVault">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <header class="top">
@@ -22,7 +25,14 @@
 
 <main class="wrap">
   <div id="setupBanner" class="banner hidden">尚未連結 GitHub 儲存庫。請先點右上角「設定」。</div>
-  <div id="readonlyBanner" class="banner hidden">目前是唯讀模式（沒有 Token），可以瀏覽但無法新增或修改。</div>
+  <div id="storageBanner" class="banner hidden">
+    <b>這個瀏覽器無法保存設定</b>，所以每次都要重新輸入 Token。常見原因：<br>
+    ・正在用<b>無痕瀏覽</b>（關閉分頁就會清空）<br>
+    ・iPhone「設定 → Safari → <b>阻擋所有 Cookie</b>」開著<br>
+    ・從 LINE / IG 等 App 內點連結開啟（請改用 Safari 開啟）
+  </div>
+  <div id="readonlyBanner" class="banner hidden">目前是唯讀模式（沒有 Token），可以瀏覽但無法新增或修改。
+    <span id="iosTip" class="hidden"><br>iPhone 建議：Safari 分享鈕 →「<b>加入主畫面</b>」，從主畫面圖示開啟後再貼一次設定碼，之後就不會被清掉。</span></div>
 
   <section class="card" id="addCard">
     <h2>新增影片</h2>
@@ -104,7 +114,7 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="common.js?v=2"></script>
+<script src="common.js?v=3"></script>
 <script>
 (() => {
   'use strict';
@@ -287,10 +297,14 @@
       branch: f.branch.value.trim() || 'main', path: f.path.value.trim() || 'videos.json',
       token: f.token.value.trim(), device: f.device.value.trim(),
     };
-    VV.saveConfig(cfg);
+    const saved = VV.saveConfig(cfg);
+    $('#storageBanner').classList.toggle('hidden', saved);
+    if (!saved) toast('設定只在這次開啟有效：瀏覽器拒絕儲存（見頁面上方說明）', true);
     store = new VV.GitHubStore(cfg);
     reload();
   });
+  if (!VV.storageWorks()) $('#storageBanner').classList.remove('hidden');
+  if (/iPhone|iPad/i.test(navigator.userAgent) && !VV.isStandalone()) $('#iosTip').classList.remove('hidden');
   $('#btnExport').onclick = async () => {
     try { await navigator.clipboard.writeText(VV.exportConfigCode(cfg)); toast('設定碼已複製'); }
     catch { prompt('複製這段設定碼：', VV.exportConfigCode(cfg)); }
