@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-28T07:52:19.162Z",
+  "updatedAt": "2026-09-29T12:38:22.532Z",
   "videos": [
+    {
+      "id": "mumnwwn6o5qvh",
+      "url": "https://www.facebook.com/share/v/14vdqW9Vkc6",
+      "platform": "facebook",
+      "note": "學習（竹字頭）",
+      "addedAt": "2026-09-29T12:38:22.532Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "muky03r15ynxv",
       "url": "https://www.facebook.com/share/r/1DEf3ys9Va",
