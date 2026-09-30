@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-30T14:40:37.334Z",
+  "updatedAt": "2026-09-30T14:40:48.132Z",
   "videos": [
     {
       "id": "muo3hbeymrgr5",
@@ -69,9 +69,9 @@
       "note": "學習（竹字頭）",
       "addedAt": "2026-09-29T12:38:22.532Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-09-30T14:40:48.132Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
