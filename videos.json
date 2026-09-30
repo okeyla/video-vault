@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-30T04:37:42.529Z",
+  "updatedAt": "2026-09-30T04:54:55.004Z",
   "videos": [
+    {
+      "id": "munmsqvwz0k0k",
+      "url": "https://www.threads.com/share/BArydUekDO",
+      "platform": "threads",
+      "note": "勸敗",
+      "addedAt": "2026-09-30T04:54:55.004Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "munm6m81ngcfq",
       "url": "https://www.threads.com/share/BAi8mW4IOe",
