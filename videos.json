@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-30T14:41:25.022Z",
+  "updatedAt": "2026-09-30T14:41:39.669Z",
   "videos": [
     {
       "id": "muo3hbeymrgr5",
@@ -57,9 +57,9 @@
       "note": "八仙",
       "addedAt": "2026-09-30T04:37:42.529Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-09-30T14:41:39.669Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
