@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-30T14:40:51.352Z",
+  "updatedAt": "2026-09-30T14:41:05.249Z",
   "videos": [
     {
       "id": "muo3hbeymrgr5",
@@ -33,9 +33,9 @@
       "note": "教學（白手起家）",
       "addedAt": "2026-09-30T12:35:55.884Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-09-30T14:41:05.249Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
