@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-30T04:54:55.004Z",
+  "updatedAt": "2026-09-30T12:35:55.884Z",
   "videos": [
+    {
+      "id": "muo39m5odyo35",
+      "url": "https://www.threads.com/share/BAWxHQb-_E",
+      "platform": "threads",
+      "note": "教學（白手起家）",
+      "addedAt": "2026-09-30T12:35:55.884Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "munmsqvwz0k0k",
       "url": "https://www.threads.com/share/BArydUekDO",
