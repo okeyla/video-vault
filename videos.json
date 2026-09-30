@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-30T12:35:55.884Z",
+  "updatedAt": "2026-09-30T12:38:47.612Z",
   "videos": [
+    {
+      "id": "muo3danvr738i",
+      "url": "https://www.facebook.com/share/v/1JG5PpzzLU",
+      "platform": "facebook",
+      "note": "教學（網站製作）",
+      "addedAt": "2026-09-30T12:38:47.612Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "muo39m5odyo35",
       "url": "https://www.threads.com/share/BAWxHQb-_E",
