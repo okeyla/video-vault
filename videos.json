@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-30T23:30:51.283Z",
+  "updatedAt": "2026-10-03T00:06:56.334Z",
   "videos": [
+    {
+      "id": "murmtyku255nw",
+      "url": "https://www.youtube.com/watch?v=glvLKlF9cCQ",
+      "platform": "youtube",
+      "note": "學習60Hz, 50Hz電力系統",
+      "addedAt": "2026-10-03T00:06:56.334Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "muoqnuojmbdsg",
       "url": "https://www.instagram.com/reel/Dd4A_YuuHWq",
