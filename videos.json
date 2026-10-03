@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-03T00:06:56.334Z",
+  "updatedAt": "2026-10-03T14:31:43.445Z",
   "videos": [
+    {
+      "id": "mushq2xfyncml",
+      "url": "https://www.threads.com/share/BACHEehV56",
+      "platform": "threads",
+      "note": "沒有必須",
+      "addedAt": "2026-10-03T14:31:43.445Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "murmtyku255nw",
       "url": "https://www.youtube.com/watch?v=glvLKlF9cCQ",
