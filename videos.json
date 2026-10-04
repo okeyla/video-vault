@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-04T00:44:37.646Z",
+  "updatedAt": "2026-10-04T00:45:43.787Z",
   "videos": [
     {
       "id": "mut3i1a8cjw4b",
@@ -33,9 +33,9 @@
       "note": "學習60Hz, 50Hz電力系統",
       "addedAt": "2026-10-03T00:06:56.334Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-04T00:45:43.787Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
