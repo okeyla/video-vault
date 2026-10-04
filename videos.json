@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-04T00:43:35.715Z",
+  "updatedAt": "2026-10-04T00:44:37.646Z",
   "videos": [
     {
       "id": "mut3i1a8cjw4b",
@@ -9,9 +9,9 @@
       "note": "輸入的上拉電阻為什麼是10k",
       "addedAt": "2026-10-04T00:41:19.616Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-04T00:44:37.646Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
