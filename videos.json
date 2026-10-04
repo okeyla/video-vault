@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-04T00:45:43.787Z",
+  "updatedAt": "2026-10-04T04:42:31.404Z",
   "videos": [
+    {
+      "id": "mutc47sasr2ps",
+      "url": "https://www.threads.com/share/_5nsDZRQO",
+      "platform": "threads",
+      "note": "透明文件夾妙用",
+      "addedAt": "2026-10-04T04:42:31.404Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mut3i1a8cjw4b",
       "url": "https://www.youtube.com/watch?v=dz6Ztg1_bfM",
