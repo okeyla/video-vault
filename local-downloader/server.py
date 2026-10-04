@@ -78,6 +78,7 @@ DEFAULT_CONFIG = {
     "cookies_from_browser": "",  # IG/FB 需要登入時可填 firefox / edge / chrome
     "concurrency": 2,
     "collect_downloads": True,   # 網站下載完成後，把影片從瀏覽器「下載」資料夾搬進 download_dir
+    "rename_files": True,        # 歸檔時把檔名改成「日期 備註」
 }
 
 NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
@@ -166,7 +167,7 @@ def save_config(new: dict) -> dict:
             cfg[key] = str(new[key]).strip()
     if "concurrency" in new:
         cfg["concurrency"] = max(1, min(6, int(new["concurrency"])))
-    for key in ("auto_rank", "collect_downloads"):
+    for key in ("auto_rank", "collect_downloads", "rename_files"):
         if key in new:
             cfg[key] = bool(new[key])
     if isinstance(new.get("sources"), list):
@@ -303,10 +304,13 @@ def run_ytdlp(job: dict):
         return
     out_dir = Path(cfg["download_dir"]) / job["platform"]
     out_dir.mkdir(parents=True, exist_ok=True)
+    stem = nice_stem(job.get("note", ""), out_dir) if cfg.get("rename_files", True) else None
+    # yt-dlp 的輸出樣板中 % 要寫成 %%
+    template = f"{stem.replace('%', '%%')}.%(ext)s" if stem else "%(upload_date>%Y-%m-%d)s %(title).80B [%(id)s].%(ext)s"
     cmd = [
         ytdlp,
         "-P", str(out_dir),
-        "-o", "%(upload_date>%Y-%m-%d)s %(title).80B [%(id)s].%(ext)s",
+        "-o", template,
         "-f", "bv*+ba/b",
         "--merge-output-format", "mp4",
         "--no-playlist", "--newline", "--progress",
@@ -372,7 +376,7 @@ def enqueue(items: list[dict]) -> list[dict]:
         platform = it.get("platform") if it.get("platform") in PLATFORMS else "other"
         job = {"id": uuid.uuid4().hex[:10], "itemId": it.get("id"), "url": url, "platform": platform,
                "status": "queued", "progress": 0, "message": "排隊中", "file": None, "createdAt": time.time(),
-               "kind": "ytdlp"}
+               "kind": "ytdlp", "note": str(it.get("note") or "")}
         with JOBS_LOCK:
             JOBS[job["id"]] = job
         JOB_QUEUE.put(job["id"])
@@ -391,6 +395,26 @@ def _stamp(f: Path) -> float:
     return max(st.st_mtime, st.st_ctime)
 
 
+def clean_filename(text: str, limit: int = 80) -> str:
+    """去掉 Windows 檔名不能用的字元與換行，並限制長度。"""
+    text = re.sub(r'[\\/:*?"<>|\x00-\x1f]', " ", str(text or ""))
+    text = re.sub(r"\s+", " ", text).strip(" .")
+    return text[:limit].rstrip(" .")
+
+
+def nice_stem(note: str, folder: Path) -> str | None:
+    """「日期 備註」；同資料夾已有同名（不論副檔名）就加 (2)、(3)…。沒有備註回傳 None。"""
+    note = clean_filename(note)
+    if not note:
+        return None
+    base = f"{time.strftime('%Y-%m-%d')} {note}"
+    stem, i = base, 1
+    while folder.is_dir() and any(f.stem == stem for f in folder.iterdir() if f.is_file()):
+        i += 1
+        stem = f"{base} ({i})"
+    return stem
+
+
 def unique_path(target: Path) -> Path:
     if not target.exists():
         return target
@@ -401,10 +425,12 @@ def unique_path(target: Path) -> Path:
     return target.with_name(f"{target.stem} {uuid.uuid4().hex[:6]}{target.suffix}")
 
 
-def collect_worker(job_id: str, since: float, platform: str):
+def collect_worker(job_id: str, since: float, platform: str, note: str = ""):
     """等瀏覽器下載完成，把 since 之後出現的影片搬到 download_dir/<平台>/。"""
     src_dir = browser_downloads_dir()
-    dest_dir = Path(load_config()["download_dir"]) / platform
+    cfg = load_config()
+    dest_dir = Path(cfg["download_dir"]) / platform
+    rename = cfg.get("rename_files", True)
     started = time.time()
     last_sizes: dict[str, int] = {}
     while time.time() - started < 600:
@@ -424,7 +450,12 @@ def collect_worker(job_id: str, since: float, platform: str):
             for f in videos:
                 CLAIMED.add(str(f))
                 try:
-                    target = unique_path(dest_dir / f.name)
+                    name = f.name
+                    if rename:
+                        stem = nice_stem(note, dest_dir)
+                        # 沒寫備註：至少在原檔名前加上日期，方便排序
+                        name = (stem or clean_filename(f"{time.strftime('%Y-%m-%d')} {f.stem}", 100)) + f.suffix.lower()
+                    target = unique_path(dest_dir / name)
                     shutil.move(str(f), str(target))
                     moved.append(target)
                 except OSError as e:
@@ -450,10 +481,11 @@ def start_collect(body: dict) -> dict:
     job = {"id": uuid.uuid4().hex[:10], "itemId": body.get("id"), "url": str(body.get("url", "")),
            "platform": platform, "status": "running", "progress": 0, "message": "尋找剛下載的影片…",
            "file": None, "createdAt": time.time(), "kind": "collect"}
+    note = str(body.get("note") or "")
     with JOBS_LOCK:
         JOBS[job["id"]] = job
     since = float(body.get("since") or time.time() - 600)
-    threading.Thread(target=collect_worker, args=(job["id"], since, platform), daemon=True).start()
+    threading.Thread(target=collect_worker, args=(job["id"], since, platform, note), daemon=True).start()
     return job
 
 

@@ -140,6 +140,7 @@
       </div>
       <span class="hint" id="dirHint"></span></label>
     <label class="switch" style="margin-bottom:12px"><input type="checkbox" name="collect_downloads">網站下載完成後，自動把影片從瀏覽器「下載」資料夾搬進來</label>
+    <label class="switch" style="margin-bottom:12px"><input type="checkbox" name="rename_files">歸檔時把檔名改成「日期 備註」（例如 2026-10-04 蛋炒飯.mp4）</label>
     <details>
       <summary>進階</summary>
       <label class="field"><span>Parabolic 執行檔</span><input type="text" name="parabolic_exe" spellcheck="false"></label>
@@ -420,7 +421,7 @@
 
   function runYtdlp(videos) {
     if (!local.tools?.ytdlp) { toast('找不到 yt-dlp', true); return; }
-    api('/api/ytdlp', { items: videos.map(({ id, url, platform }) => ({ id, url, platform })) })
+    api('/api/ytdlp', { items: videos.map(({ id, url, platform, note }) => ({ id, url, platform, note })) })
       .then(() => { toast(`${videos.length} 部已加入自動下載`); pollJobs(); })
       .catch(e => toast(e.message, true));
   }
@@ -499,7 +500,7 @@
         recordStat(s, true);
         markDownloaded(e.v.id);
         if (s.type === 'site' && e.openedAt && local.config?.collect_downloads) {
-          api('/api/collect', { id: e.v.id, url: e.v.url, platform: e.v.platform, since: e.openedAt })
+          api('/api/collect', { id: e.v.id, url: e.v.url, platform: e.v.platform, note: e.v.note, since: e.openedAt })
             .then(pollJobs).catch(err => toast(err.message, true));
         }
         break;
@@ -560,6 +561,7 @@
     const lc = local.config || {};
     for (const k of ['download_dir', 'parabolic_exe', 'ytdlp_exe', 'cookies_from_browser', 'concurrency']) f.elements[k].value = lc[k] ?? '';
     f.elements.collect_downloads.checked = lc.collect_downloads !== false;
+    f.elements.rename_files.checked = lc.rename_files !== false;
     updateDirHint(lc.download_dir_is_default);
   }
   $('#btnSettings').onclick = async () => { await localReady; fillSettings(cfg); if ($('#settingsDlg').open) return; $('#importCode').value = ''; $('#settingsDlg').showModal(); };
@@ -600,7 +602,7 @@
         await api('/api/config', {
           download_dir: f.download_dir.value, parabolic_exe: f.parabolic_exe.value, ytdlp_exe: f.ytdlp_exe.value,
           cookies_from_browser: f.cookies_from_browser.value, concurrency: f.concurrency.value,
-          collect_downloads: f.collect_downloads.checked,
+          collect_downloads: f.collect_downloads.checked, rename_files: f.rename_files.checked,
         });
       } catch (e) { toast(e.message, true); }
     }
