@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-03T14:31:43.445Z",
+  "updatedAt": "2026-10-04T00:41:19.616Z",
   "videos": [
+    {
+      "id": "mut3i1a8cjw4b",
+      "url": "https://www.youtube.com/watch?v=dz6Ztg1_bfM",
+      "platform": "youtube",
+      "note": "輸入的上拉電阻為什麼是10k",
+      "addedAt": "2026-10-04T00:41:19.616Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mushq2xfyncml",
       "url": "https://www.threads.com/share/BACHEehV56",
