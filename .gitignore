@@ -2,3 +2,6 @@ local-downloader/config.json
 __pycache__/
 github_pat_*
 local-downloader/stats.json
+local-downloader/common.js
+local-downloader/style.css
+local-downloader/icon.svg

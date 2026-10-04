@@ -113,3 +113,19 @@ IG 有時需要登入才能下載：設定 → 進階的「登入 cookies 來源
 }
 ```
 網址加入時會去掉追蹤參數（`igsh`、`fbclid`、`si`…），YouTube 的 `youtu.be` 統一轉成 `watch?v=`，以避免同一支影片重複收錄。
+
+## 把本地下載站搬到別的位置 / 別台電腦
+`local-downloader` 資料夾可以**整個複製**到任何地方單獨執行（先在原位置執行過一次 `start.bat`，資料夾裡才會有 `common.js`、`style.css`、`icon.svg` 這三個共用檔的副本）。
+
+| 檔案 | 說明 |
+|---|---|
+| `start.bat`、`server.py`、`index.html` | 程式本體，必要 |
+| `common.js`、`style.css`、`icon.svg` | 共用檔副本，必要（啟動時自動從專案根目錄更新） |
+| `config.json` | 這台電腦的設定（儲存資料夾、下載來源），可一起帶走 |
+| `stats.json` | 下載來源成功率紀錄，可一起帶走 |
+
+搬到新位置或新電腦後要注意：
+- 需要安裝 **Python 3**；YouTube 要用 Parabolic 的話也要安裝（yt-dlp 會用 Parabolic 內附的）。
+- GitHub Token 存在瀏覽器裡、不在資料夾內：換電腦或換瀏覽器要到「設定」重新貼一次**設定碼**。
+- `config.json` 裡的儲存資料夾若在新電腦不存在，請到「設定」重新選。
+- 之後程式有更新時，複製出去的那份不會自動更新，要重新複製。

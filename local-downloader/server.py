@@ -594,13 +594,37 @@ def open_folder(which: str | None = None, sub: str | None = None) -> str:
 
 
 # ---------------------------------------------------------------- HTTP
-STATIC = {
-    "/": (HERE / "index.html", "text/html; charset=utf-8"),
-    "/index.html": (HERE / "index.html", "text/html; charset=utf-8"),
-    "/common.js": (ROOT / "common.js", "text/javascript; charset=utf-8"),
-    "/style.css": (ROOT / "style.css", "text/css; charset=utf-8"),
-    "/icon.svg": (ROOT / "icon.svg", "image/svg+xml"),
+# 與管理網站共用的檔案。原始檔在專案根目錄；啟動時會複製一份到本資料夾，
+# 這樣把 local-downloader 整個資料夾複製到別處也能獨立執行。
+SHARED = {
+    "common.js": "text/javascript; charset=utf-8",
+    "style.css": "text/css; charset=utf-8",
+    "icon.svg": "image/svg+xml",
 }
+IN_PROJECT = (ROOT / "manifest.webmanifest").is_file() and all((ROOT / n).is_file() for n in SHARED)
+
+
+def sync_shared() -> list[str]:
+    """在專案內執行時，把共用檔案的最新版複製到本資料夾。回傳缺少的檔名。"""
+    if IN_PROJECT:
+        for name in SHARED:
+            src, dst = ROOT / name, HERE / name
+            try:
+                if not dst.is_file() or dst.read_bytes() != src.read_bytes():
+                    shutil.copyfile(src, dst)
+            except OSError as e:
+                print(f"[warn] 無法更新 {name}：{e}")
+    return [n for n in SHARED if not (HERE / n).is_file()]
+
+
+def static_file(path: str):
+    if path in ("/", "/index.html"):
+        return HERE / "index.html", "text/html; charset=utf-8"
+    name = path.lstrip("/")
+    if name in SHARED:
+        # 在專案內直接讀根目錄的原始檔（修改後不用重啟）；獨立執行時讀本資料夾的副本
+        return (ROOT if IN_PROJECT else HERE) / name, SHARED[name]
+    return None
 ALLOWED_HOSTS = {f"127.0.0.1:{PORT}", f"localhost:{PORT}"}
 
 
@@ -638,9 +662,14 @@ class Handler(BaseHTTPRequestHandler):
         if not self.guard():
             return
         path = self.path.split("?", 1)[0]
-        if path in STATIC:
-            file, ctype = STATIC[path]
-            data = file.read_bytes()
+        found = static_file(path)
+        if found:
+            file, ctype = found
+            try:
+                data = file.read_bytes()
+            except OSError:
+                self.send_error(404, f"missing {file.name}")
+                return
             self.send_response(200)
             self.send_header("Content-Type", ctype)
             self.send_header("Content-Length", str(len(data)))
@@ -702,6 +731,13 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main():
+    missing = sync_shared()
+    if missing:
+        print("缺少檔案：" + "、".join(missing))
+        print("請把整個 local-downloader 資料夾（含 common.js、style.css、icon.svg）一起複製，")
+        print("或在原本的專案資料夾執行一次 start.bat，再重新複製。")
+        input("按 Enter 結束…")
+        return
     cfg = load_config()
     for _ in range(max(1, int(cfg.get("concurrency", 2)))):
         threading.Thread(target=worker, daemon=True).start()
