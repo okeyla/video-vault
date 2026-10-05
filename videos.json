@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T05:53:16.140Z",
+  "updatedAt": "2026-10-05T05:54:24.914Z",
   "videos": [
     {
       "id": "muuu31pogc41c",
@@ -21,9 +21,9 @@
       "note": "透明文件夾妙用",
       "addedAt": "2026-10-04T04:42:31.404Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-05T05:54:24.914Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
