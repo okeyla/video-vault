@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T05:54:27.013Z",
+  "updatedAt": "2026-10-05T05:55:47.152Z",
   "videos": [
     {
       "id": "muuu31pogc41c",
@@ -9,9 +9,9 @@
       "note": "110-220-380電壓的由來",
       "addedAt": "2026-10-05T05:53:16.140Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-05T05:55:47.152Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
