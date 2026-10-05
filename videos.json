@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-04T04:42:31.404Z",
+  "updatedAt": "2026-10-05T05:53:16.140Z",
   "videos": [
+    {
+      "id": "muuu31pogc41c",
+      "url": "https://www.youtube.com/watch?v=ke1f8qc9z9s",
+      "platform": "youtube",
+      "note": "110-220-380電壓的由來",
+      "addedAt": "2026-10-05T05:53:16.140Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mutc47sasr2ps",
       "url": "https://www.threads.com/share/_5nsDZRQO",
