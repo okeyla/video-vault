@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T05:55:47.152Z",
+  "updatedAt": "2026-10-09T00:38:40.840Z",
   "videos": [
+    {
+      "id": "mv08lw3rd0uso",
+      "url": "https://www.youtube.com/watch?v=CL0SjJXCqhY",
+      "platform": "youtube",
+      "note": "AI產出四階層幫我看懂",
+      "addedAt": "2026-10-09T00:38:40.839Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "muuu31pogc41c",
       "url": "https://www.youtube.com/watch?v=ke1f8qc9z9s",
