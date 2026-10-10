@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-09T12:31:10.532Z",
+  "updatedAt": "2026-10-10T05:44:18.716Z",
   "videos": [
+    {
+      "id": "mv1yysd5fchwq",
+      "url": "https://www.threads.com/share/_gfXZ6L2r",
+      "platform": "threads",
+      "note": "對異性的思維",
+      "addedAt": "2026-10-10T05:44:18.715Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv0y25z865nbx",
       "url": "https://www.instagram.com/reel/DeHGu7_hS0U",
