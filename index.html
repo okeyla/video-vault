@@ -24,6 +24,10 @@
 </header>
 
 <main class="wrap">
+  <div id="fileBanner" class="banner hidden">
+    <b>你開的是電腦裡的檔案，不是線上的管理網站。</b>之前的設定存在線上版，這裡看不到。<br>
+    請改開 GitHub Pages 的網址（<code>https://你的帳號.github.io/video-vault/</code>）並加到書籤；要下載影片請執行 <code>local-downloader\start.bat</code>。
+  </div>
   <div id="setupBanner" class="banner hidden">尚未連結 GitHub 儲存庫。請先點右上角「設定」。</div>
   <div id="storageBanner" class="banner hidden">
     <b>這個瀏覽器無法保存設定</b>，所以每次都要重新輸入 Token。常見原因：<br>
@@ -304,6 +308,7 @@
     reload();
   });
   if (!VV.storageWorks()) $('#storageBanner').classList.remove('hidden');
+  if (location.protocol === 'file:') $('#fileBanner').classList.remove('hidden');
   if (/iPhone|iPad/i.test(navigator.userAgent) && !VV.isStandalone()) $('#iosTip').classList.remove('hidden');
   $('#btnExport').onclick = async () => {
     try { await navigator.clipboard.writeText(VV.exportConfigCode(cfg)); toast('設定碼已複製'); }
