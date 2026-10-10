@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-10T11:42:44.629Z",
+  "updatedAt": "2026-10-10T11:42:50.993Z",
   "videos": [
     {
       "id": "mv1yysd5fchwq",
@@ -33,9 +33,9 @@
       "note": "運動後",
       "addedAt": "2026-10-09T12:30:24.790Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-10T11:42:50.993Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
