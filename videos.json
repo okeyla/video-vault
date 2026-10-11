@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-10T11:44:07.645Z",
+  "updatedAt": "2026-10-11T02:52:09.944Z",
   "videos": [
+    {
+      "id": "mv3899aw6jeer",
+      "url": "https://houseai.azurewebsites.net/House/0gHq1i",
+      "platform": "other",
+      "note": "跑步送髖怎麼練",
+      "addedAt": "2026-10-11T02:52:09.944Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv1yysd5fchwq",
       "url": "https://www.threads.com/share/_gfXZ6L2r",
