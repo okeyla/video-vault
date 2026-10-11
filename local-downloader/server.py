@@ -476,16 +476,71 @@ def collect_worker(job_id: str, since: float, platform: str, note: str = ""):
     set_job(job_id, status="error", message="等太久了（超過 10 分鐘），請手動搬移")
 
 
+FRAGMENT_RE = re.compile(r"\.f\d+\.\w+$|\.temp\.\w+$", re.I)  # yt-dlp 合併前的暫存片段
+
+
+def watch_worker(job_id: str, platform: str, note: str, match: str, hours: float = 3):
+    """Parabolic（yt-dlp）下載的檔名帶有 [影片ID]：等這個檔案出現並下載完成，再歸檔到 download_dir/<平台>/。"""
+    cfg = load_config()
+    root = Path(cfg["download_dir"])
+    dest_dir = root / platform
+    rename = cfg.get("rename_files", True)
+    places = [browser_downloads_dir(), root, dest_dir]
+    started = time.time()
+    last_sizes: dict[str, int] = {}
+    while time.time() - started < hours * 3600:
+        hits: list[Path] = []
+        for d in places:
+            try:
+                hits += [f for f in d.iterdir() if f.is_file() and match in f.name]
+            except OSError:
+                pass
+        busy = [f for f in hits if f.suffix.lower() in PARTIAL_EXT | {".ytdl"} or FRAGMENT_RE.search(f.name)]
+        videos = [f for f in hits if f not in busy and f.suffix.lower() in VIDEO_EXT]
+        sizes = {str(f): f.stat().st_size for f in videos}
+        stable = videos and sizes == last_sizes and all(sizes.values())
+        last_sizes = sizes
+        if stable and not busy:
+            f = max(videos, key=lambda x: x.stat().st_size)
+            if f.parent == dest_dir:
+                set_job(job_id, status="done", progress=100, file=str(f), message=f"已在 {dest_dir}")
+                return
+            try:
+                dest_dir.mkdir(parents=True, exist_ok=True)
+                stem = nice_stem(note, dest_dir) if rename else None
+                target = unique_path(dest_dir / ((stem + f.suffix.lower()) if stem else f.name))
+                shutil.move(str(f), str(target))
+            except OSError as e:
+                set_job(job_id, status="error", message=f"搬移失敗（檔案可能還在使用中）：{e}")
+                return
+            set_job(job_id, status="done", progress=100, file=str(target), message=f"已搬到 {dest_dir}")
+            return
+        set_job(job_id, status="running",
+                message="Parabolic 下載中，完成後自動歸檔…" if hits else "等待 Parabolic 開始下載…（下載完成後會自動歸檔並標記）")
+        time.sleep(2)
+    set_job(job_id, status="error", message="一直沒偵測到 Parabolic 下載的檔案；若已下載到別處，請手動按「完成」")
+
+
 def start_collect(body: dict) -> dict:
     platform = body.get("platform") if body.get("platform") in PLATFORMS else "other"
-    job = {"id": uuid.uuid4().hex[:10], "itemId": body.get("id"), "url": str(body.get("url", "")),
-           "platform": platform, "status": "running", "progress": 0, "message": "尋找剛下載的影片…",
-           "file": None, "createdAt": time.time(), "kind": "collect"}
+    match = str(body.get("match") or "")
+    if match and not re.fullmatch(r"[\w-]{6,20}", match):
+        raise ValueError("影片代號格式不正確")
     note = str(body.get("note") or "")
     with JOBS_LOCK:
+        # 同一部影片已經在等了就不重複開
+        for j in JOBS.values():
+            if match and j.get("match") == match and j["status"] == "running":
+                return j
+        job = {"id": uuid.uuid4().hex[:10], "itemId": body.get("id"), "url": str(body.get("url", "")),
+               "platform": platform, "status": "running", "progress": 0, "message": "尋找剛下載的影片…",
+               "file": None, "createdAt": time.time(), "kind": "collect", "match": match}
         JOBS[job["id"]] = job
-    since = float(body.get("since") or time.time() - 600)
-    threading.Thread(target=collect_worker, args=(job["id"], since, platform, note), daemon=True).start()
+    if match:
+        threading.Thread(target=watch_worker, args=(job["id"], platform, note, match), daemon=True).start()
+    else:
+        since = float(body.get("since") or time.time() - 600)
+        threading.Thread(target=collect_worker, args=(job["id"], since, platform, note), daemon=True).start()
     return job
 
 

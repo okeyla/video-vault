@@ -449,6 +449,12 @@
     copySync(e.v.url);
     if (s.type === 'parabolic') {
       api('/api/parabolic', { url: e.v.url }).catch(err => toast(err.message, true));
+      // Parabolic 存的檔名帶有 [影片ID]：請本地程式盯著，下載完成就自動歸檔並標記
+      const vid = youtubeId(e.v.url);
+      if (vid && local.config?.collect_downloads) {
+        api('/api/collect', { id: e.v.id, url: e.v.url, platform: e.v.platform, note: e.v.note, match: vid })
+          .then(pollJobs).catch(() => {});
+      }
     } else {
       if (s.url !== '{url}') e.openedAt ??= Date.now() / 1000;
       const w = window.open(siteTarget(s, e.v.url), 'vv_' + e.v.platform);
@@ -456,13 +462,22 @@
     }
     renderManual();
   }
+  function youtubeId(url) {
+    try {
+      const u = new URL(url);
+      return u.searchParams.get('v') || (u.pathname.match(/^[/](?:shorts|live|embed)[/]([A-Za-z0-9_-]{6,})/) || [])[1]
+        || (u.hostname === 'youtu.be' ? u.pathname.slice(1) : '') || '';
+    } catch { return ''; }
+  }
   function renderManual() {
     const e = manualQ[manualIdx];
     if (!e) return;
     const { v } = e, s = e.cands[e.ci];
     const name = `<b>${VV.escapeHtml(s.name)}</b>`;
     const how = s.type === 'parabolic'
-      ? `已開啟 ${name} 並複製網址。在 Parabolic 按「新增下載」，網址會自動帶入，選好畫質後下載。`
+      ? (e.autoDone
+          ? '<b style="color:var(--ok)">✓ 已偵測到下載完成，影片已歸檔並標記。</b>按「完成，下一部」繼續。'
+          : `已開啟 ${name} 並複製網址。在 Parabolic 按「新增下載」，網址會自動帶入，選好畫質後下載。<br>下載完成後程式會自動歸檔並標記為已下載，不用回來按完成。`)
       : s.url === '{url}'
         ? '已開啟原網址並複製。'
         : document.documentElement.dataset.vvExt
@@ -538,7 +553,12 @@
     for (const j of jobs) {
       if ((j.status === 'done' || j.status === 'error') && !reported.has(j.id)) {
         reported.add(j.id); finished = true;
-        if (j.status === 'done') markDownloaded(j.itemId, j.file);
+        if (j.status === 'done') {
+          markDownloaded(j.itemId, j.file);
+          const cur = manualQ[manualIdx];
+          if (j.match && cur?.v.id === j.itemId) { cur.autoDone = true; renderManual(); }
+          if (j.match) toast('Parabolic 下載完成，已自動歸檔');
+        }
       }
     }
     if (finished) api('/api/config').then(r => { local.stats = r.stats; render(); }).catch(() => {});

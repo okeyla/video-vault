@@ -71,7 +71,7 @@ GitHub → Settings → Developer settings → **Fine-grained tokens** → Gener
 |---|---|
 | yt-dlp 全自動 | 直接存進儲存資料夾 |
 | 下載網站（fdown、SaveClip…） | 按「✓ 完成」後，程式會到瀏覽器「下載」資料夾找出**開啟網站之後**新下載的影片，等下載完成再自動搬進儲存資料夾的平台子資料夾（可在設定關閉） |
-| Parabolic | Parabolic 的設定檔有加密，程式無法幫你改。請在 Parabolic 新增下載時，把「儲存資料夾」選為 `<儲存資料夾>\youtube`，它會記住 |
+| Parabolic | 開啟 Parabolic 後，程式會盯著檔名帶有 `[影片ID]` 的檔案（在「下載」資料夾或儲存資料夾），下載完成就自動搬到 `youtube` 子資料夾並標記為已下載，不必回頁面按完成（本地下載站的頁面要開著） |
 
 
 ## 下載來源管理
