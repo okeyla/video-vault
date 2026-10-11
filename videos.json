@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-11T02:52:09.944Z",
+  "updatedAt": "2026-10-11T03:12:30.000Z",
   "videos": [
     {
       "id": "mv3899aw6jeer",
@@ -57,10 +57,10 @@
       "note": "AI產出四階層幫我看懂",
       "addedAt": "2026-10-09T00:38:40.839Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-10-11T03:12:30.000Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-10-11 AI產出四階層幫我看懂.mp4"
     },
     {
       "id": "muuu31pogc41c",
