@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T07:06:25.832Z",
+  "updatedAt": "2026-10-14T13:25:22.177Z",
   "videos": [
+    {
+      "id": "mv8574ap1qwa5",
+      "url": "https://www.facebook.com/share/v/195XL8AJJv",
+      "platform": "facebook",
+      "note": "羨慕",
+      "addedAt": "2026-10-14T13:25:22.177Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv7rk9uaewk90",
       "url": "https://www.instagram.com/reel/DeRFUvJRZxP",
