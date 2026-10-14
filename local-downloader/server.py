@@ -447,7 +447,8 @@ def collect_worker(job_id: str, since: float, platform: str, note: str = ""):
         if stable and not partial:
             dest_dir.mkdir(parents=True, exist_ok=True)
             moved = []
-            for f in videos:
+            # 連續下載時，下一部影片可能已經下載好了；只拿最早出現的那一個，留給下一部的歸檔工作
+            for f in sorted(videos, key=_stamp)[:1]:
                 CLAIMED.add(str(f))
                 try:
                     name = f.name

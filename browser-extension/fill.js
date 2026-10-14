@@ -4,8 +4,11 @@
 // 不會自動按下載（很多下載站有機器人驗證，留給使用者本人按）。
 (() => {
   'use strict';
-  // 同一分頁再次開啟時只有 # 後面改變，靠 hashchange 重新填入
-  window.addEventListener('hashchange', start);
+  // 同一分頁再次開啟時只有 # 後面改變，瀏覽器不會重新載入，網站還停在上一部影片的狀態。
+  // 這時強制重新載入一次（# 會保留），讓網站回到乾淨狀態再填入。
+  window.addEventListener('hashchange', () => {
+    if (/[#&]vv=/.test(location.hash)) location.reload();
+  });
   if (/[#&]vv=/.test(location.hash)) start();
 
   function params() {
