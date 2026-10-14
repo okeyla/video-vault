@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T07:04:50.524Z",
+  "updatedAt": "2026-10-14T07:05:05.247Z",
   "videos": [
     {
       "id": "mv7rk9uaewk90",
@@ -9,9 +9,9 @@
       "note": "倖存者偏差",
       "addedAt": "2026-10-14T07:03:41.266Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-14T07:05:05.247Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
