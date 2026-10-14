@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T07:05:07.112Z",
+  "updatedAt": "2026-10-14T07:05:52.128Z",
   "videos": [
     {
       "id": "mv7rk9uaewk90",
@@ -21,9 +21,9 @@
       "note": "有時輸才會贏",
       "addedAt": "2026-10-14T04:43:31.854Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-14T07:05:52.128Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
