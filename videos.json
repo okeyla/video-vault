@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T13:25:22.177Z",
+  "updatedAt": "2026-10-14T13:26:16.096Z",
   "videos": [
     {
       "id": "mv8574ap1qwa5",
@@ -9,9 +9,9 @@
       "note": "羨慕",
       "addedAt": "2026-10-14T13:25:22.177Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-14T13:26:16.096Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
