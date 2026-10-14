@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T07:05:52.128Z",
+  "updatedAt": "2026-10-14T07:06:00.770Z",
   "videos": [
     {
       "id": "mv7rk9uaewk90",
@@ -45,9 +45,9 @@
       "note": "跑步送髖怎麼練",
       "addedAt": "2026-10-11T02:52:09.944Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-14T07:06:00.769Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
