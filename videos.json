@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T04:43:31.855Z",
+  "updatedAt": "2026-10-14T07:03:41.266Z",
   "videos": [
+    {
+      "id": "mv7rk9uaewk90",
+      "url": "https://www.instagram.com/reel/DeRFUvJRZxP",
+      "platform": "instagram",
+      "note": "倖存者偏差",
+      "addedAt": "2026-10-14T07:03:41.266Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv7mk13guw03v",
       "url": "https://www.instagram.com/reel/DcFKwpWxrij",
