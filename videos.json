@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T13:37:12.748Z",
+  "updatedAt": "2026-10-15T01:49:11.408Z",
   "videos": [
+    {
+      "id": "mv8vrofiqvk7l",
+      "url": "https://www.threads.com/share/_wqCvp_wK",
+      "platform": "threads",
+      "note": "台北小眾景點",
+      "addedAt": "2026-10-15T01:49:11.407Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv85mcksnwvt5",
       "url": "https://www.instagram.com/reel/DdVDl89jetU",
