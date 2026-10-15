@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T15:30:34.486Z",
+  "updatedAt": "2026-10-15T23:20:09.950Z",
   "videos": [
+    {
+      "id": "mva5vvtqbiz7n",
+      "url": "https://www.facebook.com/share/v/1JywrgmKBo",
+      "platform": "facebook",
+      "note": "平台是不是在偷聽",
+      "addedAt": "2026-10-15T23:20:09.950Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv9p3zhwixmop",
       "url": "https://www.threads.com/share/BAS7HIyTBn",
