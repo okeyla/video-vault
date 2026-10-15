@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T06:29:10.345Z",
+  "updatedAt": "2026-10-15T07:25:31.343Z",
   "videos": [
+    {
+      "id": "mv97s7dalzci8",
+      "url": "https://www.facebook.com/share/v/1FC8Fj7NPP",
+      "platform": "facebook",
+      "note": "雙標的徹底",
+      "addedAt": "2026-10-15T07:25:31.343Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv94ze94o8ehm",
       "url": "https://www.facebook.com/share/v/19tX2ajjzb",
