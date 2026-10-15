@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T06:28:02.290Z",
+  "updatedAt": "2026-10-15T06:28:18.708Z",
   "videos": [
     {
       "id": "mv94ze94o8ehm",
@@ -69,9 +69,9 @@
       "note": "鴿子式",
       "addedAt": "2026-10-14T13:37:12.748Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-15T06:28:18.708Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
