@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T06:28:21.976Z",
+  "updatedAt": "2026-10-15T06:28:42.355Z",
   "videos": [
     {
       "id": "mv94ze94o8ehm",
@@ -57,9 +57,9 @@
       "note": "台北小眾景點",
       "addedAt": "2026-10-15T01:49:11.407Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-15T06:28:42.355Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
