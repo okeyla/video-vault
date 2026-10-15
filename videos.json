@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T07:25:31.343Z",
+  "updatedAt": "2026-10-15T15:30:34.486Z",
   "videos": [
+    {
+      "id": "mv9p3zhwixmop",
+      "url": "https://www.threads.com/share/BAS7HIyTBn",
+      "platform": "threads",
+      "note": "瘦肚子2",
+      "addedAt": "2026-10-15T15:30:34.486Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv97s7dalzci8",
       "url": "https://www.facebook.com/share/v/1FC8Fj7NPP",
