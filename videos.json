@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T06:27:30.854Z",
+  "updatedAt": "2026-10-15T06:27:43.355Z",
   "videos": [
     {
       "id": "mv94ze94o8ehm",
@@ -33,9 +33,9 @@
       "note": "消肚子",
       "addedAt": "2026-10-15T02:58:17.609Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-15T06:27:43.355Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
