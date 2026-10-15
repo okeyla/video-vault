@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T23:39:51.577Z",
+  "updatedAt": "2026-10-15T23:40:06.551Z",
   "videos": [
     {
       "id": "mva5vvtqbiz7n",
@@ -21,9 +21,9 @@
       "note": "瘦肚子2",
       "addedAt": "2026-10-15T15:30:34.486Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-15T23:40:06.551Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
