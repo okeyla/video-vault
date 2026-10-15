@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T03:10:09.797Z",
+  "updatedAt": "2026-10-15T06:07:08.008Z",
   "videos": [
+    {
+      "id": "mv94ze94o8ehm",
+      "url": "https://www.facebook.com/share/v/19tX2ajjzb",
+      "platform": "facebook",
+      "note": "叛逆還是自由",
+      "addedAt": "2026-10-15T06:07:08.008Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv8ynt6syv272",
       "url": "https://www.instagram.com/reel/DeHRBLKAYwS",
