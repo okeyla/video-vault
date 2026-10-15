@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T06:27:12.920Z",
+  "updatedAt": "2026-10-15T06:27:27.700Z",
   "videos": [
     {
       "id": "mv94ze94o8ehm",
@@ -21,9 +21,9 @@
       "note": "綁起來",
       "addedAt": "2026-10-15T03:10:09.797Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-15T06:27:27.700Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
