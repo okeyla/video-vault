@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T23:39:33.872Z",
+  "updatedAt": "2026-10-15T23:39:48.343Z",
   "videos": [
     {
       "id": "mva5vvtqbiz7n",
@@ -33,9 +33,9 @@
       "note": "雙標的徹底",
       "addedAt": "2026-10-15T07:25:31.343Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-15T23:39:48.343Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
