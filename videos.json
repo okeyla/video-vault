@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T06:27:45.364Z",
+  "updatedAt": "2026-10-15T06:28:00.178Z",
   "videos": [
     {
       "id": "mv94ze94o8ehm",
@@ -45,9 +45,9 @@
       "note": "3秒折衣服",
       "addedAt": "2026-10-15T02:54:44.357Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-15T06:28:00.178Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
