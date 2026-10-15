@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T23:20:09.950Z",
+  "updatedAt": "2026-10-15T23:39:30.413Z",
   "videos": [
     {
       "id": "mva5vvtqbiz7n",
@@ -9,9 +9,9 @@
       "note": "平台是不是在偷聽",
       "addedAt": "2026-10-15T23:20:09.950Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-15T23:39:30.413Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
