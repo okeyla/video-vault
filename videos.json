@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T02:58:17.609Z",
+  "updatedAt": "2026-10-15T03:10:09.797Z",
   "videos": [
+    {
+      "id": "mv8ynt6syv272",
+      "url": "https://www.instagram.com/reel/DeHRBLKAYwS",
+      "platform": "instagram",
+      "note": "綁起來",
+      "addedAt": "2026-10-15T03:10:09.797Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mv8y8jnt23whl",
       "url": "https://www.instagram.com/reel/DeZLo4huHag",
