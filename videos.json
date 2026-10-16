@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T05:49:13.257Z",
+  "updatedAt": "2026-10-16T05:57:46.785Z",
   "videos": [
+    {
+      "id": "mvak37vl4h7ec",
+      "url": "https://www.facebook.com/share/v/1Fa3j47sg7",
+      "platform": "facebook",
+      "note": "控制手上的牌",
+      "addedAt": "2026-10-16T05:57:46.785Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvajs7mux6buc",
       "url": "https://www.threads.com/share/BAFOsarDfo",
