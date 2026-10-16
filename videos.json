@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T23:07:49.599Z",
+  "updatedAt": "2026-10-16T23:08:12.396Z",
   "videos": [
     {
       "id": "mvbku59zrk2ph",
@@ -33,9 +33,9 @@
       "note": "控制手上的牌",
       "addedAt": "2026-10-16T05:57:46.785Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-16T23:08:12.396Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
