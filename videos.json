@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T23:08:36.180Z",
+  "updatedAt": "2026-10-16T23:08:53.860Z",
   "videos": [
     {
       "id": "mvbku59zrk2ph",
@@ -21,9 +21,9 @@
       "note": "約人的套路",
       "addedAt": "2026-10-16T14:37:17.277Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-16T23:08:53.860Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
