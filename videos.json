@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T02:56:10.877Z",
+  "updatedAt": "2026-10-16T05:49:13.257Z",
   "videos": [
+    {
+      "id": "mvajs7mux6buc",
+      "url": "https://www.threads.com/share/BAFOsarDfo",
+      "platform": "threads",
+      "note": "Tesla Roadster2 發佈會",
+      "addedAt": "2026-10-16T05:49:13.256Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvadlojht5nbg",
       "url": "https://www.facebook.com/share/v/1f55a2jJNG",
