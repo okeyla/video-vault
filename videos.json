@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T23:09:23.045Z",
+  "updatedAt": "2026-10-16T23:10:22.315Z",
   "videos": [
     {
       "id": "mvbku59zrk2ph",
@@ -45,9 +45,9 @@
       "note": "Tesla Roadster2 發佈會",
       "addedAt": "2026-10-16T05:49:13.256Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-16T23:10:22.315Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
