@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T23:06:29.304Z",
+  "updatedAt": "2026-10-16T23:07:47.692Z",
   "videos": [
     {
       "id": "mvbku59zrk2ph",
@@ -9,9 +9,9 @@
       "note": "Roadster倒著開原理",
       "addedAt": "2026-10-16T23:06:29.304Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-16T23:07:47.692Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
