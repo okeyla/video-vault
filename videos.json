@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-17T15:52:19.551Z",
+  "updatedAt": "2026-10-17T15:52:38.458Z",
   "videos": [
+    {
+      "id": "mvcks2eyermey",
+      "url": "https://www.facebook.com/reel/1090038857166231",
+      "platform": "facebook",
+      "note": "TeslaRoadster2-2",
+      "addedAt": "2026-10-17T15:52:38.458Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvckrntrnxxgc",
       "url": "https://www.facebook.com/reel/1437127741732912",
