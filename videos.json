@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-17T15:08:02.422Z",
+  "updatedAt": "2026-10-17T15:15:54.840Z",
   "videos": [
     {
       "id": "mvcj6pkmau5v2",
@@ -9,10 +9,10 @@
       "note": "GEOGUESSR tips",
       "addedAt": "2026-10-17T15:08:02.422Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-10-17T15:15:54.840Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-10-17 GEOGUESSR tips.mp4"
     },
     {
       "id": "mvcj4zglj08xt",
