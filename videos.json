@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-17T15:15:56.677Z",
+  "updatedAt": "2026-10-17T15:17:02.003Z",
   "videos": [
     {
       "id": "mvcj6pkmau5v2",
@@ -21,9 +21,9 @@
       "note": "GEOGUESSR",
       "addedAt": "2026-10-17T15:06:41.925Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-17T15:17:02.003Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
