@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T23:10:24.278Z",
+  "updatedAt": "2026-10-17T15:06:41.925Z",
   "videos": [
+    {
+      "id": "mvcj4zglj08xt",
+      "url": "https://www.youtube.com/watch?v=DOrJibKH5lU&list=PLFl29nbZBu5w&index=2",
+      "platform": "youtube",
+      "note": "GEOGUESSR",
+      "addedAt": "2026-10-17T15:06:41.925Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvbku59zrk2ph",
       "url": "https://www.facebook.com/share/v/1DBtZBLqjr",
