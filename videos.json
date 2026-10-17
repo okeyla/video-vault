@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-17T15:52:38.458Z",
+  "updatedAt": "2026-10-17T15:54:04.290Z",
   "videos": [
     {
       "id": "mvcks2eyermey",
@@ -9,9 +9,9 @@
       "note": "TeslaRoadster2-2",
       "addedAt": "2026-10-17T15:52:38.458Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-17T15:54:04.290Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
