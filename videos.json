@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-17T15:06:41.925Z",
+  "updatedAt": "2026-10-17T15:08:02.422Z",
   "videos": [
+    {
+      "id": "mvcj6pkmau5v2",
+      "url": "https://www.youtube.com/watch?v=7HhxpDQ3IX4&t=20s",
+      "platform": "youtube",
+      "note": "GEOGUESSR tips",
+      "addedAt": "2026-10-17T15:08:02.422Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvcj4zglj08xt",
       "url": "https://www.youtube.com/watch?v=DOrJibKH5lU&list=PLFl29nbZBu5w&index=2",
