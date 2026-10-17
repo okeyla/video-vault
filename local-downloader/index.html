@@ -446,7 +446,7 @@
       openCurrent();
       return;
     }
-    copySync(e.v.url);
+    copySync(VV.normalizeUrl(e.v.url));  // YouTube 會去掉播放清單參數
     if (s.type === 'parabolic') {
       api('/api/parabolic', { url: e.v.url }).catch(err => toast(err.message, true));
       // Parabolic 存的檔名帶有 [影片ID]：請本地程式盯著，下載完成就自動歸檔並標記

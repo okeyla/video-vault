@@ -43,6 +43,8 @@
       if (hostMatches(u.hostname, 'youtu.be')) id = u.pathname.slice(1).split('/')[0];
       const m = u.pathname.match(/^\/(shorts|live|embed)\/([\w-]{6,})/);
       if (m) id = m[2];
+      if (!id && u.pathname === '/watch') id = u.searchParams.get('v');
+      // 只留影片本身：去掉 list / index / t 等參數，避免被當成播放清單整串下載
       if (id) return 'https://www.youtube.com/' + (m && m[1] === 'shorts' ? 'shorts/' + id : 'watch?v=' + id);
       u.hostname = 'www.youtube.com';
     }

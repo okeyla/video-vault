@@ -477,6 +477,25 @@ def collect_worker(job_id: str, since: float, platform: str, note: str = ""):
     set_job(job_id, status="error", message="等太久了（超過 10 分鐘），請手動搬移")
 
 
+def files_in(folder: Path, depth: int = 0) -> list[Path]:
+    out: list[Path] = []
+    try:
+        for f in folder.iterdir():
+            if f.is_file():
+                out.append(f)
+            elif depth > 0 and f.is_dir():
+                out += files_in(f, depth - 1)
+    except OSError:
+        pass
+    return out
+
+
+def single_video_url(url: str) -> str:
+    """YouTube 網址只留影片本身（去掉 list、index、t），避免 Parabolic 整串播放清單下載。"""
+    m = re.match(r"^https?://(?:www\.|m\.)?youtube\.com/watch\?(?:.*&)?v=([\w-]{6,})", url)
+    return f"https://www.youtube.com/watch?v={m.group(1)}" if m else url
+
+
 FRAGMENT_RE = re.compile(r"\.f\d+\.\w+$|\.temp\.\w+$", re.I)  # yt-dlp 合併前的暫存片段
 
 
@@ -492,10 +511,8 @@ def watch_worker(job_id: str, platform: str, note: str, match: str, hours: float
     while time.time() - started < hours * 3600:
         hits: list[Path] = []
         for d in places:
-            try:
-                hits += [f for f in d.iterdir() if f.is_file() and match in f.name]
-            except OSError:
-                pass
+            # 也看一層子資料夾：Parabolic 下載播放清單時會另開一個以清單命名的資料夾
+            hits += [f for f in files_in(d, depth=1) if match in f.name]
         busy = [f for f in hits if f.suffix.lower() in PARTIAL_EXT | {".ytdl"} or FRAGMENT_RE.search(f.name)]
         videos = [f for f in hits if f not in busy and f.suffix.lower() in VIDEO_EXT]
         sizes = {str(f): f.stat().st_size for f in videos}
@@ -552,7 +569,7 @@ def open_parabolic(url: str) -> str:
     if not Path(exe).is_file():
         raise FileNotFoundError(f"找不到 Parabolic：{exe}")
     # Parabolic 會讀取啟動參數中的網址；即使沒吃到參數，網頁端也已把網址放進剪貼簿，新增下載視窗會自動帶入
-    subprocess.Popen([exe, url], cwd=str(Path(exe).parent))
+    subprocess.Popen([exe, single_video_url(url)], cwd=str(Path(exe).parent))
     return "已開啟 Parabolic"
 
 
