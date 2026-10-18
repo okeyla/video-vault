@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-18T00:04:53.835Z",
+  "updatedAt": "2026-10-18T02:30:14.037Z",
   "videos": [
+    {
+      "id": "mvd7k0lxcemyc",
+      "url": "https://www.facebook.com/share/r/1EoFe7CYPp",
+      "platform": "facebook",
+      "note": "目標相同-道不同",
+      "addedAt": "2026-10-18T02:30:14.037Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvd2d423as8yn",
       "url": "https://www.youtube.com/watch?v=woW6MWs3hKs",
