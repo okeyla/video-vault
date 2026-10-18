@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-17T15:54:20.868Z",
+  "updatedAt": "2026-10-18T00:04:53.835Z",
   "videos": [
+    {
+      "id": "mvd2d423as8yn",
+      "url": "https://www.youtube.com/watch?v=woW6MWs3hKs",
+      "platform": "youtube",
+      "note": "TeslaRoadster_中英對照",
+      "addedAt": "2026-10-18T00:04:53.835Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvcks2eyermey",
       "url": "https://www.facebook.com/reel/1090038857166231",
