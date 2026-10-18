@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-18T02:30:14.037Z",
+  "updatedAt": "2026-10-18T06:11:11.960Z",
   "videos": [
+    {
+      "id": "mvdfg6hklyg6h",
+      "url": "https://www.threads.com/share/BAX-ra1se6",
+      "platform": "threads",
+      "note": "志同道合的人是在路上",
+      "addedAt": "2026-10-18T06:11:11.960Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvd7k0lxcemyc",
       "url": "https://www.facebook.com/share/r/1EoFe7CYPp",
