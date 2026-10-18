@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-18T09:36:53.955Z",
+  "updatedAt": "2026-10-18T09:37:06.508Z",
   "videos": [
     {
       "id": "mvdfg6hklyg6h",
@@ -33,9 +33,9 @@
       "note": "TeslaRoadster_中英對照",
       "addedAt": "2026-10-18T00:04:53.835Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-18T09:37:06.508Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
