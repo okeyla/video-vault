@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-18T09:38:32.827Z",
+  "updatedAt": "2026-10-18T10:35:32.127Z",
   "videos": [
+    {
+      "id": "mvdow49rjbs8t",
+      "url": "https://www.facebook.com/share/r/1CGehosprv",
+      "platform": "facebook",
+      "note": "冷凍蝦子",
+      "addedAt": "2026-10-18T10:35:32.127Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvdfg6hklyg6h",
       "url": "https://www.threads.com/share/BAX-ra1se6",
