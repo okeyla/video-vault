@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T00:16:13.654Z",
+  "updatedAt": "2026-10-19T00:20:56.612Z",
   "videos": [
+    {
+      "id": "mveidllwygms2",
+      "url": "https://www.threads.com/share/_vpvSeJpe",
+      "platform": "threads",
+      "note": "挑女生",
+      "addedAt": "2026-10-19T00:20:56.612Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvei7j9yjbhc3",
       "url": "https://www.instagram.com/reel/DcISTqyObbo",
