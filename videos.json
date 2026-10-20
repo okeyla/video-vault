@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T00:20:56.612Z",
+  "updatedAt": "2026-10-20T11:13:31.405Z",
   "videos": [
+    {
+      "id": "mvgl4ob0c9oar",
+      "url": "https://www.threads.com/share/_0N1E2ULW",
+      "platform": "threads",
+      "note": "發票作弊",
+      "addedAt": "2026-10-20T11:13:31.405Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mveidllwygms2",
       "url": "https://www.threads.com/share/_vpvSeJpe",
