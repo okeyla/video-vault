@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-20T12:14:43.990Z",
+  "updatedAt": "2026-10-20T12:18:30.254Z",
   "videos": [
+    {
+      "id": "mvgng8oemss8l",
+      "url": "https://www.instagram.com/reel/DerVGz2M-8m",
+      "platform": "instagram",
+      "note": "穿衣褲層次感",
+      "addedAt": "2026-10-20T12:18:30.254Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvgnbe3a4y83j",
       "url": "https://www.instagram.com/reel/DetXGqAym57",
