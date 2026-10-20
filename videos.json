@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-20T11:13:31.405Z",
+  "updatedAt": "2026-10-20T12:14:43.990Z",
   "videos": [
+    {
+      "id": "mvgnbe3a4y83j",
+      "url": "https://www.instagram.com/reel/DetXGqAym57",
+      "platform": "instagram",
+      "note": "一堆氣",
+      "addedAt": "2026-10-20T12:14:43.990Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvgl4ob0c9oar",
       "url": "https://www.threads.com/share/_0N1E2ULW",
