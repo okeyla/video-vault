@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-20T12:18:30.254Z",
+  "updatedAt": "2026-10-22T10:37:59.292Z",
   "videos": [
+    {
+      "id": "mvjeqohmovvi4",
+      "url": "https://www.threads.com/share/_3O7GLQ39",
+      "platform": "threads",
+      "note": "洗帽子",
+      "addedAt": "2026-10-22T10:37:59.291Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvgng8oemss8l",
       "url": "https://www.instagram.com/reel/DerVGz2M-8m",
