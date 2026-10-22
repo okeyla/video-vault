@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T10:37:59.292Z",
+  "updatedAt": "2026-10-22T13:13:02.763Z",
   "videos": [
+    {
+      "id": "mvjka33f9orrk",
+      "url": "https://www.threads.com/share/BAQ2IuodUb",
+      "platform": "threads",
+      "note": "親疏遠近",
+      "addedAt": "2026-10-22T13:13:02.763Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvjeqohmovvi4",
       "url": "https://www.threads.com/share/_3O7GLQ39",
