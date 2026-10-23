@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T13:13:02.763Z",
+  "updatedAt": "2026-10-23T10:03:54.860Z",
   "videos": [
+    {
+      "id": "mvksypnwo0lrx",
+      "url": "https://www.threads.com/share/_p6EY6Pgq",
+      "platform": "threads",
+      "note": "Prompt vs Skill",
+      "addedAt": "2026-10-23T10:03:54.860Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvjka33f9orrk",
       "url": "https://www.threads.com/share/BAQ2IuodUb",
