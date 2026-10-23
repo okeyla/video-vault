@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T11:10:48.962Z",
+  "updatedAt": "2026-10-23T11:11:23.442Z",
   "videos": [
     {
       "id": "mvksypnwo0lrx",
@@ -9,9 +9,9 @@
       "note": "Prompt vs Skill",
       "addedAt": "2026-10-23T10:03:54.860Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-23T11:11:23.442Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
