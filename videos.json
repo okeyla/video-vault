@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T11:09:11.807Z",
+  "updatedAt": "2026-10-23T11:09:32.321Z",
   "videos": [
     {
       "id": "mvksypnwo0lrx",
@@ -45,9 +45,9 @@
       "note": "穿衣褲層次感",
       "addedAt": "2026-10-20T12:18:30.254Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-23T11:09:32.321Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
