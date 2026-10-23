@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T11:12:42.968Z",
+  "updatedAt": "2026-10-23T11:13:56.685Z",
   "videos": [
     {
       "id": "mvksypnwo0lrx",
@@ -69,9 +69,9 @@
       "note": "發票作弊",
       "addedAt": "2026-10-20T11:13:31.405Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-23T11:13:56.685Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
