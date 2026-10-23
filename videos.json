@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T11:12:00.537Z",
+  "updatedAt": "2026-10-23T11:12:39.999Z",
   "videos": [
     {
       "id": "mvksypnwo0lrx",
@@ -33,9 +33,9 @@
       "note": "洗帽子",
       "addedAt": "2026-10-22T10:37:59.291Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-23T11:12:39.999Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
