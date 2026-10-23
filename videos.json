@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23T11:09:53.843Z",
+  "updatedAt": "2026-10-23T11:10:46.760Z",
   "videos": [
     {
       "id": "mvksypnwo0lrx",
@@ -93,9 +93,9 @@
       "note": "調整門",
       "addedAt": "2026-10-19T00:16:13.654Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-23T11:10:46.760Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
