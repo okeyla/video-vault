@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T09:36:38.857Z",
+  "updatedAt": "2026-10-26T09:37:51.694Z",
   "videos": [
     {
       "id": "mvp2b7bdfcelq",
@@ -45,9 +45,9 @@
       "note": "阿嬤準備好了",
       "addedAt": "2026-10-25T07:47:01.816Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-26T09:37:51.693Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
