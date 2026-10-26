@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T09:37:54.856Z",
+  "updatedAt": "2026-10-26T09:38:11.483Z",
   "videos": [
     {
       "id": "mvp2b7bdfcelq",
@@ -33,9 +33,9 @@
       "note": "各種肉類怎麼去腥",
       "addedAt": "2026-10-25T08:30:50.126Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-26T09:38:11.483Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
