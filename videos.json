@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T09:39:59.422Z",
+  "updatedAt": "2026-10-26T11:48:02.352Z",
   "videos": [
+    {
+      "id": "mvp7069buy4lx",
+      "url": "https://www.threads.com/share/BA3HTK3XEf",
+      "platform": "threads",
+      "note": "整理相簿",
+      "addedAt": "2026-10-26T11:48:02.351Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvp2b7bdfcelq",
       "url": "https://www.youtube.com/watch?v=6zGgQod1VW8",
