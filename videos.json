@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-25T08:36:34.086Z",
+  "updatedAt": "2026-10-26T09:36:38.857Z",
   "videos": [
+    {
+      "id": "mvp2b7bdfcelq",
+      "url": "https://www.youtube.com/watch?v=6zGgQod1VW8",
+      "platform": "youtube",
+      "note": "保哥帶你學GIT",
+      "addedAt": "2026-10-26T09:36:38.857Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvnkq36uzmaa0",
       "url": "https://www.threads.com/share/BAsY6NG965",
