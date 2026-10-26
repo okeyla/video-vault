@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-26T11:48:02.352Z",
+  "updatedAt": "2026-10-26T22:32:16.693Z",
   "videos": [
+    {
+      "id": "mvpu0o51o8skk",
+      "url": "https://www.facebook.com/share/v/19teUonAs1",
+      "platform": "facebook",
+      "note": "重心往前",
+      "addedAt": "2026-10-26T22:32:16.693Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvp7069buy4lx",
       "url": "https://www.threads.com/share/BA3HTK3XEf",
