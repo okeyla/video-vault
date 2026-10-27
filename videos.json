@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-27T20:06:18.836Z",
+  "updatedAt": "2026-10-27T23:21:11.112Z",
   "videos": [
+    {
+      "id": "mvrb7f0o1sbli",
+      "url": "https://www.youtube.com/watch?v=3d1T_F4cBl8",
+      "platform": "youtube",
+      "note": "老曾聊房",
+      "addedAt": "2026-10-27T23:21:11.112Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvpu0o51o8skk",
       "url": "https://www.facebook.com/share/v/19teUonAs1",
