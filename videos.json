@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-27T23:21:11.112Z",
+  "updatedAt": "2026-10-27T23:48:52.503Z",
   "videos": [
     {
       "id": "mvrb7f0o1sbli",
@@ -9,10 +9,10 @@
       "note": "老曾聊房",
       "addedAt": "2026-10-27T23:21:11.112Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-10-27T23:48:52.503Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-10-28 老曾聊房.mp4"
     },
     {
       "id": "mvpu0o51o8skk",
