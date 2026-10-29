@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-27T23:48:52.503Z",
+  "updatedAt": "2026-10-29T04:03:58.650Z",
   "videos": [
+    {
+      "id": "mvt0qxx5o5miv",
+      "url": "https://www.instagram.com/reel/Dex6t2dTlGN",
+      "platform": "instagram",
+      "note": "挑水果",
+      "addedAt": "2026-10-29T04:03:58.649Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvrb7f0o1sbli",
       "url": "https://www.youtube.com/watch?v=3d1T_F4cBl8",
