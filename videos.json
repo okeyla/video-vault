@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-30T22:24:22.558Z",
+  "updatedAt": "2026-10-30T22:24:37.234Z",
   "videos": [
     {
       "id": "mvvjfugufgtcz",
@@ -45,9 +45,9 @@
       "note": "挑水果",
       "addedAt": "2026-10-29T04:03:58.649Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-30T22:24:37.234Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
