@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-30T22:23:51.787Z",
+  "updatedAt": "2026-10-30T22:24:06.085Z",
   "videos": [
     {
       "id": "mvvjfugufgtcz",
@@ -21,9 +21,9 @@
       "note": "先別急著自證",
       "addedAt": "2026-10-30T21:53:23.237Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-30T22:24:06.085Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
