@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-30T22:22:46.014Z",
+  "updatedAt": "2026-10-30T22:23:49.449Z",
   "videos": [
     {
       "id": "mvvjfugufgtcz",
@@ -9,9 +9,9 @@
       "note": "台大明明的數學破題法",
       "addedAt": "2026-10-30T22:22:46.014Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-30T22:23:49.449Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
