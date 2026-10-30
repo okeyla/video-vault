@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-29T04:03:58.650Z",
+  "updatedAt": "2026-10-30T21:47:41.996Z",
   "videos": [
+    {
+      "id": "mvvi6qzwaqgtz",
+      "url": "https://www.facebook.com/share/v/1FMk6sUSxn",
+      "platform": "facebook",
+      "note": "美國留學多少錢",
+      "addedAt": "2026-10-30T21:47:41.996Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvt0qxx5o5miv",
       "url": "https://www.instagram.com/reel/Dex6t2dTlGN",
