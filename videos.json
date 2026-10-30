@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-30T22:24:08.367Z",
+  "updatedAt": "2026-10-30T22:24:20.334Z",
   "videos": [
     {
       "id": "mvvjfugufgtcz",
@@ -33,9 +33,9 @@
       "note": "美國留學多少錢",
       "addedAt": "2026-10-30T21:47:41.996Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-10-30T22:24:20.334Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
