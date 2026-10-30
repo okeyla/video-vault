@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-30T21:53:23.237Z",
+  "updatedAt": "2026-10-30T22:22:46.014Z",
   "videos": [
+    {
+      "id": "mvvjfugufgtcz",
+      "url": "https://www.facebook.com/share/r/1CPSqJ5EY4",
+      "platform": "facebook",
+      "note": "台大明明的數學破題法",
+      "addedAt": "2026-10-30T22:22:46.014Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvvie2atcy0pq",
       "url": "https://www.facebook.com/share/r/1CHGRnXDM2",
