@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-31T16:17:53.336Z",
+  "updatedAt": "2026-10-31T23:55:32.999Z",
   "videos": [
+    {
+      "id": "mvx270n991qjz",
+      "url": "https://www.facebook.com/share/r/1F2UgqfpKX",
+      "platform": "facebook",
+      "note": "雪板這樣轉彎",
+      "addedAt": "2026-10-31T23:55:32.998Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvwlugmvbkg3o",
       "url": "https://www.threads.com/share/_hTVePKcr",
