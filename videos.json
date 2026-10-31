@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-30T22:24:39.299Z",
+  "updatedAt": "2026-10-31T11:22:26.692Z",
   "videos": [
+    {
+      "id": "mvwbaio2rrpv5",
+      "url": "https://www.threads.com/share/BAAuUowLkq",
+      "platform": "threads",
+      "note": "好聽學日文",
+      "addedAt": "2026-10-31T11:22:26.691Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvvjfugufgtcz",
       "url": "https://www.facebook.com/share/r/1CPSqJ5EY4",
