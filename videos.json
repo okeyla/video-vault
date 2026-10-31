@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-31T11:22:26.692Z",
+  "updatedAt": "2026-10-31T16:17:53.336Z",
   "videos": [
+    {
+      "id": "mvwlugmvbkg3o",
+      "url": "https://www.threads.com/share/_hTVePKcr",
+      "platform": "threads",
+      "note": "跟自己獨處-我才是拼圖的核心",
+      "addedAt": "2026-10-31T16:17:53.336Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvwbaio2rrpv5",
       "url": "https://www.threads.com/share/BAAuUowLkq",
