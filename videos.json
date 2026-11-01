@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-31T23:55:32.999Z",
+  "updatedAt": "2026-11-01T12:08:17.816Z",
   "videos": [
+    {
+      "id": "mvxsdc489kp2x",
+      "url": "https://www.threads.com/share/BAbB-mvixR",
+      "platform": "threads",
+      "note": "擇偶心理學",
+      "addedAt": "2026-11-01T12:08:17.816Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvx270n991qjz",
       "url": "https://www.facebook.com/share/r/1F2UgqfpKX",
