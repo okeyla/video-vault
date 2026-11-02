@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02T01:53:54.246Z",
+  "updatedAt": "2026-11-02T01:54:22.519Z",
   "videos": [
     {
       "id": "mvxsdc489kp2x",
@@ -9,9 +9,9 @@
       "note": "擇偶心理學",
       "addedAt": "2026-11-01T12:08:17.816Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-02T01:54:22.519Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
