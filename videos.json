@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02T01:55:50.958Z",
+  "updatedAt": "2026-11-02T01:56:06.814Z",
   "videos": [
     {
       "id": "mvxsdc489kp2x",
@@ -45,9 +45,9 @@
       "note": "好聽學日文",
       "addedAt": "2026-10-31T11:22:26.691Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-02T01:56:06.814Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
