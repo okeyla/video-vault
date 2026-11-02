@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02T23:18:00.710Z",
+  "updatedAt": "2026-11-02T23:46:24.062Z",
   "videos": [
+    {
+      "id": "mvzwqyf06b2yr",
+      "url": "https://www.youtube.com/watch?v=QVZdJToew2c",
+      "platform": "youtube",
+      "note": "VibeCoding要賺錢的考量",
+      "addedAt": "2026-11-02T23:46:24.061Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvzvqg3qpmo17",
       "url": "https://www.instagram.com/reel/DfOqrVWE3t5",
