@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02T01:56:09.126Z",
+  "updatedAt": "2026-11-02T03:25:26.071Z",
   "videos": [
+    {
+      "id": "mvyp4s6v3s5hb",
+      "url": "https://www.facebook.com/share/v/1EGypZWsJN",
+      "platform": "facebook",
+      "note": "你還我還銀行明天就破產",
+      "addedAt": "2026-11-02T03:25:26.071Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvxsdc489kp2x",
       "url": "https://www.threads.com/share/BAbB-mvixR",
