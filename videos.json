@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02T14:26:12.010Z",
+  "updatedAt": "2026-11-02T23:18:00.710Z",
   "videos": [
+    {
+      "id": "mvzvqg3qpmo17",
+      "url": "https://www.instagram.com/reel/DfOqrVWE3t5",
+      "platform": "instagram",
+      "note": "重情義與好吃懶做",
+      "addedAt": "2026-11-02T23:18:00.710Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvzcqj6v50giw",
       "url": "https://www.facebook.com/share/r/1CJLfpXKoG",
