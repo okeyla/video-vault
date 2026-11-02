@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02T03:25:26.071Z",
+  "updatedAt": "2026-11-02T14:26:12.010Z",
   "videos": [
+    {
+      "id": "mvzcqj6v50giw",
+      "url": "https://www.facebook.com/share/r/1CJLfpXKoG",
+      "platform": "facebook",
+      "note": "低認知流往高認知",
+      "addedAt": "2026-11-02T14:26:12.009Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvyp4s6v3s5hb",
       "url": "https://www.facebook.com/share/v/1EGypZWsJN",
