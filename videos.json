@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-01T12:08:17.816Z",
+  "updatedAt": "2026-11-02T01:53:54.246Z",
   "videos": [
     {
       "id": "mvxsdc489kp2x",
@@ -21,9 +21,9 @@
       "note": "雪板這樣轉彎",
       "addedAt": "2026-10-31T23:55:32.998Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-02T01:53:54.246Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
