@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-03T07:34:14.857Z",
+  "updatedAt": "2026-11-03T15:25:25.207Z",
   "videos": [
+    {
+      "id": "mw0uajivnwpvy",
+      "url": "https://www.facebook.com/share/r/1DzGBoY4xp",
+      "platform": "facebook",
+      "note": "日本退稅流程",
+      "addedAt": "2026-11-03T15:25:25.207Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw0dglzdjcin6",
       "url": "https://www.threads.com/share/BAeJx3yvjw",
