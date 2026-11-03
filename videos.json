@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-03T15:58:51.186Z",
+  "updatedAt": "2026-11-03T15:59:05.024Z",
   "videos": [
     {
       "id": "mw0uajivnwpvy",
@@ -21,9 +21,9 @@
       "note": "男人為何沈默",
       "addedAt": "2026-11-03T07:34:14.857Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-03T15:59:05.024Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
