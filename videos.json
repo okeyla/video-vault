@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-03T03:25:59.003Z",
+  "updatedAt": "2026-11-03T03:26:20.400Z",
   "videos": [
     {
       "id": "mw04bnrxkwdwb",
@@ -33,9 +33,9 @@
       "note": "重情義與好吃懶做",
       "addedAt": "2026-11-02T23:18:00.710Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-03T03:26:20.400Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
