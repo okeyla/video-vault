@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-03T15:25:25.207Z",
+  "updatedAt": "2026-11-03T15:58:47.996Z",
   "videos": [
     {
       "id": "mw0uajivnwpvy",
@@ -9,9 +9,9 @@
       "note": "日本退稅流程",
       "addedAt": "2026-11-03T15:25:25.207Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-03T15:58:47.996Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
