@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-03T03:26:22.775Z",
+  "updatedAt": "2026-11-03T03:27:27.030Z",
   "videos": [
     {
       "id": "mw04bnrxkwdwb",
@@ -21,10 +21,10 @@
       "note": "VibeCoding要賺錢的考量",
       "addedAt": "2026-11-02T23:46:24.061Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-11-03T03:27:27.030Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-11-03 VibeCoding要賺錢的考量.mp4"
     },
     {
       "id": "mvzvqg3qpmo17",
