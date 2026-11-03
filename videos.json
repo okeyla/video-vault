@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-03T03:18:27.360Z",
+  "updatedAt": "2026-11-03T03:25:13.235Z",
   "videos": [
     {
       "id": "mw04bnrxkwdwb",
@@ -9,9 +9,9 @@
       "note": "高山症來由",
       "addedAt": "2026-11-03T03:18:27.359Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-03T03:25:13.235Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
