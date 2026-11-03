@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02T23:46:24.062Z",
+  "updatedAt": "2026-11-03T03:18:27.360Z",
   "videos": [
+    {
+      "id": "mw04bnrxkwdwb",
+      "url": "https://www.facebook.com/share/r/1HwyMq5jxV",
+      "platform": "facebook",
+      "note": "高山症來由",
+      "addedAt": "2026-11-03T03:18:27.359Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mvzwqyf06b2yr",
       "url": "https://www.youtube.com/watch?v=QVZdJToew2c",
