@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-04T23:13:16.674Z",
+  "updatedAt": "2026-11-04T23:13:32.119Z",
   "videos": [
     {
       "id": "mw2p80vdju4hf",
@@ -9,9 +9,9 @@
       "note": "恢復體力",
       "addedAt": "2026-11-04T22:39:01.993Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-04T23:13:32.119Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
