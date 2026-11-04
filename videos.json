@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-04T23:12:24.668Z",
+  "updatedAt": "2026-11-04T23:12:47.131Z",
   "videos": [
     {
       "id": "mw2p80vdju4hf",
@@ -33,9 +33,9 @@
       "note": "一句話賭回去_沒有解決問題",
       "addedAt": "2026-11-04T13:46:05.129Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-04T23:12:47.131Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
