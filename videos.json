@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-04T23:12:50.530Z",
+  "updatedAt": "2026-11-04T23:13:13.775Z",
   "videos": [
     {
       "id": "mw2p80vdju4hf",
@@ -45,9 +45,9 @@
       "note": "夢",
       "addedAt": "2026-11-04T01:22:16.360Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-04T23:13:13.774Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
