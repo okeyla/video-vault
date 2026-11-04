@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-04T22:39:01.993Z",
+  "updatedAt": "2026-11-04T23:12:22.165Z",
   "videos": [
     {
       "id": "mw2p80vdju4hf",
@@ -21,9 +21,9 @@
       "note": "運動後拉伸",
       "addedAt": "2026-11-04T14:12:17.465Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-04T23:12:22.165Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
