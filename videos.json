@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-04T01:22:16.360Z",
+  "updatedAt": "2026-11-04T13:46:05.129Z",
   "videos": [
+    {
+      "id": "mw266nd5qgoxf",
+      "url": "https://www.facebook.com/share/v/19WLk65fG8",
+      "platform": "facebook",
+      "note": "一句話賭回去_沒有解決問題",
+      "addedAt": "2026-11-04T13:46:05.129Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw1fm3l2e7y70",
       "url": "https://www.facebook.com/share/r/1Qf1bBcKoW",
