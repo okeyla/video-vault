@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-05T05:54:21.154Z",
+  "updatedAt": "2026-11-05T13:18:18.960Z",
   "videos": [
+    {
+      "id": "mw3kmsemstfix",
+      "url": "https://www.facebook.com/share/v/1J9Bf5jzwD",
+      "platform": "facebook",
+      "note": "學歷還是很重要",
+      "addedAt": "2026-11-05T13:18:18.960Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw34rujlq2vmh",
       "url": "https://www.instagram.com/reel/DfRnASrPzRV",
