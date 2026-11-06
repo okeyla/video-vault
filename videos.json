@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06T16:54:42.588Z",
+  "updatedAt": "2026-11-06T16:55:14.644Z",
   "videos": [
     {
       "id": "mw57r8gbkjpfy",
@@ -9,9 +9,9 @@
       "note": "moose_code_machine",
       "addedAt": "2026-11-06T16:53:23.723Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-06T16:55:14.643Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
