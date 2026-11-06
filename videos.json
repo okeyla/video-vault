@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06T02:48:49.389Z",
+  "updatedAt": "2026-11-06T02:49:09.629Z",
   "videos": [
     {
       "id": "mw4dc2kwfwvny",
@@ -21,9 +21,9 @@
       "note": "學歷還是很重要",
       "addedAt": "2026-11-05T13:18:18.960Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-06T02:49:09.628Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
