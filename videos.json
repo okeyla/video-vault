@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06T02:49:32.442Z",
+  "updatedAt": "2026-11-06T04:42:38.179Z",
   "videos": [
+    {
+      "id": "mw4hnh0ju272l",
+      "url": "https://www.facebook.com/share/v/1CVKHLYJdj",
+      "platform": "facebook",
+      "note": "打擊黃仁勳",
+      "addedAt": "2026-11-06T04:42:38.179Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw4dc2kwfwvny",
       "url": "https://www.facebook.com/share/v/1FLL82tQUJ",
