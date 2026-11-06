@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06T04:55:23.130Z",
+  "updatedAt": "2026-11-06T08:18:15.593Z",
   "videos": [
+    {
+      "id": "mw4pcrl5utewo",
+      "url": "https://www.facebook.com/share/r/1F71ysrQtB",
+      "platform": "facebook",
+      "note": "煎牛排",
+      "addedAt": "2026-11-06T08:18:15.593Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw4hnh0ju272l",
       "url": "https://www.facebook.com/share/v/1CVKHLYJdj",
