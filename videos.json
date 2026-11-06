@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-05T13:18:18.960Z",
+  "updatedAt": "2026-11-06T02:41:47.793Z",
   "videos": [
+    {
+      "id": "mw4dc2kwfwvny",
+      "url": "https://www.facebook.com/share/v/1FLL82tQUJ",
+      "platform": "facebook",
+      "note": "雪板在腳上的感覺",
+      "addedAt": "2026-11-06T02:41:47.793Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw3kmsemstfix",
       "url": "https://www.facebook.com/share/v/1J9Bf5jzwD",
