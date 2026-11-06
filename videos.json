@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06T02:49:14.398Z",
+  "updatedAt": "2026-11-06T02:49:30.282Z",
   "videos": [
     {
       "id": "mw4dc2kwfwvny",
@@ -33,9 +33,9 @@
       "note": "代換掉詞",
       "addedAt": "2026-11-05T05:54:21.153Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-06T02:49:30.282Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
