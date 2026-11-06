@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06T02:41:47.793Z",
+  "updatedAt": "2026-11-06T02:48:46.306Z",
   "videos": [
     {
       "id": "mw4dc2kwfwvny",
@@ -9,9 +9,9 @@
       "note": "雪板在腳上的感覺",
       "addedAt": "2026-11-06T02:41:47.793Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-06T02:48:46.306Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
