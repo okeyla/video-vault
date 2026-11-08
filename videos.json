@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-08T12:56:26.655Z",
+  "updatedAt": "2026-11-08T23:43:20.609Z",
   "videos": [
+    {
+      "id": "mw8ha4v43dlsz",
+      "url": "https://www.facebook.com/share/r/1BqmPmuThW",
+      "platform": "facebook",
+      "note": "換刃換不過來",
+      "addedAt": "2026-11-08T23:43:20.609Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw7u67tozqu8a",
       "url": "https://www.threads.com/share/_jPSaEUdu",
