@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T01:10:46.082Z",
+  "updatedAt": "2026-11-09T03:29:35.498Z",
   "videos": [
+    {
+      "id": "mw8pd3bevot4w",
+      "url": "https://www.facebook.com/share/r/1DsA2F8GgC",
+      "platform": "facebook",
+      "note": "日文高低音不同的字",
+      "addedAt": "2026-11-09T03:29:35.498Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw8kekaos58un",
       "url": "https://www.facebook.com/share/r/1CyVok3yg7",
