@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T14:07:38.010Z",
+  "updatedAt": "2026-11-09T14:08:24.496Z",
   "videos": [
     {
       "id": "mw9c5maiynjou",
@@ -9,9 +9,9 @@
       "note": "平方根的計算",
       "addedAt": "2026-11-09T14:07:38.010Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-09T14:08:24.496Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
