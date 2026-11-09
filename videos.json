@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T03:29:35.498Z",
+  "updatedAt": "2026-11-09T14:07:38.010Z",
   "videos": [
+    {
+      "id": "mw9c5maiynjou",
+      "url": "https://www.facebook.com/share/v/1E62Udb28Y",
+      "platform": "facebook",
+      "note": "平方根的計算",
+      "addedAt": "2026-11-09T14:07:38.010Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw8pd3bevot4w",
       "url": "https://www.facebook.com/share/r/1DsA2F8GgC",
