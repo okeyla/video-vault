@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T14:09:26.285Z",
+  "updatedAt": "2026-11-09T14:09:47.551Z",
   "videos": [
     {
       "id": "mw9c5maiynjou",
@@ -57,9 +57,9 @@
       "note": "定價哲學",
       "addedAt": "2026-11-08T12:56:26.654Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-09T14:09:47.551Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
