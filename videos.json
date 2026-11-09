@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T14:08:49.273Z",
+  "updatedAt": "2026-11-09T14:09:02.326Z",
   "videos": [
     {
       "id": "mw9c5maiynjou",
@@ -33,9 +33,9 @@
       "note": "多用髖",
       "addedAt": "2026-11-09T01:10:46.082Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-09T14:09:02.326Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
