@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T14:09:12.461Z",
+  "updatedAt": "2026-11-09T14:09:22.920Z",
   "videos": [
     {
       "id": "mw9c5maiynjou",
@@ -45,9 +45,9 @@
       "note": "換刃換不過來",
       "addedAt": "2026-11-08T23:43:20.609Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-09T14:09:22.920Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
