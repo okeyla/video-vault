@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-10T03:08:35.823Z",
+  "updatedAt": "2026-11-10T04:44:42.011Z",
   "videos": [
+    {
+      "id": "mwa7hj89b2q2u",
+      "url": "https://www.threads.com/share/_eOtKZzVE",
+      "platform": "threads",
+      "note": "生活小tips",
+      "addedAt": "2026-11-10T04:44:42.010Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwa41y0fyeyuo",
       "url": "https://www.threads.com/share/_7fwt__gk",
