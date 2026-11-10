@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T14:09:50.177Z",
+  "updatedAt": "2026-11-10T03:08:35.823Z",
   "videos": [
+    {
+      "id": "mwa41y0fyeyuo",
+      "url": "https://www.threads.com/share/_7fwt__gk",
+      "platform": "threads",
+      "note": "我只是接招而已",
+      "addedAt": "2026-11-10T03:08:35.823Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mw9c5maiynjou",
       "url": "https://www.facebook.com/share/v/1E62Udb28Y",
