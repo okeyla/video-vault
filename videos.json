@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-10T04:44:42.011Z",
+  "updatedAt": "2026-11-10T10:46:08.978Z",
   "videos": [
+    {
+      "id": "mwakeczyqf0h7",
+      "url": "https://www.facebook.com/share/r/1FHaJAMgd6",
+      "platform": "facebook",
+      "note": "練跨",
+      "addedAt": "2026-11-10T10:46:08.977Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwa7hj89b2q2u",
       "url": "https://www.threads.com/share/_eOtKZzVE",
