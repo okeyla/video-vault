@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11T06:17:17.320Z",
+  "updatedAt": "2026-11-11T06:17:43.082Z",
   "videos": [
     {
       "id": "mwakeczyqf0h7",
@@ -21,9 +21,9 @@
       "note": "生活小tips",
       "addedAt": "2026-11-10T04:44:42.010Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-11T06:17:43.082Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
