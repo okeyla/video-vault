@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11T06:17:46.307Z",
+  "updatedAt": "2026-11-11T06:18:06.771Z",
   "videos": [
     {
       "id": "mwakeczyqf0h7",
@@ -33,9 +33,9 @@
       "note": "我只是接招而已",
       "addedAt": "2026-11-10T03:08:35.823Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-11T06:18:06.771Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
