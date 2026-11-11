@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-10T10:46:08.978Z",
+  "updatedAt": "2026-11-11T06:17:13.822Z",
   "videos": [
     {
       "id": "mwakeczyqf0h7",
@@ -9,9 +9,9 @@
       "note": "練跨",
       "addedAt": "2026-11-10T10:46:08.977Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-11T06:17:13.822Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
