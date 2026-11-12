@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11T06:18:10.373Z",
+  "updatedAt": "2026-11-12T08:14:41.286Z",
   "videos": [
+    {
+      "id": "mwd9va8699xua",
+      "url": "https://www.threads.com/share/BAc9Gt6IrY",
+      "platform": "threads",
+      "note": "重啟人生",
+      "addedAt": "2026-11-12T08:14:41.286Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwakeczyqf0h7",
       "url": "https://www.facebook.com/share/r/1FHaJAMgd6",
