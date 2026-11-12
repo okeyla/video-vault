@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-12T08:14:41.286Z",
+  "updatedAt": "2026-11-12T09:49:58.428Z",
   "videos": [
+    {
+      "id": "mwdd9tlnp9w7v",
+      "url": "https://www.threads.com/share/_nCCidydy",
+      "platform": "threads",
+      "note": "貧窮守護",
+      "addedAt": "2026-11-12T09:49:58.427Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwd9va8699xua",
       "url": "https://www.threads.com/share/BAc9Gt6IrY",
