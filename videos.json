@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T08:26:53.581Z",
+  "updatedAt": "2026-11-13T08:27:12.061Z",
   "videos": [
     {
       "id": "mwee4gkqbf0sf",
@@ -33,9 +33,9 @@
       "note": "貧窮守護",
       "addedAt": "2026-11-12T09:49:58.427Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-13T08:27:12.061Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
