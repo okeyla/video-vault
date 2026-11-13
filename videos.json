@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T03:01:34.059Z",
+  "updatedAt": "2026-11-13T08:26:35.953Z",
   "videos": [
     {
       "id": "mwee4gkqbf0sf",
@@ -9,9 +9,9 @@
       "note": "輪胎標示",
       "addedAt": "2026-11-13T03:01:34.059Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-13T08:26:35.953Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
