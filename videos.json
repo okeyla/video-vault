@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T08:26:39.105Z",
+  "updatedAt": "2026-11-13T08:26:51.424Z",
   "videos": [
     {
       "id": "mwee4gkqbf0sf",
@@ -21,9 +21,9 @@
       "note": "綁繩子",
       "addedAt": "2026-11-13T01:07:45.093Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-13T08:26:51.424Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
