@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T08:27:15.295Z",
+  "updatedAt": "2026-11-13T08:27:32.240Z",
   "videos": [
     {
       "id": "mwee4gkqbf0sf",
@@ -45,9 +45,9 @@
       "note": "重啟人生",
       "addedAt": "2026-11-12T08:14:41.286Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-13T08:27:32.240Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
