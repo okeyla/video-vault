@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T08:27:35.039Z",
+  "updatedAt": "2026-11-13T09:50:13.403Z",
   "videos": [
+    {
+      "id": "mwespztn01i6m",
+      "url": "https://www.threads.com/share/BAg88MfZRz",
+      "platform": "threads",
+      "note": "刻意練習",
+      "addedAt": "2026-11-13T09:50:13.403Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwee4gkqbf0sf",
       "url": "https://www.instagram.com/reel/Dfb0dl4N1BO",
