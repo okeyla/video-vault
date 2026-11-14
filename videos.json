@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T23:02:04.237Z",
+  "updatedAt": "2026-11-14T23:03:09.714Z",
   "videos": [
     {
       "id": "mwh09jlnfqo8s",
@@ -45,10 +45,10 @@
       "note": "不鏽鋼解說",
       "addedAt": "2026-11-14T14:20:59.885Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-11-14T23:03:09.714Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-11-15 不鏽鋼解說.mp4"
     },
     {
       "id": "mwespztn01i6m",
