@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T09:50:13.403Z",
+  "updatedAt": "2026-11-14T14:20:59.885Z",
   "videos": [
+    {
+      "id": "mwghu2ct8qpvi",
+      "url": "https://www.youtube.com/watch?v=4sG083jvCMY",
+      "platform": "youtube",
+      "note": "不鏽鋼解說",
+      "addedAt": "2026-11-14T14:20:59.885Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwespztn01i6m",
       "url": "https://www.threads.com/share/BAg88MfZRz",
