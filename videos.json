@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T23:00:21.863Z",
+  "updatedAt": "2026-11-14T23:02:02.304Z",
   "videos": [
     {
       "id": "mwh09jlnfqo8s",
@@ -33,10 +33,10 @@
       "note": "wafer製程的幾奈米是甚麼意思",
       "addedAt": "2026-11-14T14:36:05.718Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-11-14T23:02:02.304Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-11-15 wafer製程的幾奈米是甚麼意思.mp4"
     },
     {
       "id": "mwghu2ct8qpvi",
