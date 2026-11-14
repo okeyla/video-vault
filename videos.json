@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T14:20:59.885Z",
+  "updatedAt": "2026-11-14T14:36:05.718Z",
   "videos": [
+    {
+      "id": "mwgidhauanohn",
+      "url": "https://www.youtube.com/watch?v=fV9itw9fEaI",
+      "platform": "youtube",
+      "note": "wafer製程的幾奈米是甚麼意思",
+      "addedAt": "2026-11-14T14:36:05.718Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwghu2ct8qpvi",
       "url": "https://www.youtube.com/watch?v=4sG083jvCMY",
