@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T22:58:04.461Z",
+  "updatedAt": "2026-11-14T22:59:15.382Z",
   "videos": [
     {
       "id": "mwh09jlnfqo8s",
@@ -9,10 +9,10 @@
       "note": "正確使用AI學習",
       "addedAt": "2026-11-14T22:56:55.163Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-11-14T22:59:15.382Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-11-15 正確使用AI學習.mp4"
     },
     {
       "id": "mwgjgalxyqyof",
