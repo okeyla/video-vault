@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T15:06:16.629Z",
+  "updatedAt": "2026-11-14T22:56:55.163Z",
   "videos": [
+    {
+      "id": "mwh09jlnfqo8s",
+      "url": "https://www.youtube.com/watch?v=Dvb3F8DKMrA",
+      "platform": "youtube",
+      "note": "正確使用AI學習",
+      "addedAt": "2026-11-14T22:56:55.163Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwgjgalxyqyof",
       "url": "https://www.youtube.com/watch?v=6PTAmvsYlEA",
