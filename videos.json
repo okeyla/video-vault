@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T22:56:55.163Z",
+  "updatedAt": "2026-11-14T22:58:02.137Z",
   "videos": [
     {
       "id": "mwh09jlnfqo8s",
@@ -57,9 +57,9 @@
       "note": "刻意練習",
       "addedAt": "2026-11-13T09:50:13.403Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-14T22:58:02.137Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
