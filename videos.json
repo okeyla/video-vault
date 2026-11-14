@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T22:59:19.909Z",
+  "updatedAt": "2026-11-14T23:00:19.931Z",
   "videos": [
     {
       "id": "mwh09jlnfqo8s",
@@ -21,10 +21,10 @@
       "note": "量火線+中性線電壓(沒含地線)",
       "addedAt": "2026-11-14T15:06:16.629Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-11-14T23:00:19.931Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-11-15 量火線+中性線電壓(沒含地線).mp4"
     },
     {
       "id": "mwgidhauanohn",
