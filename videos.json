@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T14:36:05.718Z",
+  "updatedAt": "2026-11-14T15:06:16.629Z",
   "videos": [
+    {
+      "id": "mwgjgalxyqyof",
+      "url": "https://www.youtube.com/watch?v=6PTAmvsYlEA",
+      "platform": "youtube",
+      "note": "量火線+中性線電壓(沒含地線)",
+      "addedAt": "2026-11-14T15:06:16.629Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwgidhauanohn",
       "url": "https://www.youtube.com/watch?v=fV9itw9fEaI",
