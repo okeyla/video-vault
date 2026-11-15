@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T23:03:12.399Z",
+  "updatedAt": "2026-11-15T04:47:10.580Z",
   "videos": [
+    {
+      "id": "mwhcrz78nkxzr",
+      "url": "https://www.youtube.com/watch?v=KeyLno6yOwQ",
+      "platform": "youtube",
+      "note": "9030不沾法",
+      "addedAt": "2026-11-15T04:47:10.580Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwh09jlnfqo8s",
       "url": "https://www.youtube.com/watch?v=Dvb3F8DKMrA",
