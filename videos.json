@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-15T14:33:56.446Z",
+  "updatedAt": "2026-11-15T23:00:30.196Z",
   "videos": [
     {
       "id": "mwhxqk7xkfboo",
@@ -9,9 +9,9 @@
       "note": "第一次回來上半截",
       "addedAt": "2026-11-15T14:33:56.446Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-15T23:00:30.196Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
