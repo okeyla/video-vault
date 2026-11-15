@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-15T04:47:10.580Z",
+  "updatedAt": "2026-11-15T04:48:48.001Z",
   "videos": [
     {
       "id": "mwhcrz78nkxzr",
@@ -9,10 +9,10 @@
       "note": "9030不沾法",
       "addedAt": "2026-11-15T04:47:10.580Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-11-15T04:48:48.001Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-11-15 9030不沾法.mp4"
     },
     {
       "id": "mwh09jlnfqo8s",
