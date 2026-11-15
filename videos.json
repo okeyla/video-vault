@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-15T04:48:50.580Z",
+  "updatedAt": "2026-11-15T12:34:52.456Z",
   "videos": [
+    {
+      "id": "mwhthfvrx3e2p",
+      "url": "https://www.threads.com/share/_gOkiOJm9",
+      "platform": "threads",
+      "note": "Video",
+      "addedAt": "2026-11-15T12:34:52.455Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwhcrz78nkxzr",
       "url": "https://www.youtube.com/watch?v=KeyLno6yOwQ",
