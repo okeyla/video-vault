@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-15T12:34:52.456Z",
+  "updatedAt": "2026-11-15T14:33:56.446Z",
   "videos": [
+    {
+      "id": "mwhxqk7xkfboo",
+      "url": "https://www.threads.com/share/BATV43Kh79",
+      "platform": "threads",
+      "note": "第一次回來上半截",
+      "addedAt": "2026-11-15T14:33:56.446Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwhthfvrx3e2p",
       "url": "https://www.threads.com/share/_gOkiOJm9",
