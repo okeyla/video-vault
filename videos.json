@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16T06:29:34.718Z",
+  "updatedAt": "2026-11-16T06:29:55.555Z",
   "videos": [
+    {
+      "id": "mwivvysjt8wb2",
+      "url": "https://www.threads.com/share/BAOI1MYYIK",
+      "platform": "threads",
+      "note": "沒有客氣話",
+      "addedAt": "2026-11-16T06:29:55.555Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwivvippgv9lh",
       "url": "https://www.threads.com/share/BANE_qT20E",
