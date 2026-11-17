@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-17T02:33:09.586Z",
+  "updatedAt": "2026-11-17T10:19:43.432Z",
   "videos": [
+    {
+      "id": "mwkjjc91rw261",
+      "url": "https://www.threads.com/share/_oZerJodS",
+      "platform": "threads",
+      "note": "模型怎麼挑",
+      "addedAt": "2026-11-17T10:19:43.431Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwk2p4umrzrj6",
       "url": "https://www.facebook.com/share/r/1CitT2nB3F",
