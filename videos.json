@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16T06:29:55.555Z",
+  "updatedAt": "2026-11-17T01:13:14.739Z",
   "videos": [
+    {
+      "id": "mwk00kc1gnjxs",
+      "url": "https://www.facebook.com/share/r/1C8v2FYVPM",
+      "platform": "facebook",
+      "note": "星艦精神",
+      "addedAt": "2026-11-17T01:13:14.738Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwivvysjt8wb2",
       "url": "https://www.threads.com/share/BAOI1MYYIK",
