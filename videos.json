@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-17T02:32:16.497Z",
+  "updatedAt": "2026-11-17T02:32:40.331Z",
   "videos": [
     {
       "id": "mwk2p4umrzrj6",
@@ -33,9 +33,9 @@
       "note": "沒有客氣話",
       "addedAt": "2026-11-16T06:29:55.555Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-17T02:32:40.331Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
