@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-17T01:13:14.739Z",
+  "updatedAt": "2026-11-17T02:28:20.302Z",
   "videos": [
+    {
+      "id": "mwk2p4umrzrj6",
+      "url": "https://www.facebook.com/share/r/1CitT2nB3F",
+      "platform": "facebook",
+      "note": "把自己當獵物或是把持著獵物",
+      "addedAt": "2026-11-17T02:28:20.302Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwk00kc1gnjxs",
       "url": "https://www.facebook.com/share/r/1C8v2FYVPM",
