@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-17T10:19:43.432Z",
+  "updatedAt": "2026-11-17T16:48:11.257Z",
   "videos": [
+    {
+      "id": "mwkxewoplt4du",
+      "url": "https://www.facebook.com/share/v/1AUuwN17om",
+      "platform": "facebook",
+      "note": "王陽明-安靜",
+      "addedAt": "2026-11-17T16:48:11.257Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwkjjc91rw261",
       "url": "https://www.threads.com/share/_oZerJodS",
