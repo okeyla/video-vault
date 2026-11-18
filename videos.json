@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18T14:44:48.932Z",
+  "updatedAt": "2026-11-18T14:45:12.939Z",
   "videos": [
     {
       "id": "mwm8emx8ptyon",
@@ -21,9 +21,9 @@
       "note": "動物水果",
       "addedAt": "2026-11-18T08:01:29.908Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-18T14:45:12.938Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
