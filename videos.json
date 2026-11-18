@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18T14:45:15.964Z",
+  "updatedAt": "2026-11-18T14:45:34.093Z",
   "videos": [
     {
       "id": "mwm8emx8ptyon",
@@ -45,9 +45,9 @@
       "note": "模型怎麼挑",
       "addedAt": "2026-11-17T10:19:43.431Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-18T14:45:34.093Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
