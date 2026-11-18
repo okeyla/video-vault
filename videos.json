@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18T14:45:37.549Z",
+  "updatedAt": "2026-11-18T22:54:31.094Z",
   "videos": [
+    {
+      "id": "mwmpxv3qq0kuz",
+      "url": "https://www.youtube.com/watch?v=reiowJ3Blo0",
+      "platform": "youtube",
+      "note": "JensonHuang_最聰明的人",
+      "addedAt": "2026-11-18T22:54:31.094Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwm8emx8ptyon",
       "url": "https://www.facebook.com/share/v/1HgKWmAaAA",
