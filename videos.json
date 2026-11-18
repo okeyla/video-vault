@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-17T16:48:11.257Z",
+  "updatedAt": "2026-11-18T08:01:29.908Z",
   "videos": [
+    {
+      "id": "mwlu1flgpif6m",
+      "url": "https://www.threads.com/share/BASkbq8Jhx",
+      "platform": "threads",
+      "note": "動物水果",
+      "addedAt": "2026-11-18T08:01:29.908Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwkxewoplt4du",
       "url": "https://www.facebook.com/share/v/1AUuwN17om",
