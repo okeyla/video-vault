@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18T14:44:33.059Z",
+  "updatedAt": "2026-11-18T14:44:45.639Z",
   "videos": [
     {
       "id": "mwm8emx8ptyon",
@@ -33,9 +33,9 @@
       "note": "王陽明-安靜",
       "addedAt": "2026-11-17T16:48:11.257Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-18T14:44:45.639Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
