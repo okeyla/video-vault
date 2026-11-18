@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18T14:43:40.556Z",
+  "updatedAt": "2026-11-18T14:44:29.705Z",
   "videos": [
     {
       "id": "mwm8emx8ptyon",
@@ -9,9 +9,9 @@
       "note": "洗腦治病",
       "addedAt": "2026-11-18T14:43:40.556Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-18T14:44:29.705Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
