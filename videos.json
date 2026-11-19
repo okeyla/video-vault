@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-19T15:37:31.752Z",
+  "updatedAt": "2026-11-19T15:37:43.999Z",
   "videos": [
     {
       "id": "mwn2k8l464q7b",
@@ -33,9 +33,9 @@
       "note": "如何辨識這人有沒說謊",
       "addedAt": "2026-11-19T01:53:37.948Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-19T15:37:43.999Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
