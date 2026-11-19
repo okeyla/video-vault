@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-19T04:47:50.392Z",
+  "updatedAt": "2026-11-19T15:37:28.025Z",
   "videos": [
     {
       "id": "mwn2k8l464q7b",
@@ -9,9 +9,9 @@
       "note": "剪票口的距離",
       "addedAt": "2026-11-19T04:47:50.392Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-19T15:37:28.025Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
