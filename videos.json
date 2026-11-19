@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-19T04:42:18.734Z",
+  "updatedAt": "2026-11-19T04:47:50.392Z",
   "videos": [
+    {
+      "id": "mwn2k8l464q7b",
+      "url": "https://www.facebook.com/share/v/18vsPv31oy",
+      "platform": "facebook",
+      "note": "剪票口的距離",
+      "addedAt": "2026-11-19T04:47:50.392Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwn2d4oc6qaku",
       "url": "https://www.instagram.com/reel/DfhUh5fIBa6",
