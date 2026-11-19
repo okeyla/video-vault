@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-19T15:37:47.473Z",
+  "updatedAt": "2026-11-19T15:38:01.821Z",
   "videos": [
     {
       "id": "mwn2k8l464q7b",
@@ -21,9 +21,9 @@
       "note": "紙片手雷",
       "addedAt": "2026-11-19T04:42:18.733Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-19T15:38:01.821Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
