@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-19T15:38:04.658Z",
+  "updatedAt": "2026-11-19T15:38:40.416Z",
   "videos": [
     {
       "id": "mwn2k8l464q7b",
@@ -45,9 +45,9 @@
       "note": "JensonHuang_最聰明的人",
       "addedAt": "2026-11-18T22:54:31.094Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-19T15:38:40.416Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
