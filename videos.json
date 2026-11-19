@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18T22:54:31.094Z",
+  "updatedAt": "2026-11-19T01:53:37.949Z",
   "videos": [
+    {
+      "id": "mwmwc7fgxg3nv",
+      "url": "https://www.facebook.com/share/v/1UbKxynnqy",
+      "platform": "facebook",
+      "note": "如何辨識這人有沒說謊",
+      "addedAt": "2026-11-19T01:53:37.948Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwmpxv3qq0kuz",
       "url": "https://www.youtube.com/watch?v=reiowJ3Blo0",
