@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T10:04:00.280Z",
+  "updatedAt": "2026-11-21T10:05:01.961Z",
   "videos": [
     {
       "id": "mwq8otl7l4xug",
@@ -9,9 +9,9 @@
       "note": "F2L-Basics(魔方大小事)",
       "addedAt": "2026-11-21T10:02:40.459Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-21T10:05:01.960Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
