@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T10:03:32.314Z",
+  "updatedAt": "2026-11-21T10:03:44.875Z",
   "videos": [
     {
       "id": "mwq8otl7l4xug",
@@ -33,9 +33,9 @@
       "note": "杜拜富翁",
       "addedAt": "2026-11-21T00:34:22.986Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-21T10:03:44.875Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
