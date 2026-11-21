@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T10:02:40.459Z",
+  "updatedAt": "2026-11-21T10:03:29.045Z",
   "videos": [
     {
       "id": "mwq8otl7l4xug",
@@ -21,9 +21,9 @@
       "note": "跑得快的練習",
       "addedAt": "2026-11-21T01:33:27.404Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-21T10:03:29.045Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
