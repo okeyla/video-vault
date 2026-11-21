@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T01:33:27.404Z",
+  "updatedAt": "2026-11-21T10:02:40.459Z",
   "videos": [
+    {
+      "id": "mwq8otl7l4xug",
+      "url": "https://www.youtube.com/watch?v=7N9ukjZk87A",
+      "platform": "youtube",
+      "note": "F2L-Basics(魔方大小事)",
+      "addedAt": "2026-11-21T10:02:40.459Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwpqhyp8as7w1",
       "url": "https://www.facebook.com/share/r/1FFvYVRSZp",
