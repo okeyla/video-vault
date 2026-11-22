@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T11:05:08.946Z",
+  "updatedAt": "2026-11-22T01:35:11.027Z",
   "videos": [
+    {
+      "id": "mwr601bmoxm9z",
+      "url": "https://www.facebook.com/share/v/1PT6bDi84g",
+      "platform": "facebook",
+      "note": "黃仁勳和馬斯克對談",
+      "addedAt": "2026-11-22T01:35:11.027Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwqax5xu82l7m",
       "url": "https://www.facebook.com/share/r/14wXTLCk3ve",
