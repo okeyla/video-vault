@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T03:00:38.041Z",
+  "updatedAt": "2026-11-22T03:00:53.681Z",
   "videos": [
     {
       "id": "mwr8hjnr7tf25",
@@ -9,9 +9,9 @@
       "note": "滑雪單板tips",
       "addedAt": "2026-11-22T02:44:47.176Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-22T03:00:53.681Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
