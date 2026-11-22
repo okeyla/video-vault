@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:39:57.419Z",
+  "updatedAt": "2026-11-22T23:42:41.299Z",
   "videos": [
+    {
+      "id": "mwshf7v6jtosn",
+      "url": "https://www.youtube.com/watch?v=-C7R7X6pb1w",
+      "platform": "youtube",
+      "note": "2026下半年用AI做報告",
+      "addedAt": "2026-11-22T23:42:41.299Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mws2b6ojvt5g8",
       "url": "https://www.facebook.com/share/r/18JYBcNk4H",
