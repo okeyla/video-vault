@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T02:26:26.725Z",
+  "updatedAt": "2026-11-22T02:26:39.042Z",
   "videos": [
     {
       "id": "mwr7rwuc8bfxq",
@@ -45,9 +45,9 @@
       "note": "一壘手先踩壘包vs後踩壘包",
       "addedAt": "2026-11-21T11:05:08.946Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-22T02:26:39.042Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
