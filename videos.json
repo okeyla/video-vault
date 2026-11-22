@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T01:51:17.669Z",
+  "updatedAt": "2026-11-22T02:24:51.204Z",
   "videos": [
+    {
+      "id": "mwr7rwuc8bfxq",
+      "url": "https://www.facebook.com/share/v/1JQbWn1aw6",
+      "platform": "facebook",
+      "note": "2026_AI做簡報",
+      "addedAt": "2026-11-22T02:24:51.204Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwr6kr6tfnots",
       "url": "https://www.facebook.com/share/v/1Gkn7NKkXk",
