@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T01:35:11.027Z",
+  "updatedAt": "2026-11-22T01:51:17.669Z",
   "videos": [
+    {
+      "id": "mwr6kr6tfnots",
+      "url": "https://www.facebook.com/share/v/1Gkn7NKkXk",
+      "platform": "facebook",
+      "note": "不讓人幫我定價",
+      "addedAt": "2026-11-22T01:51:17.669Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwr601bmoxm9z",
       "url": "https://www.facebook.com/share/v/1PT6bDi84g",
