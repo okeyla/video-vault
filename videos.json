@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T02:26:41.219Z",
+  "updatedAt": "2026-11-22T02:39:26.931Z",
   "videos": [
+    {
+      "id": "mwr8aok3m52qb",
+      "url": "https://www.youtube.com/watch?v=G-_XKhwRukw",
+      "platform": "youtube",
+      "note": "一部影片學會魔術方塊速解",
+      "addedAt": "2026-11-22T02:39:26.931Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwr7rwuc8bfxq",
       "url": "https://www.facebook.com/share/v/1JQbWn1aw6",
