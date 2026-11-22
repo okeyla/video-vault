@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T02:39:26.931Z",
+  "updatedAt": "2026-11-22T02:44:47.176Z",
   "videos": [
+    {
+      "id": "mwr8hjnr7tf25",
+      "url": "https://www.facebook.com/share/r/1Et8SLKozU",
+      "platform": "facebook",
+      "note": "滑雪單板tips",
+      "addedAt": "2026-11-22T02:44:47.176Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwr8aok3m52qb",
       "url": "https://www.youtube.com/watch?v=G-_XKhwRukw",
