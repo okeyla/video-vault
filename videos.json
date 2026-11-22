@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T02:24:51.204Z",
+  "updatedAt": "2026-11-22T02:25:43.745Z",
   "videos": [
     {
       "id": "mwr7rwuc8bfxq",
@@ -9,9 +9,9 @@
       "note": "2026_AI做簡報",
       "addedAt": "2026-11-22T02:24:51.204Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-22T02:25:43.745Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
