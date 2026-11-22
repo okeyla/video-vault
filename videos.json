@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:39:38.900Z",
+  "updatedAt": "2026-11-22T16:39:57.419Z",
   "videos": [
     {
       "id": "mws2b6ojvt5g8",
@@ -25,18 +25,6 @@
       "downloadedAt": "2026-11-22T03:00:55.914Z",
       "downloadedOn": "IMX500",
       "file": "D:\\300.Archive檔案\\VideoVault\\facebook\\2026-11-22 滑雪單板tips.mp4"
-    },
-    {
-      "id": "mwr8aok3m52qb",
-      "url": "https://www.youtube.com/watch?v=G-_XKhwRukw",
-      "platform": "youtube",
-      "note": "一部影片學會魔術方塊速解",
-      "addedAt": "2026-11-22T02:39:26.931Z",
-      "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
     },
     {
       "id": "mwr7rwuc8bfxq",
