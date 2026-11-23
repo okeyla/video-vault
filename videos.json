@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-23T13:19:31.969Z",
+  "updatedAt": "2026-11-23T13:20:24.234Z",
   "videos": [
     {
       "id": "mwsxl59a09ldr",
@@ -21,9 +21,9 @@
       "note": "2026下半年用AI做報告",
       "addedAt": "2026-11-22T23:42:41.299Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-23T13:20:24.234Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
