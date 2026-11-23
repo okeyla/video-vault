@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-23T13:19:17.694Z",
+  "updatedAt": "2026-11-23T13:19:29.750Z",
   "videos": [
     {
       "id": "mwsxl59a09ldr",
@@ -33,9 +33,9 @@
       "note": "",
       "addedAt": "2026-11-22T16:39:38.899Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-23T13:19:29.750Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
