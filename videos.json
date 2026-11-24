@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T01:32:36.647Z",
+  "updatedAt": "2026-11-24T12:02:13.778Z",
   "videos": [
+    {
+      "id": "mwuna4k2qj556",
+      "url": "https://www.facebook.com/share/v/14xQXvPpFfs",
+      "platform": "facebook",
+      "note": "馬斯克論索羅斯",
+      "addedAt": "2026-11-24T12:02:13.778Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwu05ofi5iw8m",
       "url": "https://www.youtube.com/watch?v=I57AR3wmUmI",
