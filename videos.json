@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T01:26:08.046Z",
+  "updatedAt": "2026-11-24T01:26:11.544Z",
   "videos": [
     {
       "id": "mwu05ofi5iw8m",
@@ -9,9 +9,9 @@
       "note": "給AI的教科書",
       "addedAt": "2026-11-24T01:14:55.086Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-24T01:26:11.544Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
