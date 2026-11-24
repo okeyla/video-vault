@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T01:25:45.783Z",
+  "updatedAt": "2026-11-24T01:26:01.868Z",
   "videos": [
     {
       "id": "mwu05ofi5iw8m",
@@ -33,9 +33,9 @@
       "note": "打生活結",
       "addedAt": "2026-11-23T23:46:35.326Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-24T01:26:01.868Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
