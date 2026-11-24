@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T01:14:55.086Z",
+  "updatedAt": "2026-11-24T01:25:42.773Z",
   "videos": [
     {
       "id": "mwu05ofi5iw8m",
@@ -21,9 +21,9 @@
       "note": "練髖練髖練髖",
       "addedAt": "2026-11-24T01:06:47.154Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-24T01:25:42.773Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
