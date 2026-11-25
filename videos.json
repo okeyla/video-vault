@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-25T07:31:10.146Z",
+  "updatedAt": "2026-11-25T07:31:21.601Z",
   "videos": [
     {
       "id": "mwvt02sk9wri2",
@@ -33,9 +33,9 @@
       "note": "馬斯克論索羅斯",
       "addedAt": "2026-11-24T12:02:13.778Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-25T07:31:21.601Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
