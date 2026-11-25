@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-25T03:17:54.368Z",
+  "updatedAt": "2026-11-25T07:30:08.804Z",
   "videos": [
+    {
+      "id": "mwvt02sk9wri2",
+      "url": "https://www.youtube.com/watch?v=D4LuhqrK_1A",
+      "platform": "youtube",
+      "note": "SHEBA",
+      "addedAt": "2026-11-25T07:30:08.804Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwvjzozj6a8n5",
       "url": "https://www.facebook.com/share/r/19rQuictGk",
