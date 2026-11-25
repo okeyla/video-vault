@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T12:02:13.778Z",
+  "updatedAt": "2026-11-25T03:17:54.368Z",
   "videos": [
+    {
+      "id": "mwvjzozj6a8n5",
+      "url": "https://www.facebook.com/share/r/19rQuictGk",
+      "platform": "facebook",
+      "note": "用智慧解決",
+      "addedAt": "2026-11-25T03:17:54.367Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwuna4k2qj556",
       "url": "https://www.facebook.com/share/v/14xQXvPpFfs",
