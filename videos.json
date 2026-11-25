@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-25T07:31:24.576Z",
+  "updatedAt": "2026-11-25T07:32:26.922Z",
   "videos": [
     {
       "id": "mwvt02sk9wri2",
@@ -9,10 +9,10 @@
       "note": "SHEBA",
       "addedAt": "2026-11-25T07:30:08.804Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
-      "file": null
+      "status": "downloaded",
+      "downloadedAt": "2026-11-25T07:32:26.922Z",
+      "downloadedOn": "IMX500",
+      "file": "D:\\300.Archive檔案\\VideoVault\\youtube\\2026-11-25 SHEBA.mp4"
     },
     {
       "id": "mwvjzozj6a8n5",
