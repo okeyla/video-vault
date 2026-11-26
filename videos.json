@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-26T22:32:36.976Z",
+  "updatedAt": "2026-11-26T23:26:28.237Z",
   "videos": [
+    {
+      "id": "mwy6lrppp8bk6",
+      "url": "https://www.facebook.com/share/r/17yB8ZtNDa",
+      "platform": "facebook",
+      "note": "內野高飛必死球（點棒不算）",
+      "addedAt": "2026-11-26T23:26:28.237Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwy4oiggmpj2n",
       "url": "https://www.facebook.com/share/v/1Gz3sn94nR",
