@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-25T07:32:29.379Z",
+  "updatedAt": "2026-11-26T21:26:05.516Z",
   "videos": [
+    {
+      "id": "mwy2aymkm6g11",
+      "url": "https://www.facebook.com/share/v/1A77Gbrots",
+      "platform": "facebook",
+      "note": "傳輸加密解密",
+      "addedAt": "2026-11-26T21:26:05.516Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwvt02sk9wri2",
       "url": "https://www.youtube.com/watch?v=D4LuhqrK_1A",
