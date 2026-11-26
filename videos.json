@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-26T22:17:39.607Z",
+  "updatedAt": "2026-11-26T22:32:36.976Z",
   "videos": [
+    {
+      "id": "mwy4oiggmpj2n",
+      "url": "https://www.facebook.com/share/v/1Gz3sn94nR",
+      "platform": "facebook",
+      "note": "趕緊把貨搬完就可以休息了嗎",
+      "addedAt": "2026-11-26T22:32:36.976Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwy45a1jy5keo",
       "url": "https://www.facebook.com/share/v/1CTgFbi4Y2",
