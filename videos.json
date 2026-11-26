@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-26T21:26:05.516Z",
+  "updatedAt": "2026-11-26T22:17:39.607Z",
   "videos": [
+    {
+      "id": "mwy45a1jy5keo",
+      "url": "https://www.facebook.com/share/v/1CTgFbi4Y2",
+      "platform": "facebook",
+      "note": "別在低層次環境展現自己的美好",
+      "addedAt": "2026-11-26T22:17:39.607Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwy2aymkm6g11",
       "url": "https://www.facebook.com/share/v/1A77Gbrots",
