@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-26T23:26:28.237Z",
+  "updatedAt": "2026-11-27T00:47:54.794Z",
   "videos": [
+    {
+      "id": "mwy9ii7e3libn",
+      "url": "https://www.facebook.com/share/r/1FLZxMJXzs",
+      "platform": "facebook",
+      "note": "Email就三句",
+      "addedAt": "2026-11-27T00:47:54.794Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwy6lrppp8bk6",
       "url": "https://www.facebook.com/share/r/17yB8ZtNDa",
