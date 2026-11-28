@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-28T05:29:40.928Z",
+  "updatedAt": "2026-11-28T05:29:50.030Z",
   "videos": [
     {
       "id": "mwzyycw7hj7ua",
@@ -21,9 +21,9 @@
       "note": "Email就三句",
       "addedAt": "2026-11-27T00:47:54.794Z",
       "addedFrom": "手機",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-28T05:29:50.030Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
