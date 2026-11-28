@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-28T05:32:40.239Z",
+  "updatedAt": "2026-11-28T06:04:11.044Z",
   "videos": [
+    {
+      "id": "mx00931gcar9g",
+      "url": "https://www.facebook.com/share/v/1DmWNd9eqP",
+      "platform": "facebook",
+      "note": "講話有邏輯練習",
+      "addedAt": "2026-11-28T06:04:11.044Z",
+      "addedFrom": "電腦",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mwzyycw7hj7ua",
       "url": "https://www.facebook.com/share/v/1CqWUxmGWA",
