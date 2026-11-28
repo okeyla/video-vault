@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-28T10:14:29.239Z",
+  "updatedAt": "2026-11-28T10:15:55.263Z",
   "videos": [
+    {
+      "id": "mx098tj3wdo8k",
+      "url": "https://www.facebook.com/share/r/1EGQJTRm9X",
+      "platform": "facebook",
+      "note": "手機上日文輸入法2",
+      "addedAt": "2026-11-28T10:15:55.263Z",
+      "addedFrom": "手機",
+      "status": "pending",
+      "downloadedAt": null,
+      "downloadedOn": null,
+      "file": null
+    },
     {
       "id": "mx096z5j1pdvs",
       "url": "https://www.facebook.com/share/v/14zHtPqPdsP",
