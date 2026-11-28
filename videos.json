@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-28T05:29:51.843Z",
+  "updatedAt": "2026-11-28T05:30:16.189Z",
   "videos": [
     {
       "id": "mwzyycw7hj7ua",
@@ -45,9 +45,9 @@
       "note": "趕緊把貨搬完就可以休息了嗎",
       "addedAt": "2026-11-26T22:32:36.976Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-28T05:30:16.189Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
