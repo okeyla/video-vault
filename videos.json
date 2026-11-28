@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-28T05:30:19.923Z",
+  "updatedAt": "2026-11-28T05:30:28.591Z",
   "videos": [
     {
       "id": "mwzyycw7hj7ua",
@@ -57,9 +57,9 @@
       "note": "別在低層次環境展現自己的美好",
       "addedAt": "2026-11-26T22:17:39.607Z",
       "addedFrom": "電腦",
-      "status": "pending",
-      "downloadedAt": null,
-      "downloadedOn": null,
+      "status": "downloaded",
+      "downloadedAt": "2026-11-28T05:30:28.591Z",
+      "downloadedOn": "IMX500",
       "file": null
     },
     {
